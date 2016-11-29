@@ -1,10 +1,8 @@
 <template>
-<div @click="blurRenderItem" class="render-container">
-  <div drag-tag="modules" :class="{active: activeModules}" class="body">
-
-    <input class="page-title animated" :class="{flash:base.activeDocumentTitle}" type="text" ref="documentTitle" v-model="render.title">
+  <div @click="blurRenderItem" class="render-container">
+    <div drag-tag="modules" :class="{active: activeModules}" class="body">
+      <input class="page-title animated" :class="{flash:base.activeDocumentTitle}" type="text" ref="documentTitle" v-model="render.title">
       <div class="item" :key="index" v-bind:key="item._timestamp" :class="{'current': currentModule === item}" v-for="(item, index) in items">
-
         <sort-bar @on-sort="onSort" v-show="currentModule === item" :items="items" :item="item">
           <li class="hint--top" aria-label="拖拽" v-if="items.length > 1">
             <i class="el-icon-d-caret" @mousedown="drag(item)"></i>
@@ -15,81 +13,72 @@
           </component>
         </div>
       </div>
+    </div>
+    <module-drag :drag-module="dragModule" v-on:changeDragModule="changeDragModule">
+    </module-drag>
   </div>
-
-  <module-drag
-          :drag-module="dragModule"
-          v-on:changeDragModule="changeDragModule">
-  </module-drag>
-</div>
 </template>
-
 <style lang="less" rel="stylesheet/less" scoped>
-.render-container {
+  .render-container {
     overflow-y: auto;
-
     .body {
-        width: 375px;
-        min-height: 667px;
-        background: #fff url("../assets/img/phone-head.png") no-repeat;
-        padding-top: 64px;
-        margin: 20px auto 30px;
-        user-select: none;
-        box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.30);
+      width: 375px;
+      min-height: 667px;
+      background: #fff url("../assets/img/phone-head.png") no-repeat;
+      padding-top: 64px;
+      margin: 20px auto 30px;
+      user-select: none;
+      box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.30);
+      position: relative;
+      .page-title {
+        color: #fff;
+        border: none;
+        font-size: 20px;
+        text-align: center;
+        position: absolute;
+        top: 27px;
+        left: 73px;
+        width: 210px;
+        background: transparent;
+      }
+      &.active {
+        outline: 2px solid #2196F3;
+      }
+      .item {
+        cursor: pointer;
         position: relative;
-
-        .page-title {
-            color: #fff;
-            border: none;
-            font-size: 20px;
+        &.current {
+          outline: 2px solid #2196F3;
+          z-index: 9998;
+        }
+      }
+      .component {
+        &.active.top {
+          &:before {
+            width: 98%;
+            height: 20px;
+            line-height: 20px;
+            margin: 0 auto;
+            font-size: 14px;
             text-align: center;
-            position: absolute;
-            top: 27px;
-            left: 73px;
-            width: 210px;
-            background: transparent;
+            display: block;
+            content: '放在这';
+            border: 2px dashed #2196F3;
+            background: #E4F3FE;
+            padding: 5px 0;
+            color: #2196F3;
+          }
         }
-
-        &.active {
-            outline: 2px solid #2196F3;
+        &.active.bottom {
+          &:after:extend(.component.active.top:before) {
+            //
+          }
         }
-
-        .item {
-            cursor: pointer;
-            position: relative;
-
-            &.current {
-                outline: 2px solid #2196F3;
-                z-index: 9998;
-            }
-        }
-
-        .component {
-            &.active.top {
-                &:before {
-                    width: 98%;
-                    height: 20px;
-                    line-height: 20px;
-                    margin: 0 auto;
-                    font-size: 14px;
-                    text-align: center;
-                    display: block;
-                    content: '放在这';
-                    border: 2px dashed #2196F3;
-                    background: #E4F3FE;
-                    padding: 5px 0;
-                    color: #2196F3;
-                }
-            }
-            &.active.bottom {
-                &:after:extend(.component.active.top:before){
-                    }
-            }
-        }
+      }
     }
-}
-</style>
+  }
 
+</style>
 <script type="text/ecmascript-6">
 import Vue from 'vue'
 import {

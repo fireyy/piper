@@ -6,8 +6,8 @@ import render from './modules/render'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    modules: {
-        base,
-        render
-    }
+  modules: {
+    base,
+    render
+  }
 })
