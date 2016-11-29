@@ -3,12 +3,12 @@
          @touchend="onTouchend"
          @touchcancel="onTouchcancel">
         <div class="carousel-track" :style="trackStyle">
-            {{{addonBefore}}}
+            <div v-html="addonBefore"></div>
             <slot></slot>
-            {{{addonAfter}}}
+            <div v-html="addonAfter"></div>
         </div>
         <div class="carousel-indicators" v-if="indicators">
-            <div :class="{'carousel-dot':true,'active':index==activeIndex}" v-for="(index, item) in list"
+            <div :class="{'carousel-dot':true,'active':index==activeIndex}" v-for="(item, index) in list"
                  @click="transitionTo(index)">{{index}}
             </div>
         </div>
@@ -74,7 +74,8 @@
                 this.list.push(item)
             },
             delItem(item) {
-                this.list.$remove(item)
+                var index = this.list.indexOf(item)
+                this.list.splice(index, 1)
             }
         },
         watch  : {
@@ -252,16 +253,18 @@
                 this.setHeight()
             }, 300)
         },
-        ready() {
+        mounted() {
             this.setTimer();
+            this.$nextTick(()=>{
+              this.resize();
+              this.slid(this.activeIndex, 0);
+              window.addEventListener('resize', this.resize);
+            })
         },
-        attached() {
-            this.resize();
-            this.slid(this.activeIndex, 0);
-            window.addEventListener('resize', this.resize);
-        },
-        detached() {
+        destroyed() {
+          this.$nextTick(()=>{
             window.removeEventListener('resize', this.resize);
+          })
         }
     }
 </script>

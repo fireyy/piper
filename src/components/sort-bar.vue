@@ -1,42 +1,30 @@
 <template>
-    <ul class="actions"
-        transition="expand">
+    <ul class="actions">
         <slot></slot>
         <li class="hint--top" aria-label="上移" v-if="index !== 0">
-            <ui-icon-button
-                    @click="move('up',item)"
-                    class="btn-sm"
-                    color="default"
-                    icon="arrow_upward">
-            </ui-icon-button>
+          <i class="el-icon-arrow-up" @click="move('up',item)"></i>
         </li>
         <li class="hint--top" aria-label="下移" v-if="index !== items.length - 1">
-            <ui-icon-button
-                    @click="move('down',item)"
-                    class="btn-sm"
-                    color="default"
-                    icon="arrow_downward">
-            </ui-icon-button>
+          <i class="el-icon-arrow-down" @click="move('down',item)"></i>
         </li>
         <li class="hint--top" aria-label="删除">
-            <ui-icon-button
-                    @click="del(item)"
-                    class="btn-sm"
-                    color="default"
-                    icon="delete">
-            </ui-icon-button>
+          <i class="el-icon-delete" @click="del(item)"></i>
         </li>
     </ul>
 </template>
 
 <style lang="less" rel="stylesheet/less" scoped>
     .actions {
-        width: 100%;
-        background: rgb(238, 238, 238);
-        justify-content: flex-end;
-        flex-flow: row wrap;
+        background: #2196F3;
         z-index: 10000;
-        display: flex;
+        padding: 5px;
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        li {
+          color: #fff;
+        }
 
         &:hover {
             overflow: visible;
@@ -88,11 +76,12 @@
                 }
             },
             del(item) {
-                this.items.$remove(item)
+                var index = this.items.indexOf(item)
+                this.items.splice(index, 1)
             },
             order(newIndex, oldIndex) {
                 this.items.splice(newIndex, 0, this.items.splice(oldIndex, 1)[0])
-                this.$dispatch('on-sort', newIndex, oldIndex)
+                this.$emit('on-sort', newIndex, oldIndex)
             }
         }
     }

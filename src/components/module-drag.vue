@@ -1,14 +1,13 @@
 <template>
     <div v-show="show"
-         transition="zoom"
          :class="{'miss-drop': hitDrop, 'can-drop': dragInfo.dragTag}"
-         class="drag-module animated">
+         class="drag-module">
         <component v-if="!currentModule.data"
-                   :is="currentModule.type">
+                   v-bind:is="currentModule.type">
         </component>
         <component v-if="currentModule.data"
-                   :data.sync="currentModule.data"
-                   :is="currentModule.type">
+                   v-bind:data="currentModule.data"
+                   v-bind:is="currentModule.type">
         </component>
     </div>
 </template>
@@ -29,18 +28,6 @@
         z-index: 99999;
         background: #fff;
     }
-
-    .drag-module.animated {
-        &.zoomIn {
-            animation-duration: .3s;
-        }
-        &.zoomOutDown {
-            animation-duration: 0s;
-        }
-        &.miss-drop {
-            animation-duration: 0s;
-        }
-    }
 </style>
 
 <script type="text/ecmascript-6">
@@ -53,17 +40,11 @@
             blurRenderItem
     } from '../vuex/actions'
 
-    Vue.transition('zoom', {
-        enterClass: 'zoomIn',
-        leaveClass: 'zoomOutDown'
-    })
-
     export default{
         props: {
             dragModule: {
                 type    : Object,
-                required: true,
-                twoWay  : true
+                required: true
             }
         },
 
@@ -80,22 +61,26 @@
                 blurRenderItem
             }
         },
+        watch: {
+          'dragModule': function (newVal) {
+            this.show = !(_.isEmpty(newVal))
 
-        ready() {
-            this.$watch('dragModule', (newVal) => {
-                this.show = !(_.isEmpty(newVal))
+            if (this.show) {
+                this.hitDrop       = false
+                this.currentModule = newVal
+                this.startDrag()
+            }
+          }
+        },
 
-                if (this.show) {
-                    this.hitDrop       = false
-                    this.currentModule = newVal
-                    this.startDrag()
-                }
-            })
+        mounted() {
+            //
         },
 
         methods: {
             startDrag () {
                 let that = this
+                console.log(that)
 
                 this.blurRenderItem()
 
@@ -121,7 +106,7 @@
             stopDrag (event) {
                 setTimeout(() => {
                     this.hitDrop    = this.dropRenderItem(event, this.dragModule)
-                    this.dragModule = {}
+                    this.$emit('changeDragModule', {})
                 })
             }
         },

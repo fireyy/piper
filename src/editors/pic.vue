@@ -1,34 +1,40 @@
 <template>
     <div class="editor-container">
         <div class="editor-pic">
-            <ui-alert>建议尺寸:750X150, jpg、png、gif的图片格式</ui-alert>
-
             <div class="form"
-                 v-for="item in data.value"
-                 track-by="$index">
-
-                <div class="form-group">
-                    <div v-if="item.picUrl" class="img has-del">
-                        <div class="middle">
-                            <img :src="item.picUrl" alt="">
-                            <button @click="item.picUrl = null" class="del"><i class="material-icons">clear</i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div v-if="!item.picUrl"
-                         @click="showSelectPic(item)"
-                         class="upload-container">
-                        <a href="javascript:">
-                            {{errorMsg}} <i class="ui-icon material-icons">add_circle</i>
-                        </a>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>链接</label>
-
-                    <input class="form-control" v-model="item.url" type="text" placeholder="请输入跳转链接">
-                </div>
+                 v-for="(item, index) in data.value"
+                 v-bind:key="index">
+              <el-form label-position="top" :model="formData">
+                <el-form-item label="链接">
+                  <el-input
+                    placeholder="请输入跳转链接"
+                    v-model="item.url">
+                  </el-input>
+                </el-form-item>
+                <el-form-item label="图片">
+                  <div v-if="item.picUrl" class="img has-del">
+                      <div class="middle">
+                          <img :src="item.picUrl" alt="">
+                          <button @click="item.picUrl = null" class="del"><i class="el-icon-circle-close"></i>
+                          </button>
+                      </div>
+                  </div>
+                  <el-upload
+                    v-if="!item.picUrl"
+                    action="//jsonplaceholder.typicode.com/posts/"
+                    type="drag"
+                    :multiple="true"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :on-success="handleSuccess"
+                    :on-error="handleError"
+                  >
+                    <i class="el-icon-upload"></i>
+                    <div class="el-dragger__text">将文件拖到此处，或<em>点击上传</em></div>
+                    <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+                  </el-upload>
+                </el-form-item>
+              </el-form>
 
                 <div class="hr"></div>
             </div>
@@ -37,7 +43,7 @@
 </template>
 
 <style lang="less" rel="stylesheet/less">
-    
+
 </style>
 
 <script type="text/ecmascript-6">
@@ -68,14 +74,18 @@
         },
 
         methods: {
-          showSelectPic() {
-            alert("todo")
+          handleRemove(file, fileList) {
+            console.log(file, fileList);
+          },
+          handlePreview(file) {
+            console.log(file);
           }
         },
 
         data(){
-            return {
-            }
+          return {
+            formData: {}
+          };
         }
     }
 </script>

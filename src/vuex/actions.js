@@ -3,7 +3,6 @@ import {
     ACTIVE_RENDER_ITEM,
     EDIT_RENDER_ITEM,
     BLUR_RENDER_ITEM,
-    TOAST,
     FOCUS_DOCUMENT_TITLE
 } from './mutation-types'
 
@@ -11,7 +10,6 @@ export const addRenderItem    = markAction(ADD_RENDER_ITEM)
 export const editRenderItem   = markAction(EDIT_RENDER_ITEM)
 export const blurRenderItem   = markAction(BLUR_RENDER_ITEM)
 export const focusDocumentTitle   = markAction(FOCUS_DOCUMENT_TITLE)
-export const showToast        = markAction(TOAST)
 export const activeRenderItem = ({dispatch}, event) => {
     dispatch(ACTIVE_RENDER_ITEM, getDragInfo(event))
 }
@@ -38,7 +36,12 @@ export const dropRenderItem   = ({dispatch}, event, module) => {
  * @returns {function(): *}
  */
 function markAction(type) {
-    return ({dispatch}, ...args) => dispatch(type, ...args)
+    //return ({dispatch}, ...args) => dispatch(type, ...args)
+    return ({dispatch}, ...args) => {
+      if(type == "EDIT_RENDER_ITEM") console.log("EDIT_RENDER_ITEM");
+      if(type == "BLUR_RENDER_ITEM") console.log("BLUR_RENDER_ITEM");
+      return dispatch(type, ...args)
+    }
 }
 
 

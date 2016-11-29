@@ -5,17 +5,17 @@
             未选中任何模块
         </div>
 
-        <div v-for="item in items"
-             track-by="_timestamp"
+        <div v-for="(item, index) in items"
+             v-bind:key="item._timestamp"
              v-show="item === currentModule">
             <h2>{{item.alias}}</h2>
 
             <div class="contents"
-                 track-by="$index"
-                 v-for="(key,value) in item.data">
+                 v-bind:key="key"
+                 v-for="(value, key) in item.data">
                 <component
-                        :index="$index"
-                        :data.sync="value"
+                        :index="key"
+                        :data="value"
                         :is="value.type">
                 </component>
             </div>
@@ -59,7 +59,7 @@
             }
         },
 
-        data: () => {
+        data() {
             return {
                 components
             }

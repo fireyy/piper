@@ -1,19 +1,18 @@
 <template>
     <div class="popover">
-        <div v-el:contents
+        <div ref="contents"
              class="popover-contents"
-             v-show="show"
-             transition="scale">
+             v-show="show">
             <div @mouseover="showContents"
                  @mouseout="blurContents">
-                <div v-el:arrow
+                <div ref="arrow"
                      class="arrow">
                 </div>
                 <slot name="contents"></slot>
             </div>
         </div>
 
-        <div v-el:triggers
+        <div ref="triggers"
              @mouseover="showContents"
              @mouseout="blurContents"
              class="triggers">
@@ -74,8 +73,10 @@
             }
         },
 
-        ready() {
-            document.body.appendChild(this.$els.contents)
+        mounted() {
+            this.$nextTick(()=>{
+              document.body.appendChild(this.$refs.contents)
+            })
         },
 
         watch: {},
@@ -98,11 +99,11 @@
             },
 
             updatePosition() {
-                console.log(this.$els.contents)
+                console.log(this.$refs.contents)
 
-                let elContents      = this.$els.contents
-                let elArrow         = this.$els.arrow
-                let elTriggers      = this.$els.triggers
+                let elContents      = this.$refs.contents
+                let elArrow         = this.$refs.arrow
+                let elTriggers      = this.$refs.triggers
                 let elContentsHalfW = Number.parseFloat(window.getComputedStyle(elContents).width)
                 let elContentsHalfH = Number.parseFloat(window.getComputedStyle(elContents).height)
                 let elTriggersHalfW = Number.parseFloat(window.getComputedStyle(elTriggers).width)

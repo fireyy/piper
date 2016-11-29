@@ -1,19 +1,59 @@
 export const modules = [
     {
+      title: '常规',
+      items: [
+        {
+            alias    : '文本',
+            type     : 'txt',
+            icon   : 'edit',
+            data : {
+              style: {
+                type   : 'prop',
+                title  : '样式',
+                value  : [
+                  {
+                    key: "Margin",
+                    value: '0px'
+                  },
+                  {
+                    key: "Padding",
+                    value: '0px'
+                  }
+                ]
+              }
+            },
+            component: require('./txt.vue')
+        }
+      ]
+    },
+    {
         title: '图片',
         items: [
             {
                 alias    : '图片',
-                type     : 'poster-single',
-                icon   : 'image',
-                component: (resolve) => require(['./poster-single.vue'], resolve)
+                type     : 'poster',
+                icon   : 'picture',
+                data : {
+                  pic: {
+                      type   : 'pic',
+                      title  : '图片',
+                      value  : [{
+                          url   : null,
+                          picUrl: 'http://img1.ffan.com/T1xEWTBmET1RCvBVdK'
+                      }],
+                      options: {
+                          max: 1
+                      }
+                  }
+                },
+                component: require('./poster.vue')
             },
-            {
-                alias    : '幻灯片',
-                type     : 'poster-many',
-                icon   : 'collections',
-                component: (resolve) => require(['./poster-many.vue'], resolve)
-            }
+            // {
+            //     alias    : '幻灯片',
+            //     type     : 'slider',
+            //     icon   : 'picture',
+            //     component: require('./slider.vue')
+            // }
         ]
     }
 ]
@@ -22,4 +62,3 @@ export let components = _.reduce(_.chain(modules).map('items').flatten().value()
     obj[item.type] = item.component
     return obj
 }, {})
-

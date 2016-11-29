@@ -11,7 +11,8 @@ const state = {
     items   : [],
     title   : '网页标题',
     current : {},
-    dragInfo: {}
+    dragInfo: {},
+    dragModule: {}
 }
 
 const mutations = {

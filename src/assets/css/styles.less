@@ -1,7 +1,6 @@
 @import "_base";
 @import "_editor";
 @import "_dialog";
-@import "_form";
 
 * {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
@@ -53,6 +52,10 @@ a {
   text-align: right;
 }
 
+.form {
+  padding: 20px;
+}
+
 ul, li {
   margin: 0;
   padding: 0;
@@ -63,26 +66,9 @@ ul, li {
   color: #777 !important;
 }
 
-.ui-icon-button {
-  &.btn-sm {
-    width: 30px;
-    height: 30px;
-
-    .ui-icon {
-      font-size: 20px;
-    }
-  }
-}
-
 input {
   border: 1px solid #ddd;
   padding: 5px 8px;
-}
-
-.ui-modal {
-  &.ui-modal-mask {
-    z-index: 10000;
-  }
 }
 
 .ui-progress-circular {
@@ -91,17 +77,6 @@ input {
 
 .drop-element.drop-after-open {
   z-index: 10000;
-}
-
-.container ~ .ui-snackbar-container {
-  bottom: auto;
-  top: 0;
-  z-index: 10000;
-
-  .ui-snackbar-toggle-enter,
-  .ui-snackbar-toggle-leave {
-    transform: translateY(-84px);
-  }
 }
 
 .drop {
@@ -134,12 +109,6 @@ input {
   }
 }
 
-.ui-modal.goods {
-  .ui-modal-body {
-    padding: 10px 0 0 0;
-  }
-}
-
 .loading-bar {
   z-index: 100000;
 }
@@ -160,8 +129,7 @@ input {
   .del {
     cursor: pointer;
     padding: 0;
-    color: #fff;
-    background: #F44336;
+    color: #FF4949;
     border-radius: 50%;
     display: flex;
     position: absolute;

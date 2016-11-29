@@ -1,10 +1,13 @@
 <template>
     <div class="editor-container">
         <div class="editor-text form">
-            <div v-for="(key,value) in data.value" class="form-group">
-                <label>{{value.title}}</label>
-                <input type="text" v-model="value.value">
-            </div>
+          <el-form label-width="80px" :model="formData">
+            <el-form-item  v-for="(value, key) in data.value" :label="value.key">
+              <el-input
+                v-model="value.value">
+              </el-input>
+            </el-form-item>
+          </el-form>
         </div>
     </div>
 </template>
@@ -22,7 +25,9 @@
         },
 
         data(){
-            return {}
+            return {
+              formData: {}
+            }
         }
     }
 </script>

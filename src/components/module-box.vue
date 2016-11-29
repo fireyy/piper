@@ -8,14 +8,15 @@
                     class="item hint--top"
                     v-for="item in moduleItem.items"
                 >
-                    <ui-icon draggable="false" :icon="item.icon"></ui-icon>
+                    <i :class="'el-icon-'+item.icon"></i>
                     {{item.alias}}
                 </li>
             </ul>
         </div>
 
         <module-drag
-                :drag-module.sync="dragModule">
+                :drag-module="dragModule"
+                v-on:changeDragModule="changeDragModule">
         </module-drag>
     </div>
 </template>
@@ -67,8 +68,12 @@
         },
 
         methods : {
+            changeDragModule(dragModule) {
+                this.dragModule = dragModule
+            },
             drag(item) {
                 this.dragModule = item
+                console.log(item)
             }
         },
         computed: {},
