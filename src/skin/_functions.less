@@ -1,0 +1,17 @@
+@designWidth: 750;
+
+.function{
+	.px2rem(@px){
+		return : unit(@px*320/@designWidth/20 , rem);
+	}
+  .spaceBetween(@itemPx, @itemCount, @wrapPx:750) {
+    return : unit((100 - @itemPx / @wrapPx * 100  * @itemCount) / (@itemCount + 1), ~"%");
+  }
+}
+
+.adapt-font-size(@px) {
+  @scale: @px / 24;
+
+  font-size: px2rem(@px);
+  display: inline-block;
+}

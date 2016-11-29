@@ -1,0 +1,38 @@
+.loop (@i) when (@i > 0) {
+    .m-t-@{i} {
+      margin-top: @i+px;
+    }
+    .m-r-@{i} {
+      margin-right: @i+px;
+    }
+    .m-b-@{i} {
+      margin-bottom: @i+px;
+    }
+    .m-l-@{i} {
+      margin-left: @i+px;
+    }
+
+    .p-t-@{i} {
+      padding-top: @i+px;
+    }
+    .p-r-@{i} {
+      padding-right: @i+px;
+    }
+    .p-b-@{i} {
+      padding-bottom: @i+px;
+    }
+    .p-l-@{i} {
+      padding-left: @i+px;
+    }
+
+    .loop (@i - 1);
+}
+
+.loop (50);
+
+img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+}

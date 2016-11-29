@@ -1,0 +1,37 @@
+.form {
+  .form-group {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 0 0 15px 0;
+    padding: 0 15px;
+
+    label {
+      margin-bottom: 5px;
+    }
+
+    input[type=text] {
+      width: 100%;
+      padding: 8px 12px;
+      background: #E2E2E2;
+
+      &::placeholder {
+        color: #888;
+      }
+    }
+
+    select {
+      width: 100%;
+      height: 34px;
+      background: #E2E2E2;
+      border-radius: 0;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+    }
+
+    .tips {
+      color: #ccc;
+      font-size: 13px;
+      margin-bottom: 0;
+    }
+  }
+}

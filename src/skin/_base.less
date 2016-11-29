@@ -1,0 +1,57 @@
+.module-container {
+  * {
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    box-sizing: border-box;
+  }
+
+  a {
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .color-primary {
+    color: @color-primary;
+  }
+
+  .color-default {
+    color: @color-default;
+  }
+
+  .color-muted {
+    color: @color-muted !important;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .ph-empty {
+    width: 100%;
+    color: #aaa;
+    text-align: center;
+    padding: 10px 0;
+
+    &.dashed {
+      border: 1px dashed #ddd;
+    }
+  }
+
+  .carousel-indicators {
+    bottom: 10%;
+
+    .carousel-dot {
+      width: px2rem(15);
+      height: px2rem(15);
+      text-indent: -99999999px;
+      border: 1px solid #fff;
+      padding: 0;
+      border-radius: 50%;
+      margin: 0 px2rem(10);
+      background: transparent;
+
+      &.active {
+        background: #fff;
+      }
+    }
+  }
+}

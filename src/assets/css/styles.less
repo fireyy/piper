@@ -1,0 +1,177 @@
+@import "_base";
+@import "_editor";
+@import "_dialog";
+@import "_form";
+
+* {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.hide {
+  display: none !important;
+}
+
+.design-mode {
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: #F5F5F5;
+    cursor: pointer;
+  }
+
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #aaa;
+  }
+
+}
+
+body {
+  font-size: 14px;
+  color: #777;
+}
+
+a {
+  color: #2196F3;
+  text-decoration: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ui-textbox-label-text {
+  color: #777 !important;
+}
+
+.ui-icon-button {
+  &.btn-sm {
+    width: 30px;
+    height: 30px;
+
+    .ui-icon {
+      font-size: 20px;
+    }
+  }
+}
+
+input {
+  border: 1px solid #ddd;
+  padding: 5px 8px;
+}
+
+.ui-modal {
+  &.ui-modal-mask {
+    z-index: 10000;
+  }
+}
+
+.ui-progress-circular {
+  display: inline-block;
+}
+
+.drop-element.drop-after-open {
+  z-index: 10000;
+}
+
+.container ~ .ui-snackbar-container {
+  bottom: auto;
+  top: 0;
+  z-index: 10000;
+
+  .ui-snackbar-toggle-enter,
+  .ui-snackbar-toggle-leave {
+    transform: translateY(-84px);
+  }
+}
+
+.drop {
+  .drop-content {
+    .ui-menu {
+      max-height: 500px;
+    }
+  }
+}
+
+.panel {
+  position: relative;
+
+  .title {
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+    background: #EEEEEE;
+    padding: 0 8px;
+    border-bottom: 1px solid #E7E8E7;
+  }
+
+  .actions {
+    right: 0;
+    position: absolute;
+  }
+
+  .body {
+    padding: 5px 8px;
+  }
+}
+
+.ui-modal.goods {
+  .ui-modal-body {
+    padding: 10px 0 0 0;
+  }
+}
+
+.loading-bar {
+  z-index: 100000;
+}
+
+.datepicker-overlay {
+  z-index: 9999 !important;
+}
+
+.hr {
+  height: 1px;
+  background: #eee;
+  margin-bottom: 15px;
+}
+
+.has-del {
+  position: relative;
+
+  .del {
+    cursor: pointer;
+    padding: 0;
+    color: #fff;
+    background: #F44336;
+    border-radius: 50%;
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: -10px;
+    border: 2px solid #fff;
+
+    i {
+      font-size: 20px;
+    }
+  }
+}
