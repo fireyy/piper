@@ -4,9 +4,11 @@
       <input class="page-title animated" :class="{flash:base.activeDocumentTitle}" type="text" ref="documentTitle" v-model="render.title">
       <div class="item" :key="index" v-bind:key="item._timestamp" :class="{'current': currentModule === item}" v-for="(item, index) in items">
         <sort-bar @on-sort="onSort" v-show="currentModule === item" :items="items" :item="item">
-          <li class="hint--top" aria-label="拖拽" v-if="items.length > 1">
-            <i class="el-icon-d-caret" @mousedown="drag(item)"></i>
-          </li>
+          <el-tooltip content="拖拽" placement="top" v-if="items.length > 1">
+            <li>
+              <i class="el-icon-d-caret" @mousedown="drag(item)"></i>
+            </li>
+          </el-tooltip>
         </sort-bar>
         <div :drag-tag="'module-'+index" @click.stop.prevent="editRenderItem(item)" :index="index" class="component" :class="[{active: activeModule.dragTag === 'module-' + index}, activeModule.position]">
           <component :data="item.data" :is="components[item.type]">

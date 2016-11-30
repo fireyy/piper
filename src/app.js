@@ -10,7 +10,6 @@ import App from './views/App'
 import 'animate.css/animate.css'
 
 Vue.use(Element)
-Vue.use(require('vue-sortable'))
 
 const app = new Vue({
   ...App

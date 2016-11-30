@@ -3,9 +3,11 @@
     <div class="modules" v-for="moduleItem in modules">
       <div class="title">{{moduleItem.title}}</div>
       <ul class="items">
-        <li @mousedown="drag(item)" aria-label="按住拖拽" class="item hint--top" v-for="item in moduleItem.items">
-          <i :class="'el-icon-'+item.icon"></i> {{item.alias}}
-        </li>
+        <el-tooltip content="按住拖拽" placement="top" v-for="item in moduleItem.items">
+          <li @mousedown="drag(item)" class="item">
+            <i :class="'el-icon-'+item.icon"></i> {{item.alias}}
+          </li>
+        </el-tooltip>
       </ul>
     </div>
     <module-drag :drag-module="dragModule" v-on:changeDragModule="changeDragModule">

@@ -1,19 +1,25 @@
 <template>
-  <ul class="actions">
+  <ul class="ctrl-actions">
     <slot></slot>
-    <li class="hint--top" aria-label="上移" v-if="index !== 0">
-      <i class="el-icon-arrow-up" @click="move('up',item)"></i>
-    </li>
-    <li class="hint--top" aria-label="下移" v-if="index !== items.length - 1">
-      <i class="el-icon-arrow-down" @click="move('down',item)"></i>
-    </li>
-    <li class="hint--top" aria-label="删除">
-      <i class="el-icon-delete" @click="del(item)"></i>
-    </li>
+    <el-tooltip content="上移" placement="top" v-if="index !== 0">
+      <li>
+        <i class="el-icon-arrow-up" @click="move('up',item)"></i>
+      </li>
+    </el-tooltip>
+    <el-tooltip content="下移" placement="top" v-if="index !== items.length - 1">
+      <li>
+        <i class="el-icon-arrow-down" @click="move('down',item)"></i>
+      </li>
+    </el-tooltip>
+    <el-tooltip content="删除" placement="top">
+      <li>
+        <i class="el-icon-delete" @click="del(item)"></i>
+      </li>
+    </el-tooltip>
   </ul>
 </template>
-<style lang="less" scoped>
-  .actions {
+<style lang="less">
+  .ctrl-actions {
     background: #2196F3;
     z-index: 1000;
     padding: 5px;
