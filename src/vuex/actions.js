@@ -1,56 +1,62 @@
-import {
-  ADD_RENDER_ITEM,
-  ACTIVE_RENDER_ITEM,
-  EDIT_RENDER_ITEM,
-  BLUR_RENDER_ITEM,
-  FOCUS_DOCUMENT_TITLE
-} from './mutation-types'
+import * as t from './mutation-types'
 
-export const addRenderItem = markAction(ADD_RENDER_ITEM)
-export const editRenderItem = markAction(EDIT_RENDER_ITEM)
-export const blurRenderItem = markAction(BLUR_RENDER_ITEM)
-export const focusDocumentTitle = markAction(FOCUS_DOCUMENT_TITLE)
-export const activeRenderItem = ({
-  dispatch
+const makeAction = (type) => (
+    ({ commit }, payload) => commit(type, payload)
+);
+
+const makeActions = mutations => (
+    Object.keys(mutations).reduce((actions, type) => {
+        actions[type] = makeAction(normalMutations[type]);
+        return actions;
+    }, {})
+);
+
+// 可以简单处理的 mutation
+const normalMutations = {
+  addRenderItem: t.ADD_RENDER_ITEM,
+  editRenderItem: t.EDIT_RENDER_ITEM,
+  editDragModule: t.EDIT_DRAG_MODULE,
+  blurRenderItem: t.BLUR_RENDER_ITEM,
+  focusDocumentTitle: t.FOCUS_DOCUMENT_TITLE,
+  editDraging: t.EDIT_DRAGING
+};
+
+const activeRenderItem = ({
+  commit
 }, event) => {
-  dispatch(ACTIVE_RENDER_ITEM, getDragInfo(event))
+  commit(t.ACTIVE_RENDER_ITEM, getDragInfo(event))
 }
-export const dropRenderItem = ({
-  dispatch
-}, event, module) => {
+const dropRenderItem = ({
+  state,
+  commit
+}, event) => {
+  let module = state.render.dragModule
   let {
     dragTag,
     position
   } = getDragInfo(event)
+  
+  console.log(dragTag, position)
 
   if (dragTag) {
     let data = module.data || null
 
     if (dragTag === 'modules') {
-      dispatch(ADD_RENDER_ITEM, module.type, data)
+      commit(t.ADD_RENDER_ITEM, {
+        type: module.type,
+        data: data
+      })
     } else {
       let index = +(dragTag.split('-')[1])
-      dispatch(ADD_RENDER_ITEM, module.type, data, position === 'bottom' ? ++index : index)
+      commit(t.ADD_RENDER_ITEM, {
+        type: module.type,
+        data: data,
+        index: position === 'bottom' ? ++index : index
+      })
     }
   }
 
   return dragTag
-}
-
-/**
- * 通用的dispatch
- * @param type
- * @returns {function(): *}
- */
-function markAction(type) {
-  //return ({dispatch}, ...args) => dispatch(type, ...args)
-  return ({
-    dispatch
-  }, ...args) => {
-    if (type == "EDIT_RENDER_ITEM") console.log("EDIT_RENDER_ITEM");
-    if (type == "BLUR_RENDER_ITEM") console.log("BLUR_RENDER_ITEM");
-    return dispatch(type, ...args)
-  }
 }
 
 
@@ -101,3 +107,9 @@ function getDragPosition(event, dragTarget) {
     return halfHeight > event.y - rect.top ? 'top' : 'bottom'
   }
 }
+
+export default {
+    ...makeActions(normalMutations),
+    activeRenderItem,
+    dropRenderItem
+};

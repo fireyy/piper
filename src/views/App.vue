@@ -26,18 +26,12 @@
 </template>
 
 <script>
-import store from '../vuex/store'
+import { mapGetters, mapActions } from 'vuex'
 import render from '../components/render.vue'
 import moduleBox from '../components/module-box.vue'
 import propertyEditor from '../components/property-editor.vue'
-import {
-  addRenderItem,
-  focusDocumentTitle,
-} from '../vuex/actions'
 
 export default {
-  store,
-
   components: {
     propertyEditor,
     moduleBox,
@@ -50,19 +44,15 @@ export default {
     this.loaded = true
   },
 
-  vuex: {
-    getters: {
-      renderData: ({
-        render
-      }) => render
-    },
-    actions: {
-      addRenderItem,
-      focusDocumentTitle
-    }
+  computed: {
+    ...mapGetters({
+      renderData: 'render'
+    })
   },
-
   methods: {
+    ...mapActions([
+      'focusDocumentTitle'
+    ]),
     getData() {
       let {
         items,

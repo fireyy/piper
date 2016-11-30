@@ -24,46 +24,29 @@
 }
 </style>
 <script>
-import Vue from 'vue'
+import { mapGetters, mapActions } from 'vuex'
 import {
   components,
   modules
 } from '../modules'
-import {
-  addRenderItem,
-  activeRenderItem,
-  dropRenderItem,
-  blurRenderItem
-} from '../vuex/actions'
 
 export default {
-  props: {
-    dragModule: {
-      type: Object,
-      required: true
-    }
-  },
 
   components: components,
 
-  vuex: {
-    getters: {
-      dragInfo: ({
-        render
-      }) => render.dragInfo
-    },
-    actions: {
-      addRenderItem,
-      activeRenderItem,
-      dropRenderItem,
-      blurRenderItem
-    }
+  computed: {
+    ...mapGetters({
+      dragInfo: 'dragInfo',
+      dragModule: 'dragModule',
+      draging: 'draging'
+    })
   },
   watch: {
-    'dragModule': function(newVal) {
+    dragModule: function(newVal) {
       this.show = !(_.isEmpty(newVal))
-
-      if (this.show) {
+  
+      if (this.show && !this.draging) {
+        this.editDraging(true)
         this.hitDrop = false
         this.currentModule = newVal
         this.startDrag()
@@ -71,14 +54,17 @@ export default {
     }
   },
 
-  mounted() {
-    //
-  },
-
   methods: {
+    ...mapActions([
+      'addRenderItem',
+      'activeRenderItem',
+      'dropRenderItem',
+      'blurRenderItem',
+      'editDragModule',
+      'editDraging'
+    ]),
     startDrag() {
       let that = this
-      console.log(that)
 
       this.blurRenderItem()
 
@@ -104,9 +90,10 @@ export default {
 
     stopDrag(event) {
       setTimeout(() => {
-        this.hitDrop = this.dropRenderItem(event, this.dragModule)
-        this.$emit('changeDragModule', {})
-      })
+        this.hitDrop = this.dropRenderItem(event)
+        this.editDragModule({})
+        this.editDraging(false)
+      }, 0)
     }
   },
 

@@ -3,22 +3,36 @@ import {
   EDIT_RENDER_ITEM,
   ADD_RENDER_ITEM,
   BLUR_RENDER_ITEM,
+  EDIT_DRAG_MODULE,
+  EDIT_DRAGING
 } from '../mutation-types'
 import {
   modules
 } from '../../modules'
-
 
 const state = {
   items: [],
   title: '网页标题',
   current: {},
   dragInfo: {},
-  dragModule: {}
+  dragModule: {},
+  draging: false
+}
+
+const getters = {
+  activeModules: state => state.dragInfo.dragTag === 'modules',
+  activeModule: state => state.dragInfo,
+  currentModule: state => state.current,
+  dragInfo: state => state.dragInfo,
+  draging: state => state.draging,
+  dragModule: state => state.dragModule,
+  render: state => state,
+  renderItems: state => state.items
 }
 
 const mutations = {
-  [ADD_RENDER_ITEM](state, type, data, index = state.items.length + 1) {
+  [ADD_RENDER_ITEM](state, { type, data, index: index = state.items.length + 1 }) {
+    console.log("index", index);
     let module = null
 
     _.each(modules, (moduleItem) => {
@@ -34,13 +48,23 @@ const mutations = {
     }).value()
 
     newItem._timestamp = newItem._timestamp || Date.now()
+    console.log("1", state.items);
     state.items.splice(index, 0, newItem)
     state.current = newItem
     state.dragInfo = {}
+    console.log("2", state.items);
   },
 
   [EDIT_RENDER_ITEM](state, item) {
     state.current = item
+  },
+  
+  [EDIT_DRAG_MODULE](state, dragModule) {
+    state.dragModule = dragModule
+  },
+  
+  [EDIT_DRAGING](state, draging) {
+    state.draging = draging
   },
 
   [ACTIVE_RENDER_ITEM](state, dragInfo) {
@@ -54,5 +78,6 @@ const mutations = {
 
 export default {
   state,
+  getters,
   mutations
 }

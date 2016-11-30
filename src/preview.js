@@ -4,7 +4,6 @@ import './skin/default.less'
 import Preview from './views/Preview'
 
 const preview = new Vue({
-  ...Preview
+  el: '#preview',
+  render: h => h(Preview)
 })
-
-preview.$mount('#preview')

@@ -6,6 +6,10 @@ const state = {
   activeDocumentTitle: false
 }
 
+const getters = {
+  base: state => state
+}
+
 const mutations = {
   [FOCUS_DOCUMENT_TITLE](state, active = true) {
     state.activeDocumentTitle = active
@@ -14,5 +18,6 @@ const mutations = {
 
 export default {
   state,
+  getters,
   mutations
 }

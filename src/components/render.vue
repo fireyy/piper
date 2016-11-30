@@ -16,8 +16,7 @@
         </div>
       </div>
     </div>
-    <module-drag :drag-module="dragModule" v-on:changeDragModule="changeDragModule">
-    </module-drag>
+    <module-drag></module-drag>
   </div>
 </template>
 <style lang="less" scoped>
@@ -82,20 +81,17 @@
 
 </style>
 <script>
-import Vue from 'vue'
+import { mapGetters, mapActions } from 'vuex'
 import {
   components,
   modules
 } from '../modules'
-import {
-  editRenderItem,
-  blurRenderItem
-} from '../vuex/actions'
 import moduleDrag from './module-drag.vue'
 import sortBar from './sort-bar.vue'
 
 export default {
-  components: {...components,
+  components: {
+    ...components,
     moduleDrag,
     sortBar
   },
@@ -110,34 +106,6 @@ export default {
     }
   },
 
-  vuex: {
-    getters: {
-      base: ({
-        base
-      }) => base,
-      render: ({
-        render
-      }) => render,
-      items: ({
-        render
-      }) => render.items,
-      activeModules: ({
-        render
-      }) => render.dragInfo.dragTag === 'modules',
-      activeModule: ({
-        render
-      }) => render.dragInfo,
-      currentModule: ({
-        render
-      }) => render.current
-    },
-
-    actions: {
-      editRenderItem,
-      blurRenderItem
-    }
-  },
-
   watch: {
     'base.activeDocumentTitle' (newVal) {
       this.$refs.documentTitle.focus()
@@ -146,26 +114,31 @@ export default {
       })
     }
   },
+  
+  computed: mapGetters({
+    base: 'base',
+    render: 'render',
+    items: 'renderItems',
+    activeModules: 'activeModules',
+    activeModule: 'activeModule',
+    currentModule: 'currentModule'
+  }),
 
   methods: {
-    editRenderItem1() {
-      console.log("test")
-    },
-    changeDragModule(dragModule) {
-        this.dragModule = dragModule
-    },
+    ...mapActions([
+      'editRenderItem',
+      'blurRenderItem',
+      'editDragModule'
+    ]),
     drag(item) {
       var index = this.items.indexOf(item);
       this.items.splice(index, 1)
-      this.dragModule = item
-    },
-    hoverItem(item) {
-      _.forEach(this.items, (item) => item._hover = false)
-      item._hover = true
+      this.editDragModule(item)
     },
     onSort(newIndex, oldIndex) {
       setTimeout(() => {
-        this.$store.dispatch('EDIT_RENDER_ITEM', this.items[newIndex])
+        this.editRenderItem(this.items[newIndex]);
+        //this.$store.commit('EDIT_RENDER_ITEM', this.items[newIndex])
       }, 0)
     }
   },
@@ -173,8 +146,7 @@ export default {
   data() {
     return {
       modules,
-      components,
-      dragModule: {}
+      components
     }
   }
 }
