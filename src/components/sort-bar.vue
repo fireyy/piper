@@ -12,27 +12,26 @@
     </li>
   </ul>
 </template>
-<style lang="less" rel="stylesheet/less" scoped>
+<style lang="less" scoped>
   .actions {
     background: #2196F3;
-    z-index: 10000;
+    z-index: 1000;
     padding: 5px;
     position: absolute;
     right: 0;
     top: 0;
     li {
+      display: inline-block;
       color: #fff;
+      margin: 0 8px;
     }
     &:hover {
       overflow: visible;
     }
-    li:not(:first-child) {
-      margin: 0 0 0 8px;
-    }
   }
 
 </style>
-<script type="text/ecmascript-6">
+<script>
     export default {
         props: {
             items: {

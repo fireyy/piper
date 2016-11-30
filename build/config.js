@@ -3,7 +3,7 @@ const pkg = require('../package')
 
 module.exports = {
   port: 4000,
-  title: 'foo',
+  title: 'piper',
   vendor: Object.keys(pkg.dependencies),
   babel: {
     babelrc: false,

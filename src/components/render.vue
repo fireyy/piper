@@ -18,7 +18,7 @@
     </module-drag>
   </div>
 </template>
-<style lang="less" rel="stylesheet/less" scoped>
+<style lang="less" scoped>
   .render-container {
     overflow-y: auto;
     .body {
@@ -49,7 +49,7 @@
         position: relative;
         &.current {
           outline: 2px solid #2196F3;
-          z-index: 9998;
+          z-index: 998;
         }
       }
       .component {
@@ -79,7 +79,7 @@
   }
 
 </style>
-<script type="text/ecmascript-6">
+<script>
 import Vue from 'vue'
 import {
   components,

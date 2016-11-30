@@ -7,7 +7,8 @@ const _ = require('./utils')
 
 module.exports = {
   entry: {
-    'index': './src/index.js'
+    'app': './src/app.js',
+    'preview': './src/preview.js'
   },
   output: {
     path: _.outputPath,
@@ -17,8 +18,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.vue', '.css', '.json'],
     alias: {
-      src: path.join(__dirname, '../src'),
-      components: path.join(__dirname, '../src/components')
+      src: path.join(__dirname, '../src')
     }
   },
   module: {
@@ -59,7 +59,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: config.title,
       template: __dirname + '/index.html',
-      filename: _.outputIndexPath
+      chunks  : ['app'],
+      filename: _.outputPath + '/index.html'
+    }),
+    new HtmlWebpackPlugin({
+      title: config.title,
+      template: __dirname + '/preview.html',
+      chunks  : ['preview'],
+      filename: _.outputPath + '/preview.html'
     })
   ],
   target: _.target

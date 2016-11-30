@@ -4,10 +4,10 @@
   </div>
 </template>
 
-<style lang="less" rel="stylesheet/less" scoped>
+<style lang="less" scoped>
 </style>
 
-<script type="text/ecmascript-6">
+<script>
   export default{
     props: ['data'],
 

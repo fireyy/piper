@@ -6,7 +6,7 @@
   </component>
 </div>
 </template>
-<style lang="less" rel="stylesheet/less">
+<style lang="less">
 .drag-module {
     width: 375px;
     display: inline-block;
@@ -19,11 +19,11 @@
     pointer-events: none;
     transform: scale(0.6);
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.50);
-    z-index: 99999;
+    z-index: 999;
     background: #fff;
 }
 </style>
-<script type="text/ecmascript-6">
+<script>
 import Vue from 'vue'
 import {
   components,

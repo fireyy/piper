@@ -5,11 +5,9 @@ import 'element-ui/lib/theme-default/index.css'
 import './assets/css/styles.less'
 import './skin/default.less'
 
-import App from './App'
+import App from './views/App'
 
 import 'animate.css/animate.css'
-import 'keen-ui/dist/keen-ui.css'
-import 'hint.css/hint.css'
 
 Vue.use(Element)
 Vue.use(require('vue-sortable'))

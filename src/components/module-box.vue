@@ -12,7 +12,7 @@
     </module-drag>
   </div>
 </template>
-<style lang="less" rel="stylesheet/less" scoped>
+<style lang="less" scoped>
   .module-box {
     .title {
       background: #eee;
@@ -46,7 +46,7 @@
   }
 
 </style>
-<script type="text/ecmascript-6">
+<script>
     import {modules} from '../modules'
     import moduleDrag from './module-drag.vue'
 

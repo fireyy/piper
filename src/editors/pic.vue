@@ -27,7 +27,7 @@
   </div>
 </div>
 </template>
-<script type="text/ecmascript-6">
+<script>
 import Vue from 'vue'
 import components from '../components'
 import popover from '../components/popover.vue'

@@ -12,7 +12,7 @@
     </div>
   </div>
 </template>
-<style lang="less" rel="stylesheet/less">
+<style lang="less">
   .properties {
     .ph-text {
       font-size: 20px;
@@ -32,7 +32,7 @@
   }
 
 </style>
-<script type="text/ecmascript-6">
+<script>
     import components from '../editors'
 
     export default{

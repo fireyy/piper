@@ -8,7 +8,7 @@
 </div>
 </template>
 
-<style lang="less" rel="stylesheet/less" scoped>
+<style lang="less" scoped>
 </style>
 
 <script>

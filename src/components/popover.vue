@@ -12,7 +12,7 @@
   </div>
 </div>
 </template>
-<style lang="less" rel="stylesheet/less" scoped>
+<style lang="less" scoped>
 .popover-contents {
     min-width: 50px;
     position: absolute;
@@ -23,7 +23,7 @@
     border: 1px solid #ddd;
     box-shadow: 0 1px 5px rgba(99, 99, 99, 0.3);
     background: #fff;
-    z-index: 20160907;
+    z-index: 1000;
     .arrow {
         position: absolute;
         top: 100%;
