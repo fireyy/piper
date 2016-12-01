@@ -1,5 +1,5 @@
 export default {
-    prop  : require('./prop.vue'),
+    inputText  : require('./input-text.vue'),
     pic   : require('./pic.vue'),
-    color : require('./color.vue'),
+    htmlStyle : require('./html-style.vue'),
 }

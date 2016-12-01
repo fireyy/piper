@@ -73,18 +73,17 @@ export default {
       return data
     },
     save() {
+      let data = this.getData()
       
-      if (title === '网页标题') {
+      if (data.title === '网页标题') {
         this.$message({
           message: '请输入合适的网页标题',
           type: 'warning'
         });
         return this.focusDocumentTitle(true)
       }
-      
-      let data = JSON.stringify(this.getData())
 
-      alert(data)
+      alert(JSON.stringify(data))
       console.log(data)
     },
 

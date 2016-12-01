@@ -2,7 +2,9 @@
 const fs = require('fs')
 const path = require('path')
 const express = require('express')
+const request = require('request')
 const webpack = require('webpack')
+const proxy = require('http-proxy-middleware')
 const webpackConfig = require('./webpack.dev')
 const config = require('./config')
 
@@ -32,11 +34,21 @@ app.use(require('webpack-hot-middleware')(compiler))
 var mockPath = path.join(__dirname, '../mock')
 
 app.use('/api', function(req, res){
-  console.log(req.path);
+  console.log(req.path)
   var data = fs.readFileSync(path.join(mockPath, req.path), "utf8")
-  console.log(data);
-  res.json(JSON.parse(data));
+  console.log(data)
+  res.json(JSON.parse(data))
 })
+
+var chuckNorrisApiProxy = proxy(['/upload'], {
+  target: "http://zhaoshang.sit.ffan.com/",
+  changeOrigin: true,
+  logLevel: 'debug',
+  headers: {
+    Cookie: "PHPSESSID=94i22svhvhv89iipkkivfvls13"
+  }
+});
+app.use(chuckNorrisApiProxy)
 
 const mfs = devMiddleWare.fileSystem
 const file = path.join(webpackConfig.output.path, 'index.html')

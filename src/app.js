@@ -3,6 +3,7 @@ import Element from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import './assets/css/styles.less'
 import './skin/default.less'
+import 'vue-swipe/dist/vue-swipe.css'
 
 import store from './vuex/store'
 import App from './views/App'
@@ -19,3 +20,5 @@ const app = new Vue({
 
 // design mode
 document.documentElement.classList.add('design-mode')
+
+export { app, store }

@@ -2,7 +2,7 @@
 <div class="editor-container">
   <div class="editor-pic">
     <div class="form" v-for="(item, index) in data.value" v-bind:key="index">
-      <el-form label-position="top" :model="formData">
+      <el-form label-position="top">
         <el-form-item label="链接">
           <el-input placeholder="请输入跳转链接" v-model="item.url">
           </el-input>
@@ -11,11 +11,12 @@
           <div v-if="item.picUrl" class="img has-del">
             <div class="middle">
               <img :src="item.picUrl" alt="">
-              <button @click="item.picUrl = null" class="del"><i class="el-icon-circle-close"></i>
-                          </button>
+              <button @click="item.picUrl = null" class="del"><i class="el-icon-circle-close"></i></button>
             </div>
           </div>
-          <el-upload v-if="!item.picUrl" action="//jsonplaceholder.typicode.com/posts/" type="drag" :multiple="true" :on-preview="handlePreview" :on-remove="handleRemove" :on-success="handleSuccess" :on-error="handleError">
+          <el-upload v-if="!item.picUrl" action="/upload" type="drag"
+          :on-success="handleSuccess"
+          :on-error="handleError">
             <i class="el-icon-upload"></i>
             <div class="el-dragger__text">将文件拖到此处，或<em>点击上传</em></div>
             <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -29,17 +30,12 @@
 </template>
 <script>
 import Vue from 'vue'
-import components from '../components'
-import popover from '../components/popover.vue'
 
 export default {
   props: {
     data: {
       type: Object
     }
-  },
-  components: {
-    popover
   },
   created() {
     let diff = this.data.options.max - this.data.value.length
@@ -55,18 +51,20 @@ export default {
   },
 
   methods: {
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
+    handleSuccess(response, file, fileList) {
+      console.log(response, file, fileList)
+      if(response.status=="200"){
+        alert("http://img1.ffan.com/"+response.data.name)
+      }
     },
-    handlePreview(file) {
-      console.log(file);
+    handleError(err, response, file) {
+      console.log(err, response, file);
     }
   },
 
   data() {
     return {
-      formData: {}
-    };
+    }
   }
 }
 </script>
