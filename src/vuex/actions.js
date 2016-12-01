@@ -35,8 +35,6 @@ const dropRenderItem = ({
     dragTag,
     position
   } = getDragInfo(event)
-  
-  console.log(dragTag, position)
 
   if (dragTag) {
     let data = module.data || null

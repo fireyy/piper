@@ -3,6 +3,7 @@ const exec = require('child_process').execSync
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const base = require('./webpack.base')
 const pkg = require('../package')
 const _ = require('./utils')
@@ -21,6 +22,7 @@ base.output.chunkFilename = '[name].[chunkhash:8].js'
 // add webpack plugins
 base.plugins.push(
   new ProgressBarPlugin(),
+  new LodashModuleReplacementPlugin(),
   new ExtractTextPlugin('static/css/styles.[contenthash:8].css'),
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify('production')
@@ -39,9 +41,17 @@ base.plugins.push(
   }),
   // extract vendor chunks
   new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    filename: 'vendor.[chunkhash:8].js'
+    name: 'app.vendor',
+    chunks: ["app"]
+  }),
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'preview.vendor',
+    chunks: ["preview"]
   })
+  // new webpack.optimize.CommonsChunkPlugin({
+  //   name: 'vendor',
+  //   filename: 'vendor.[chunkhash:8].js'
+  // })
 )
 
 // extrac css in standalone .css files

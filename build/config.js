@@ -7,6 +7,7 @@ module.exports = {
   vendor: Object.keys(pkg.dependencies),
   babel: {
     babelrc: false,
+    plugins: ['lodash'],
     presets: [
       ['es2015', {modules: false}],
       'stage-1'

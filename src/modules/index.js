@@ -1,3 +1,8 @@
+import _ from "lodash";
+import map from "lodash/fp/map";
+import flatten from "lodash/fp/flatten";
+import compose from "lodash/fp/compose";
+
 export const modules = [
     {
       title: '常规',
@@ -58,7 +63,14 @@ export const modules = [
     }
 ]
 
-export let components = _.reduce(_.chain(modules).map('items').flatten().value(), (obj, item) => {
+export let components = _.reduce(
+  compose(
+    flatten, 
+    map('items')
+  )(modules), 
+  (obj, item) => {
     obj[item.type] = item.component
     return obj
-}, {})
+  }, 
+  {}
+)

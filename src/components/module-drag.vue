@@ -25,6 +25,7 @@
 </style>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import _ from 'lodash'
 import {
   components,
   modules

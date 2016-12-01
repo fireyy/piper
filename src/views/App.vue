@@ -27,6 +27,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import _ from 'lodash'
 import render from '../components/render.vue'
 import moduleBox from '../components/module-box.vue'
 import propertyEditor from '../components/property-editor.vue'

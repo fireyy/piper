@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import components from '../components'
 
 export default {

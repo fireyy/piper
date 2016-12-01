@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import _ from 'lodash'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import './assets/css/styles.less'

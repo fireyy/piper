@@ -1,3 +1,9 @@
+import _ from "lodash";
+import pick from "lodash/fp/pick";
+import merge from "lodash/fp/merge";
+import cloneDeep from "lodash/fp/cloneDeep";
+import compose from "lodash/fp/compose";
+
 import {
   ACTIVE_RENDER_ITEM,
   EDIT_RENDER_ITEM,
@@ -32,7 +38,6 @@ const getters = {
 
 const mutations = {
   [ADD_RENDER_ITEM](state, { type, data, index: index = state.items.length + 1 }) {
-    console.log("index", index);
     let module = null
 
     _.each(modules, (moduleItem) => {
@@ -43,16 +48,16 @@ const mutations = {
       })
     })
 
-    let newItem = _.chain(module).pick(['type', 'alias', 'data']).cloneDeep().merge({
-      data
-    }).value()
+    let newItem = compose(
+                    merge({ data }),
+                    cloneDeep,
+                    pick(['type', 'alias', 'data'])
+                  )(module)
 
     newItem._timestamp = newItem._timestamp || Date.now()
-    console.log("1", state.items);
     state.items.splice(index, 0, newItem)
     state.current = newItem
     state.dragInfo = {}
-    console.log("2", state.items);
   },
 
   [EDIT_RENDER_ITEM](state, item) {

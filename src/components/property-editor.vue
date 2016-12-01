@@ -36,7 +36,7 @@ import {
   mapGetters,
   mapActions
 } from 'vuex'
-import components from '../editors'
+import components from '../property'
 
 export default {
   components,
