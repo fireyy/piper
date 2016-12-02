@@ -114,7 +114,7 @@ export default {
       })
     }
   },
-  
+
   computed: mapGetters({
     base: 'base',
     render: 'render',

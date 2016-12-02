@@ -12,14 +12,9 @@ html {
 </style>
 
 <script>
-import store from '../vuex/store'
 import PreviewRender from '../components/preview-render.vue'
-import {
-  addRenderItem,
-} from '../vuex/actions'
 
 export default {
-  store,
 
   components: {
     PreviewRender

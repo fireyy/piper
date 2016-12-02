@@ -13,9 +13,4 @@ base.plugins.push(
   new webpack.NoErrorsPlugin()
 )
 
-// push loader for .css file
-base.module.loaders.push(
-  _.styleLoaders({ sourceMap: config.cssSourceMap })
-)
-
 module.exports = base

@@ -23,7 +23,6 @@ base.output.chunkFilename = '[name].[chunkhash:8].js'
 base.plugins.push(
   new ProgressBarPlugin(),
   new LodashModuleReplacementPlugin(),
-  new ExtractTextPlugin('static/css/styles.[contenthash:8].css'),
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify('production')
   }),
@@ -52,11 +51,6 @@ base.plugins.push(
   //   name: 'vendor',
   //   filename: 'vendor.[chunkhash:8].js'
   // })
-)
-
-// extrac css in standalone .css files
-base.module.loaders.push(
-  _.styleLoaders({ sourceMap: config.cssSourceMap, extract: true })
 )
 
 module.exports = base

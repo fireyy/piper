@@ -2,18 +2,20 @@ import Vue from 'vue'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import './assets/css/styles.less'
-import './skin/default.less'
 import 'vue-swipe/dist/vue-swipe.css'
 
-import store from './vuex/store'
-import App from './views/App'
+import store from './store'
+import router from './router'
+import { sync } from 'vuex-router-sync'
+import App from './App.vue'
 
-import 'animate.css/animate.css'
+sync(store, router)
 
 Vue.use(Element)
 
 const app = new Vue({
   el: '#app',
+  router,
   store,
   render: h => h(App)
 })
@@ -21,4 +23,4 @@ const app = new Vue({
 // design mode
 document.documentElement.classList.add('design-mode')
 
-export { app, store }
+export { app, router, store }

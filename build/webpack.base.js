@@ -16,44 +16,46 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['', '.js', '.vue', '.css', '.json'],
+    extensions: ['.js', '.vue', '.css', '.json'],
     alias: {
       src: path.join(__dirname, '../src')
     }
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.vue$/,
-        loaders: ['vue']
+        loader: 'vue-loader',
+        options: config.vue
       },
       {
         test: /\.js$/,
-        loaders: ['babel'],
-        exclude: [/node_modules/]
-      },
-      {
-        test: /\.es6$/,
-        loaders: ['babel']
+        loader: 'buble-loader',
+        exclude: /node_modules/,
+        options: {
+          objectAssign: 'Object.assign'
+        }
       },
       {
         test: /\.json$/,
-        loader: 'json'
+        loader: 'json-loader'
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!less-loader'
       },
       {
         test: /\.(ico|jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
-        loader: 'file',
-        query: {
+        loader: 'file-loader',
+        options: {
           name: 'static/media/[name].[hash:8].[ext]'
         }
       }
     ]
-  },
-  babel: config.babel,
-  postcss: config.postcss,
-  vue: {
-    loaders: _.cssLoaders(),
-    postcss: config.postcss
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -68,6 +70,5 @@ module.exports = {
       chunks  : ['preview'],
       filename: _.outputPath + '/preview.html'
     })
-  ],
-  target: _.target
+  ]
 }

@@ -13,11 +13,16 @@ module.exports = {
       'stage-1'
     ]
   },
-  postcss: [
-    require('autoprefixer')({
-      // Vue does not support ie 8 and below
-      browsers: ['last 2 versions', 'ie > 8']
-    })
-  ],
+  vue: {
+    preserveWhitespace: false,
+    postcss: [
+      require('autoprefixer')({
+        browsers: ['last 3 versions']
+      })
+    ],
+    buble: {
+      objectAssign: 'Object.assign'
+    }
+  },
   cssSourceMap: false
 }
