@@ -3,11 +3,13 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+import PageList from '../views/PageList.vue'
 import Designer from '../views/Designer.vue'
 
 export default new Router({
   routes: [
-    { path: '/design/:id', component: Designer },
-    { path: '/', redirect: '/design/1' }
+    { name: 'design', path: '/design/:id', component: Designer },
+    { path: '/pages', component: PageList },
+    { path: '/', redirect: '/pages' }
   ]
 })

@@ -5,14 +5,14 @@
   </div>
 </template>
 
-<style lang="less" rel="stylesheet/less">
+<style lang="less">
 body {
   width: 16rem;
   margin: 0 auto;
 }
 </style>
 
-<script type="text/ecmascript-6">
+<script>
 import Vue from 'vue'
 import {
   components,

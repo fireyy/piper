@@ -18,7 +18,8 @@ const normalMutations = {
   editDragModule: t.EDIT_DRAG_MODULE,
   blurRenderItem: t.BLUR_RENDER_ITEM,
   focusDocumentTitle: t.FOCUS_DOCUMENT_TITLE,
-  editDraging: t.EDIT_DRAGING
+  editDraging: t.EDIT_DRAGING,
+  editRenderData: t.EDIT_RENDER_DATA
 };
 
 const activeRenderItem = ({

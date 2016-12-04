@@ -10,7 +10,8 @@ import {
   ADD_RENDER_ITEM,
   BLUR_RENDER_ITEM,
   EDIT_DRAG_MODULE,
-  EDIT_DRAGING
+  EDIT_DRAGING,
+  EDIT_RENDER_DATA
 } from '../mutation-types'
 import {
   modules
@@ -63,11 +64,16 @@ const mutations = {
   [EDIT_RENDER_ITEM](state, item) {
     state.current = item
   },
-  
+
+  [EDIT_RENDER_DATA](state, render) {
+    state.items = render.items
+    state.title = render.title
+  },
+
   [EDIT_DRAG_MODULE](state, dragModule) {
     state.dragModule = dragModule
   },
-  
+
   [EDIT_DRAGING](state, draging) {
     state.draging = draging
   },

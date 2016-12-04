@@ -4,7 +4,7 @@
     <div class="title">foo</div>
 
     <div>
-      <el-button type="primary" icon="document" @click="preview">预览</el-button>
+      <!-- <el-button type="primary" icon="document" @click="preview">预览</el-button> -->
       <el-button type="success" icon="check" @click="save">保存</el-button>
     </div>
   </header>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import api from '../api'
 import '../skin/default.less'
 import { mapGetters, mapActions } from 'vuex'
 import _ from 'lodash'
@@ -41,19 +42,30 @@ export default {
   },
 
   mounted() {
-
     // TODO 初始化数据
-    this.loaded = true
+    if(this.id){
+      api.page.get({id: this.id}).then((res)=>{
+        let data = res.data
+        this.editRenderData(data)
+        this.loaded = true
+      });
+    }else{
+      this.loaded = true
+    }
   },
 
   computed: {
     ...mapGetters({
       renderData: 'render'
-    })
+    }),
+    id() {
+      return this.$route.params.id || ''
+    }
   },
   methods: {
     ...mapActions([
-      'focusDocumentTitle'
+      'focusDocumentTitle',
+      'editRenderData'
     ]),
     getData() {
       let {
@@ -84,8 +96,13 @@ export default {
         return this.focusDocumentTitle(true)
       }
 
-      alert(JSON.stringify(data))
+      //保存数据
       console.log(data)
+      if(this.id){
+        api.page.update({id: this.id}, data);
+      }else{
+        api.page.saveData(data);
+      }
     },
 
     preview() {
