@@ -4,6 +4,15 @@ const __ = require('../constants');
 module.exports = class {
   static url = '/page/:id';
 
+  @authorize([ 'CHANGE' ])
+  static async delete(ctx) {
+    let { id } = ctx.params;
+    await ctx.sql.commit('UPDATE `pages` SET `is_delete` = 1 WHERE `id` = ?', [ id ]);
+    ctx.body = {
+      message: 'Delete success'
+    };
+  }
+
   @authorize([ 'EDIT' ])
   static async get(ctx) {
     let { id } = ctx.params;
@@ -39,8 +48,9 @@ module.exports = class {
       if (!page || page.is_delete) throw { status: 404, name: 'PAGE_NOT_FOUND', message: 'page is not found' };
       await ctx.sql('UPDATE `pages` SET ? WHERE `id` = ?', [ change, id ]);
     });
-    ctx.status = 204;
-    ctx.body = '';
+    ctx.body = {
+      message: 'Save success'
+    };
   }
 
 };

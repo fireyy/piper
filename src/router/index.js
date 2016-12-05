@@ -8,7 +8,7 @@ import Designer from '../views/Designer.vue'
 
 export default new Router({
   routes: [
-    { name: 'design', path: '/design/:id', component: Designer },
+    { name: 'design', path: '/design/:id?', component: Designer },
     { path: '/pages', component: PageList },
     { path: '/', redirect: '/pages' }
   ]

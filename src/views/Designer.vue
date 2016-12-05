@@ -50,6 +50,10 @@ export default {
         this.loaded = true
       });
     }else{
+      this.editRenderData({
+        title: '网页标题',
+        items: []
+      })
       this.loaded = true
     }
   },
@@ -99,9 +103,22 @@ export default {
       //保存数据
       console.log(data)
       if(this.id){
-        api.page.update({id: this.id}, data);
+        api.page.update({id: this.id}, data).then((res)=>{
+          this.$message({
+            message: res.data.message,
+            type: 'success'
+          });
+        });
       }else{
-        api.page.saveData(data);
+        api.page.saveData(data).then((res)=>{
+          this.$message({
+            message: res.data.message,
+            type: 'success'
+          });
+          this.$router.replace({name: 'design', params: {id: res.data.item.insertId}})
+        }).catch((res)=>{
+          this.$message.error(res.data.message);
+        });
       }
     },
 

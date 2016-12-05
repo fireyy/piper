@@ -21,6 +21,7 @@ module.exports = class {
     items = JSON.stringify(items);
     if (items.length > __.VALUE_MAX_LENGTH) throw __.VALUE_TOO_LONG;
 
+    let data;
     await ctx.sql.commit(async () => {
 
       let pages = await ctx.sql(
@@ -29,15 +30,17 @@ module.exports = class {
       );
       if (pages.length) throw { status: 400, name: 'DUP', message: '记录已存在' };
 
-      await ctx.sql(
+      data = await ctx.sql(
         'INSERT INTO `pages` (`title`, `items`) VALUES (?)',
         [ [ title, items ] ]
       );
 
     });
 
-    ctx.status = 204;
-    ctx.body = '';
+    ctx.body = {
+      message: 'Save success',
+      item: data
+    };
   }
 
 };
