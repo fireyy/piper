@@ -3,7 +3,9 @@
 ## TODO
 
 - [x] api server
-- [ ] swipe auto get image height
+- [x] preview mode
+- [x] swipe auto get image height
+- [ ] more modules
 - [ ] more property
 - [ ] server render & publish html => [prerender](https://github.com/chrisvfritz/prerender-spa-plugin)
 - [ ] ...

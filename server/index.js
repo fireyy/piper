@@ -31,6 +31,6 @@ koa.use(async (ctx, next) => {
 koa.use(require('koa-bodyparser')());
 koa.use(require('./lib/errorlog'));
 koa.use(require('./lib/api'));
-//koa.use(require('koa-static')('../dist'));
+koa.use(require('koa-static')('../dist'));
 
 export default koa;

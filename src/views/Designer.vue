@@ -5,7 +5,7 @@
 
     <div>
        <el-button type="danger" icon="arrow-left" @click="back">返回</el-button>
-      <!-- <el-button type="primary" icon="document" @click="preview">预览</el-button> -->
+      <el-button type="primary" icon="document" @click="preview">预览</el-button>
       <el-button type="success" :loading="loading" icon="check" @click="save">保存</el-button>
     </div>
   </header>

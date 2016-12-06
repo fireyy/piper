@@ -40,17 +40,9 @@ base.plugins.push(
   }),
   // extract vendor chunks
   new webpack.optimize.CommonsChunkPlugin({
-    name: 'app.vendor',
-    chunks: ["app"]
-  }),
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'preview.vendor',
-    chunks: ["preview"]
+    name: 'vendor',
+    filename: 'vendor.[chunkhash:8].js'
   })
-  // new webpack.optimize.CommonsChunkPlugin({
-  //   name: 'vendor',
-  //   filename: 'vendor.[chunkhash:8].js'
-  // })
 )
 
 module.exports = base

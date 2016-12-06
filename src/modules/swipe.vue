@@ -1,4 +1,4 @@
-<template>
+ <template>
 <div class="module-container">
   <div class="poster-swipe">
     <div class="ph-empty dashed" v-if="isEmpty">
@@ -6,13 +6,11 @@
     </div>
 
     <div v-if="items.length">
-      <swipe :speed="speed" class="swipe">
-        <swipe-item class="item" v-for="item in items">
-          <a :href="item.url" class="img">
-            <img :src="item.picUrl" alt="">
-          </a>
-        </swipe-item>
-      </swipe>
+      <swiper auto loop :aspect-ratio="200/640">
+        <swiper-item v-for="(item, index) in items">
+          <a :href="item.url"><img :src="item.picUrl"></a>
+        </swiper-item>
+      </swiper>
     </div>
   </div>
 </div>
@@ -24,14 +22,15 @@
 </style>
 <script>
 import _ from 'lodash'
-import { Swipe, SwipeItem } from 'vue-swipe'
+import Swiper from './swiper/index.vue'
+import SwiperItem from './swiper/swiper-item.vue'
 
 export default {
   props: ['data'],
 
   components: {
-    'swipe': Swipe,
-    'swipe-item': SwipeItem
+    'swiper': Swiper,
+    'swiper-item': SwiperItem
   },
 
   computed: {
