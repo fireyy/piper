@@ -1,14 +1,13 @@
 <template>
-<div>
-  <div v-loading="show">
-  </div>
-  <div v-show="!show">
-    <slot></slot>
-  </div>
-</div>
+  <div class="data-loading" v-loading="show"></div>
 </template>
 
-<style lang="less" scoped>
+<style lang="less">
+  .data-loading {
+    position: fixed !important;
+    top: 30px;
+    left: 50%;
+  }
 </style>
 
 <script>
@@ -18,12 +17,6 @@ export default {
       type: Boolean
     }
   },
-
-  created() {},
-
-  watch: {},
-
-  methods: {},
 
   data() {
     return {}

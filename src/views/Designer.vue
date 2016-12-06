@@ -6,7 +6,7 @@
     <div>
        <el-button type="danger" icon="arrow-left" @click="back">返回</el-button>
       <!-- <el-button type="primary" icon="document" @click="preview">预览</el-button> -->
-      <el-button type="success" :loading="submitting" icon="check" @click="save">保存</el-button>
+      <el-button type="success" :loading="loading" icon="check" @click="save">保存</el-button>
     </div>
   </header>
 
@@ -45,14 +45,11 @@ export default {
   mounted() {
     // 初始化数据
     if(this.id){
-      this.loading = true
       api.page.get({id: this.id}).then((res)=>{
         let data = res.data
         this.editRenderData(data)
-        this.loading = false
       });
     }else{
-      this.loading = false
       this.editRenderData({
         title: '网页标题',
         items: []
@@ -62,6 +59,7 @@ export default {
 
   computed: {
     ...mapGetters({
+      loading: 'loading',
       renderData: 'render'
     }),
     id() {
@@ -103,11 +101,8 @@ export default {
       }
 
       //保存数据
-      this.submitting = true
-      console.log(data)
       if(this.id){
         api.page.update({id: this.id}, data).then((res)=>{
-          this.submitting = false
           this.$message({
             message: res.data.message,
             type: 'success'
@@ -115,14 +110,12 @@ export default {
         });
       }else{
         api.page.saveData(data).then((res)=>{
-          this.submitting = false
           this.$message({
             message: res.data.message,
             type: 'success'
           });
           this.$router.replace({name: 'design', params: {id: res.data.item.insertId}})
         }).catch((res)=>{
-          this.submitting = false
           this.$message.error(res.data.message);
         });
       }
@@ -140,9 +133,7 @@ export default {
 
   data() {
     return {
-      loading: false,
-      previewVisible: false,
-      submitting: false
+      previewVisible: false
     }
   }
 }

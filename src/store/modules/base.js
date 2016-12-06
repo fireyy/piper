@@ -9,7 +9,8 @@ const state = {
 }
 
 const getters = {
-  base: state => state
+  base: state => state,
+  loading: state => state.loading
 }
 
 const mutations = {
