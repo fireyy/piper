@@ -12,9 +12,9 @@ const app = express()
 
 const port = config.port
 
-Object.keys(webpackConfig.entry).forEach(function (name) {
-  webpackConfig.entry[name] = [`webpack-hot-middleware/client`].concat(webpackConfig.entry[name])
-})
+// Object.keys(webpackConfig.entry).forEach(function (name) {
+//   webpackConfig.entry[name] = [`webpack-hot-middleware/client`].concat(webpackConfig.entry[name])
+// })
 
 const compiler = webpack(webpackConfig)
 

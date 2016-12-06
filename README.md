@@ -13,4 +13,5 @@
 ## Issues
 
 - [x] store cache error
-- [ ] client code hot reload may catch error
+- [x] hot reload not work
+- [ ] client code watch may catch error
