@@ -1,8 +1,9 @@
 <template>
 <div>
-  <header>
-    <div class="title">foo</div>
-
+  <header class="designer-header">
+    <div class="title">
+      {{ renderData.title }}
+    </div>
     <div>
        <el-button type="danger" icon="arrow-left" @click="back">返回</el-button>
       <el-button type="primary" icon="document" @click="preview">预览</el-button>
@@ -149,7 +150,7 @@ html {
   user-select: none;
 }
 
-header {
+.designer-header {
   width: 100%;
   height: 55px;
   line-height: 55px;

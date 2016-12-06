@@ -1,10 +1,20 @@
 <template>
   <div>
-    <el-form>
-      <el-form-item>
+    <el-row type="flex" class="row-bg" justify="space-between">
+      <el-col :span="12">
+        <el-form :inline="true">
+          <el-form-item>
+            <el-input placeholder="活动名称"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSearch">查询</el-button>
+          </el-form-item>
+        </el-form>
+      </el-col>
+      <el-col :span="6" class="text-right">
         <el-button type="primary" @click="handleCreate">新建</el-button>
-      </el-form-item>
-    </el-form>
+      </el-col>
+    </el-row>
     <el-table
       :data="tableData"
       style="width: 100%">
@@ -49,6 +59,9 @@
       })
     },
     methods: {
+      onSearch() {
+        alert("todo")
+      },
       handleCreate() {
         this.$router.push('design')
       },

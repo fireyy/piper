@@ -28,6 +28,26 @@
   </div>
 </div>
 </template>
+<style lang="less">
+  .editor-pic {
+    .img {
+      width: 100%;
+      height: 150px;
+      display: table;
+
+      .middle {
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      img {
+        width: 100%;
+        display: inline-block;
+      }
+    }
+  }
+</style>
 <script>
 import Vue from 'vue'
 
