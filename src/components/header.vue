@@ -15,7 +15,7 @@
           zhuyuan6@wanda.cn<i class="el-icon-caret-bottom el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>注销</el-dropdown-item>
+          <el-dropdown-item><router-link to="login">注销</router-link></el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </el-col>
@@ -49,6 +49,12 @@
       },
       menus() {
         return [
+          {
+            "title": "首页",
+            "route": {
+              "name": "home"
+            }
+          },
           {
             "title": "活动列表",
             "route": {
