@@ -4,12 +4,13 @@
     <div class="title">foo</div>
 
     <div>
+       <el-button type="danger" icon="arrow-left" @click="back">返回</el-button>
       <!-- <el-button type="primary" icon="document" @click="preview">预览</el-button> -->
-      <el-button type="success" icon="check" @click="save">保存</el-button>
+      <el-button type="success" :loading="submitting" icon="check" @click="save">保存</el-button>
     </div>
   </header>
 
-  <div v-if="loaded" class="container">
+  <div v-loading.body="loading" class="container">
     <module-box></module-box>
 
     <render></render>
@@ -42,19 +43,20 @@ export default {
   },
 
   mounted() {
-    // TODO 初始化数据
+    // 初始化数据
     if(this.id){
+      this.loading = true
       api.page.get({id: this.id}).then((res)=>{
         let data = res.data
         this.editRenderData(data)
-        this.loaded = true
+        this.loading = false
       });
     }else{
+      this.loading = false
       this.editRenderData({
         title: '网页标题',
         items: []
       })
-      this.loaded = true
     }
   },
 
@@ -101,9 +103,11 @@ export default {
       }
 
       //保存数据
+      this.submitting = true
       console.log(data)
       if(this.id){
         api.page.update({id: this.id}, data).then((res)=>{
+          this.submitting = false
           this.$message({
             message: res.data.message,
             type: 'success'
@@ -111,32 +115,34 @@ export default {
         });
       }else{
         api.page.saveData(data).then((res)=>{
+          this.submitting = false
           this.$message({
             message: res.data.message,
             type: 'success'
           });
           this.$router.replace({name: 'design', params: {id: res.data.item.insertId}})
         }).catch((res)=>{
+          this.submitting = false
           this.$message.error(res.data.message);
         });
       }
     },
 
+    back() {
+      this.$router.push({name: 'pages'})
+    },
+
     preview() {
       window.DATA = this.getData()
       this.previewVisible = true;
-    },
-
-    close() {
-      alert("todo")
     }
   },
 
   data() {
     return {
-      loaded: false,
-      loadingProgress: 0,
-      previewVisible: false
+      loading: false,
+      previewVisible: false,
+      submitting: false
     }
   }
 }

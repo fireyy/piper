@@ -36,17 +36,6 @@
         </span>
       </el-table-column>
     </el-table>
-    <el-popover
-      ref="deleteconfirm"
-      placement="top"
-      width="160"
-      v-model="isdelete">
-      <p>确定删除吗？</p>
-      <div style="text-align: right; margin: 0">
-        <el-button size="mini" type="text" @click="isdelete = false">取消</el-button>
-        <el-button type="primary" size="mini" @click="isdelete = true">确定</el-button>
-      </div>
-    </el-popover>
   </div>
 </template>
 
@@ -67,15 +56,22 @@
         this.$router.push({ name: 'design', params: { id: row.id }})
       },
       handleDelete(index, row) {
-        api.page.remove({id: row.id}).then((res)=>{
-          this.tableData.splice(index, 1)
+        this.$confirm('此操作将删除该记录, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          api.page.remove({id: row.id}).then((res)=>{
+            this.tableData.splice(index, 1)
+          });
+        }).catch(()=>{
+          //
         });
       }
     },
     data() {
       return {
-        tableData: [],
-        isdelete: false
+        tableData: []
       }
     }
   }
