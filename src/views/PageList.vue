@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="layout-content">
     <el-row type="flex" class="row-bg" justify="space-between">
       <el-col :span="12">
         <el-form :inline="true">

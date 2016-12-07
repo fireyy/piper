@@ -6,9 +6,11 @@
     </div>
   </div>
 </template>
-<style>
+<style lang="less">
   .layout-container {
-    padding: 20px;
+    .layout-content {
+      padding: 20px;
+    }
   }
 </style>
 <script>

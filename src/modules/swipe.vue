@@ -15,15 +15,10 @@
   </div>
 </div>
 </template>
-<style>
-  .swipe {
-    height: 120px;
-  }
-</style>
 <script>
 import _ from 'lodash'
-import Swiper from './swiper/index.vue'
-import SwiperItem from './swiper/swiper-item.vue'
+import Swiper from '../components/swiper/index.vue'
+import SwiperItem from '../components/swiper/swiper-item.vue'
 
 export default {
   props: ['data'],

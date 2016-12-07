@@ -1,6 +1,6 @@
 <template>
 <header class="layout-header">
-  <el-row :gutter="20">
+  <el-row>
     <el-col :span="6">
       <h1 class="logo">营销活动制作平台</h1>
     </el-col>
