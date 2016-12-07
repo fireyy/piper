@@ -17,7 +17,11 @@ export default new Router({
       component: Layout,
       children: [
         { name: 'home', path: '/home', component: Home },
-        { name: 'design', path: '/design/:id?', component: Designer },
+        {
+          name: 'design',
+          path: '/design/:id?',
+          component: Designer
+        },
         { name: 'pages', path: '/pages', component: PageList },
         { name: 'users', path: '/users', component: UserList }
       ]

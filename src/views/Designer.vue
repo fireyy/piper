@@ -44,6 +44,7 @@ export default {
   },
 
   mounted() {
+    window.addEventListener("beforeunload", this.beforeunload);
     // 初始化数据
     if(this.id){
       api.page.get({id: this.id}).then((res)=>{
@@ -56,6 +57,24 @@ export default {
         items: []
       })
     }
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("beforeunload", this.beforeunload);
+  },
+
+  beforeRouteLeave (to, from, next) {
+    // @TODO 判断是否有数据变更
+    this.$confirm('你即将离开当前页面，未保存的数据将会丢失, 是否继续?', '提示', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    }).then(() => {
+      // 离开当前页面
+      next();
+    }).catch(() => {
+      // 留在当前页面
+    });
   },
 
   computed: {
@@ -129,6 +148,12 @@ export default {
     preview() {
       window.DATA = this.getData()
       this.previewVisible = true;
+    },
+    beforeunload(e) {
+      var confirmationMessage = "可能有数据未保存";
+
+      e.returnValue = confirmationMessage;
+      return confirmationMessage
     }
   },
 
