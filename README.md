@@ -15,14 +15,16 @@ npm install
 - [x] swipe auto get image height
 - [x] publish html
 - [x] prerender? => [prerender](https://github.com/chrisvfritz/prerender-spa-plugin)
-- [ ] css extract to file
-- [ ] more modules
-- [ ] more property
+- [ ] 编辑器页面判断是否有数据变更
+- [ ] css 导出成文件？
+- [ ] 倒计时组件
+- [ ] 更多的组件
+- [ ] 更多的可设置属性
 - [ ] ...
 
 ## Issues
 
 - [x] store cache error
 - [x] hot reload not work
-- [ ] design and preview mode rem bug
-- [ ] client code watch may catch error
+- [ ] 编辑器页面和预览页面的 rem 显示 bug
+- [ ] src 代码自动编译可能会导致 nodemoon watchr 报错
