@@ -115,14 +115,14 @@ export default {
     submitSave(data) {
       //保存数据
       if(this.id){
-        api.page.update({id: this.id}, data).then((res)=>{
+        return api.page.update({id: this.id}, data).then((res)=>{
           this.$message({
             message: res.data.message,
             type: 'success'
           })
         })
       }else{
-        api.page.saveData(data).then((res)=>{
+        return api.page.saveData(data).then((res)=>{
           this.$message({
             message: res.data.message,
             type: 'success'
@@ -146,15 +146,18 @@ export default {
     },
 
     back() {
-      //this.$router.push({name: 'pages'})
       this.$router.go(-1)
     },
 
     publish() {
-      api.publish.update({id: this.id}, {}).then((res)=>{
-        if(res.data.errors.length == 0){
-          this.$message.success('发布成功')
-        }
+      let data = this.getData()
+
+      this.submitSave(data).then(()=>{
+        api.publish(this.id).then((res)=>{
+          if(res.data.errors.length == 0){
+            this.$message.success('发布成功')
+          }
+        })
       })
     },
 

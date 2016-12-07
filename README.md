@@ -24,4 +24,5 @@ npm install
 
 - [x] store cache error
 - [x] hot reload not work
+- [ ] design and preview mode rem bug
 - [ ] client code watch may catch error
