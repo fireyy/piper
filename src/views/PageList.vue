@@ -7,12 +7,12 @@
             <el-input placeholder="活动名称"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onSearch">查询</el-button>
+            <el-button type="primary" icon="search" @click="onSearch">查询</el-button>
           </el-form-item>
         </el-form>
       </el-col>
       <el-col :span="6" class="text-right">
-        <el-button type="primary" @click="handleCreate">新建</el-button>
+        <el-button type="primary" icon="plus" @click="handleCreate">新建</el-button>
       </el-col>
     </el-row>
     <el-table
@@ -37,12 +37,8 @@
         label="操作"
         width="180">
         <span>
-          <el-button
-              size="small"
-              @click="handleEdit($index, row)">
-            编辑
-          </el-button>
-          <el-button size="small" type="danger" @click="handleDelete($index, row)">删除</el-button>
+          <el-button size="small" icon="edit" @click="handleEdit($index, row)">编辑</el-button>
+          <el-button size="small" icon="delete" type="danger" @click="handleDelete($index, row)">删除</el-button>
         </span>
       </el-table-column>
     </el-table>
@@ -76,10 +72,10 @@
         }).then(() => {
           api.page.remove({id: row.id}).then((res)=>{
             this.tableData.splice(index, 1)
-          });
+          })
         }).catch(()=>{
           //
-        });
+        })
       }
     },
     data() {

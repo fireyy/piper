@@ -7,6 +7,8 @@ const _ = module.exports = {}
 
 _.outputPath = path.join(__dirname, '../dist')
 
+_.publicPath = path.join(__dirname, '../public')
+
 _.outputIndexPath = path.join(__dirname, '../dist/index.html')
 
 _.target = 'web'

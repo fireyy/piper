@@ -1,8 +1,5 @@
-import _ from "lodash";
-import pick from "lodash/fp/pick";
-import merge from "lodash/fp/merge";
-import cloneDeep from "lodash/fp/cloneDeep";
-import compose from "lodash/fp/compose";
+import _ from "lodash"
+import { pick, merge, cloneDeep, flow } from "lodash/fp"
 
 import {
   ACTIVE_RENDER_ITEM,
@@ -49,11 +46,11 @@ const mutations = {
       })
     })
 
-    let newItem = compose(
-                    merge({ data }),
-                    cloneDeep,
-                    pick(['type', 'alias', 'data'])
-                  )(module)
+    let newItem = flow(
+      merge({ data }),
+      cloneDeep,
+      pick(['type', 'alias', 'data'])
+    )(module);
 
     newItem._timestamp = newItem._timestamp || Date.now()
     state.items.splice(index, 0, newItem)

@@ -1,5 +1,5 @@
 <template>
-  <preview-render :items="items">
+  <preview-render :items="data.items">
   </preview-render>
 </template>
 
@@ -20,13 +20,9 @@ export default {
     PreviewRender
   },
 
-  beforeCreate() {
-    document.title = window.parent.DATA.title
-  },
-
-  data: () => {
-    return {
-      items: window.parent.DATA.items
+  computed: {
+    data() {
+      return window.PIPER_DATA || window.parent.DATA
     }
   }
 }

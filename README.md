@@ -7,7 +7,8 @@
 - [x] swipe auto get image height
 - [ ] more modules
 - [ ] more property
-- [ ] server render & publish html => [prerender](https://github.com/chrisvfritz/prerender-spa-plugin)
+- [x] publish html
+- [ ] prerender? => [prerender](https://github.com/chrisvfritz/prerender-spa-plugin)
 - [ ] ...
 
 ## Issues

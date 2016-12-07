@@ -16,7 +16,6 @@
 </div>
 </template>
 <script>
-import _ from 'lodash'
 import Swiper from '../components/swiper/index.vue'
 import SwiperItem from '../components/swiper/swiper-item.vue'
 
@@ -30,12 +29,11 @@ export default {
 
   computed: {
     isEmpty() {
-      return _.every(this.
-        data.pic.value, (value) => !value.picUrl)
+      return this.data.pic.value.every((value) => !value.picUrl)
     },
 
     items() {
-      return _.filter(this.data.pic.value, (value) => value.picUrl)
+      return this.data.pic.value.filter((value) => value.picUrl)
     }
   },
 

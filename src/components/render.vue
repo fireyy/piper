@@ -97,9 +97,8 @@ export default {
   },
 
   mounted() {
-    // 模拟移动端rem大小环境
+    // 模拟 rem
     setFontSize()
-    window.addEventListener("resize", setFontSize)
 
     function setFontSize() {
       document.documentElement.style.fontSize = `${(document.querySelector('[drag-tag="modules"]').clientWidth) * 20 / 320}px`

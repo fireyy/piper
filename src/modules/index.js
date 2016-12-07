@@ -1,8 +1,3 @@
-import _ from "lodash";
-import map from "lodash/fp/map";
-import flatten from "lodash/fp/flatten";
-import compose from "lodash/fp/compose";
-
 export const modules = [{
   title: '常规',
   items: [{
@@ -76,19 +71,17 @@ export const modules = [{
               max: 6
             }
           }
-        }, 
+        },
         component: require('./swipe.vue')
     }
   ]
 }]
 
-export let components = _.reduce(
-  compose(
-    flatten,
-    map('items')
-  )(modules),
-  (obj, item) => {
-    obj[item.type] = item.component
-    return obj
-  }, {}
-)
+export let components = {};
+modules.forEach(function(obj){
+  if(obj.items && obj.items.length > 0) {
+    obj.items.forEach(function(item){
+      components[item.type] = item.component
+    })
+  }
+});

@@ -9,17 +9,17 @@
 </template>
 
 <script>
-import _ from 'lodash'
 
 export default {
   props: ['data'],
   computed: {
     customStyle() {
       let styles = {}
-      this.data.style && _.each(this.data.style.value, (item, key) => {
-        styles[key] = item.value
-      })
-      
+      if(this.data.style) {
+        for(let key in this.data.style.value){
+          styles[key] = this.data.style.value[key].value
+        }
+      }
       return styles
     }
   },

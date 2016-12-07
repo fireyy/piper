@@ -16,9 +16,9 @@ module.exports = class {
   @authorize([ 'EDIT' ])
   static async get(ctx) {
     let { id } = ctx.params;
-    let result = await ctx.sql('                                                                                \
+    let result = await ctx.sql('                                                               \
       SELECT `id`, `path`, `title`, `comment`, `items`, `create_by`, `create_at`               \
-        FROM `pages` WHERE `id` = ? AND `is_delete` = 0                                                          \
+        FROM `pages` WHERE `id` = ? AND `is_delete` = 0                                        \
     ', [ id ]);
     let page = result[0];
     if (!page) throw { status: 404, name: 'PAGES_NOT_FOUND', message: 'page is not found' };
@@ -39,6 +39,8 @@ module.exports = class {
       return count + 1;
     }, 0);
     if (count === 0) throw { status: 400, name: 'ERR', message: 'require `title` or/and `items` in request body' };
+    change.title = change.title.trim();
+    if (!change.title) throw { status: 400, name: 'ERROR_PARAMS', message: 'Title 不能为空' };
     if ('items' in change) {
       change.items = JSON.stringify(change.items);
       if (change.items.length > __.VALUE_MAX_LENGTH) throw __.VALUE_TOO_LONG;

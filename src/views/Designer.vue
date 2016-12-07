@@ -1,17 +1,18 @@
 <template>
-<div>
+<div v-loading.body.fullscreen="loading" element-loading-text="拼命加载中">
   <header class="designer-header">
     <div class="title">
       {{ renderData.title }}
     </div>
     <div>
-       <el-button type="danger" icon="arrow-left" @click="back">返回</el-button>
-      <el-button type="primary" icon="document" @click="preview">预览</el-button>
-      <el-button type="success" :loading="loading" icon="check" @click="save">保存</el-button>
+      <el-button type="danger" icon="arrow-left" @click="back">返回</el-button>
+      <el-button type="warning" icon="document" @click="preview">预览</el-button>
+      <el-button type="primary" icon="check" @click="save">保存</el-button>
+      <el-button v-if="id" type="success" icon="upload" @click="publish">保存并发布</el-button>
     </div>
   </header>
 
-  <div v-loading.body="loading" class="container">
+  <div class="container">
     <module-box></module-box>
 
     <render></render>
@@ -74,6 +75,7 @@ export default {
       next();
     }).catch(() => {
       // 留在当前页面
+      next(false);
     });
   },
 
@@ -109,6 +111,26 @@ export default {
 
       return data
     },
+
+    submitSave(data) {
+      //保存数据
+      if(this.id){
+        api.page.update({id: this.id}, data).then((res)=>{
+          this.$message({
+            message: res.data.message,
+            type: 'success'
+          })
+        })
+      }else{
+        api.page.saveData(data).then((res)=>{
+          this.$message({
+            message: res.data.message,
+            type: 'success'
+          });
+          this.$router.replace({name: 'design', params: {id: res.data.item.insertId}})
+        })
+      }
+    },
     save() {
       let data = this.getData()
 
@@ -120,35 +142,29 @@ export default {
         return this.focusDocumentTitle(true)
       }
 
-      //保存数据
-      if(this.id){
-        api.page.update({id: this.id}, data).then((res)=>{
-          this.$message({
-            message: res.data.message,
-            type: 'success'
-          });
-        });
-      }else{
-        api.page.saveData(data).then((res)=>{
-          this.$message({
-            message: res.data.message,
-            type: 'success'
-          });
-          this.$router.replace({name: 'design', params: {id: res.data.item.insertId}})
-        }).catch((res)=>{
-          this.$message.error(res.data.message);
-        });
-      }
+      data.title = ''
+
+      this.submitSave(data)
     },
 
     back() {
-      this.$router.push({name: 'pages'})
+      //this.$router.push({name: 'pages'})
+      this.$router.go(-1)
+    },
+
+    publish() {
+      api.publish.update({id: this.id}, {}).then((res)=>{
+        if(res.data.errors.length == 0){
+          this.$message.success('发布成功')
+        }
+      })
     },
 
     preview() {
       window.DATA = this.getData()
       this.previewVisible = true;
     },
+
     beforeunload(e) {
       var confirmationMessage = "可能有数据未保存";
 
