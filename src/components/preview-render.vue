@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="preview">
     <component v-for="(item, index) in items" :index="index" :data="item.data" :is="components[item.type]">
     </component>
   </div>

@@ -6,6 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
+const PrerenderSpaPlugin = require('prerender-spa-plugin')
 const base = require('./webpack.base')
 const pkg = require('../package')
 const _ = require('./utils')
@@ -56,7 +57,14 @@ module.exports = function(env) {
     // extract vendor chunks
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor'
-    })
+    }),
+    new PrerenderSpaPlugin(
+      dir,
+      [ '/' ],
+      {
+        captureAfterElementExists: '#preview'
+      }
+    )
   )
   return base
 }

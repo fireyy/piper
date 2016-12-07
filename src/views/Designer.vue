@@ -142,8 +142,6 @@ export default {
         return this.focusDocumentTitle(true)
       }
 
-      data.title = ''
-
       this.submitSave(data)
     },
 
