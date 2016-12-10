@@ -16,6 +16,7 @@ npm install
 - [x] publish html
 - [x] prerender? => [prerender](https://github.com/chrisvfritz/prerender-spa-plugin)
 - [ ] 编辑器页面判断是否有数据变更
+- [ ] 图片上传
 - [ ] css 导出成文件？
 - [ ] 倒计时组件
 - [ ] 更多的组件

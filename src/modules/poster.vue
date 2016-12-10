@@ -1,6 +1,6 @@
 <template>
     <div class="module-container">
-        <div class="poster-single">
+        <div class="poster">
             <div class="ph-empty dashed" v-if="!data.pic.value[0].picUrl">
                 图片
             </div>
@@ -15,7 +15,17 @@
         </div>
     </div>
 </template>
+<style lang="less">
+  .poster {
+    text-align: center;
 
+    img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+</style>
 <script>
 
     export default {

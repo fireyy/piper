@@ -75,7 +75,27 @@ export const modules = [{
         component: require('./swipe.vue')
     }
   ]
-}]
+},
+{
+  title: '其他',
+  items: [{
+    alias: '倒计时',
+    type: 'timer',
+    icon: 'time',
+    data: {
+      time: {
+        type: 'timer',
+        title: '倒计时',
+        value: {
+          start: Date.now(),
+          end: Date.now() + 1000 * 60 * 60 * 24 *2
+        }
+      }
+    },
+    component: require('./countdown.vue')
+  }]
+}
+]
 
 export let components = {};
 modules.forEach(function(obj){

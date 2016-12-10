@@ -47,7 +47,7 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        loader: 'style-loader!css-loader!less-loader'
+        loader: 'style-loader!css-loader!px2rem-loader?remUnit=75&remPrecision=8!less-loader'
       },
       {
         test: /\.(ico|jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
