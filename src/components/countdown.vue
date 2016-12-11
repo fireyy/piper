@@ -17,15 +17,10 @@
       <div class="seconds">
         <span v-for="(item, index) in time.seconds" :key="index" class="num">{{item}}</span>
       </div>
-      <div class="milliseconds">
-        <span v-for="(item, index) in time.milliseconds" :key="index" class="num">{{item}}</span>
-      </div>
     </div>
   </div>
 </template>
 <script>
-import moment from 'moment'
-
 export default {
   props: {
     start: {
@@ -63,10 +58,9 @@ export default {
 
   methods: {
     update() {
-      this._start = moment(+this.start).valueOf()
-      this._end = moment(+this.end).valueOf()
+      this._start = new Date(+this.start).valueOf()
+      this._end = new Date(+this.end).valueOf()
       let keys = [
-        'milliseconds',
         'seconds',
         'minutes',
         'hours',
@@ -95,17 +89,29 @@ export default {
             //
         }
 
-        let duration = moment.duration(countdownTime)
+        // let duration = moment.duration(countdownTime)
+
+        countdownTime = countdownTime / 1000
+
+        let duration = {
+          seconds     : Math.floor(countdownTime % 60),
+          minutes     : Math.floor(countdownTime / 60) % 60,
+          hours       : Math.floor(countdownTime / 60 / 60) % 24,
+          days        : Math.floor(countdownTime / 60 / 60 / 24) % 7,
+          weeks       : Math.floor(countdownTime / 60 / 60 / 24 / 7),
+          months      : Math.floor(countdownTime / 60 / 60 / 24 / 30.4368),
+          years       : Math.abs(new Date(+this.end).getFullYear() - new Date().getFullYear())
+        };
 
         keys.forEach((key) => {
-          let value = `${duration[key]()}`.substr(0, 2)
+          let value = `${duration[key]}`.substr(0, 2)
           value = +value < 10 ? `0${value}` : `${value}`
 
           this.$set(this.time, `${key}`, value.split(''))
         })
 
         if (state === 'end') this.stop()
-      }, 100)
+      }, 1000)
     },
 
     getState() {
