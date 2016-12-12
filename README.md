@@ -15,7 +15,7 @@ npm install
 - [x] swipe auto get image height
 - [x] publish html
 - [x] prerender? => [prerender](https://github.com/chrisvfritz/prerender-spa-plugin)
-- [ ] 编辑器页面判断是否有数据变更
+- [x] 编辑器页面判断是否有数据变更
 - [x] 图片上传
 - [ ] css 导出成文件？
 - [x] 倒计时组件

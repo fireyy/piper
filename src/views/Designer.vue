@@ -45,6 +45,18 @@ export default {
   },
 
   mounted() {
+    this.watchItems = this.$watch('renderData.items', function(val){
+      console.log("watch items", val)
+      this.changed--
+      this.unWatchChange();
+    }, {
+      deep: true
+    })
+    this.watchTitle = this.$watch('renderData.title', function(val){
+      console.log("watch title", val)
+      this.changed--
+      this.unWatchChange();
+    })
     window.addEventListener("beforeunload", this.beforeunload);
     // 初始化数据
     if(this.id){
@@ -61,22 +73,28 @@ export default {
   },
 
   beforeDestroy() {
+    this.changed = -1;
+    this.unWatchChange();
     window.removeEventListener("beforeunload", this.beforeunload);
   },
 
   beforeRouteLeave (to, from, next) {
-    // @TODO 判断是否有数据变更
-    this.$confirm('你即将离开当前页面，未保存的数据将会丢失, 是否继续?', '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-      type: 'warning'
-    }).then(() => {
-      // 离开当前页面
-      next();
-    }).catch(() => {
-      // 留在当前页面
-      next(false);
-    });
+    // 判断是否有数据变更
+    if(this.changed < 0) {
+      this.$confirm('你即将离开当前页面，未保存的数据将会丢失, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        // 离开当前页面
+        next();
+      }).catch(() => {
+        // 留在当前页面
+        next(false);
+      });
+    }else{
+      next()
+    }
   },
 
   computed: {
@@ -93,6 +111,13 @@ export default {
       'focusDocumentTitle',
       'editRenderData'
     ]),
+    unWatchChange() {
+      if(this.changed < 0){
+        //unwatch
+        this.watchItems && this.watchItems();
+        this.watchTitle && this.watchTitle();
+      }
+    },
     getData() {
       let {
         items,
@@ -167,8 +192,9 @@ export default {
     },
 
     beforeunload(e) {
-      var confirmationMessage = "可能有数据未保存";
+      if(this.changed >= 0) return;
 
+      var confirmationMessage = "可能有数据未保存";
       e.returnValue = confirmationMessage;
       return confirmationMessage
     }
@@ -176,7 +202,10 @@ export default {
 
   data() {
     return {
-      previewVisible: false
+      previewVisible: false,
+      changed: 2,
+      watchItems: null,
+      watchTitle: null
     }
   }
 }

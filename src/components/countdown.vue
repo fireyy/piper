@@ -33,25 +33,27 @@ export default {
   },
 
   created() {
+    this.timeWatcher = this.$watch(
+      function () {
+        return this.start + this.end
+      },
+      function (newVal, oldVal) {
+        this.update()
+      }
+    )
     this.update()
   },
 
   destroyed() {
+    this.timeWatcher()
     this.stop()
   },
 
-  watch: {
-    'end': function() {
-      this.update()
-    }
-  },
-
-  computed: {
-    isStart() {
-      // return this.time.days && this.time.days.length > 0
-      return true
-    }
-  },
+  // watch: {
+  //   'end': function() {
+  //     this.update()
+  //   }
+  // },
 
   methods: {
     update() {
@@ -140,7 +142,8 @@ export default {
         underway: '结束',
         end: '结束'
       },
-      time: {}
+      time: {},
+      timeWatcher: null
     }
   }
 }
