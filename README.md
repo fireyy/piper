@@ -28,5 +28,5 @@ npm install
 
 - [x] store cache error
 - [x] hot reload not work
-- [ ] 编辑器页面和预览页面的 rem 显示 bug
+- [x] 编辑器页面和预览页面的 rem 显示 bug
 - [ ] src 代码自动编译可能会导致 nodemoon watchr 报错

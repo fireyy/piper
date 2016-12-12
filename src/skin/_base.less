@@ -1,39 +1,36 @@
-.module-container {
-  * {
-    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-    box-sizing: border-box;
+* {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.color-primary {
+  color: @color-primary;
+}
+
+.color-default {
+  color: @color-default;
+}
+
+.color-muted {
+  color: @color-muted !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.ph-empty {
+  width: 100%;
+  color: #aaa;
+  text-align: center;
+  padding: 10px 0;
+
+  &.dashed {
+    border: 1px dashed #ddd; /*no*/
   }
-
-  a {
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .color-primary {
-    color: @color-primary;
-  }
-
-  .color-default {
-    color: @color-default;
-  }
-
-  .color-muted {
-    color: @color-muted !important;
-  }
-
-  .text-center {
-    text-align: center;
-  }
-
-  .ph-empty {
-    width: 100%;
-    color: #aaa;
-    text-align: center;
-    padding: 10px 0;
-
-    &.dashed {
-      border: 1px dashed #ddd;
-    }
-  }
-
 }

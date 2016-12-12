@@ -7,7 +7,7 @@
 
 <style lang="less">
 body {
-  width: 16rem;
+  width: 100%;
   margin: 0 auto;
 }
 </style>
@@ -18,7 +18,6 @@ import {
   components,
   modules
 } from '../modules'
-import '../assets/lib/hotcss'
 
 export default {
   props: ['items'],

@@ -3,7 +3,7 @@
   </preview-render>
 </template>
 
-<style lang="less" scoped>
+<style lang="less">
 body,
 html {
     margin: 0;

@@ -1,33 +1,31 @@
-.module-container {
-  .btn {
-    text-align: center;
+.btn {
+  text-align: center;
+  font-size: 30px;
+  height: 75px;
+  line-height: 75px;
+  padding: 0 15px;
+  color: @color-default;
+  border: 1px solid @color-default; /*no*/
+  border-radius: 5px;
+  background: #fff;
+  display: inline-block;
+
+  &-primary {
+    border-color: @color-primary;
+    color: @color-primary;
+  }
+
+  &-sm {
     font-size: 30px;
-    height: 75px;
-    line-height: 75px;
+    height: 65px;
+    line-height: 65px;
+    padding: 0 8px;
+  }
+
+  &-xs {
+    font-size: 30px;
+    height: 45px;
+    line-height: 45px;
     padding: 0 15px;
-    color: @color-default;
-    border: 1px solid @color-default; /*no*/
-    border-radius: 5px;
-    background: #fff;
-    display: inline-block;
-
-    &-primary {
-      border-color: @color-primary;
-      color: @color-primary;
-    }
-
-    &-sm {
-      font-size: 30px;
-      height: 65px;
-      line-height: 65px;
-      padding: 0 8px;
-    }
-
-    &-xs {
-      font-size: 30px;
-      height: 45px;
-      line-height: 45px;
-      padding: 0 15px;
-    }
   }
 }

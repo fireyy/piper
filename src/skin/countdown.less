@@ -33,7 +33,7 @@
   .days {
     margin-right: 35px;
 
-    &:after:extend(.num) {
+    &:after {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -46,8 +46,10 @@
     margin-right: 5px;
 
     &:after {
-
       position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
       content: ':';
     }
   }
