@@ -176,7 +176,7 @@ export default {
 
   > .@{pre}-indicator, .@{pre}-indicator-right {
     position: absolute;
-    left: 50%;
+    right: 10px;
     bottom: 10px;
 
     > a {

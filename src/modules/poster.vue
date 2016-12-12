@@ -1,14 +1,14 @@
 <template>
     <div class="module-container">
         <div class="poster">
-            <div class="ph-empty dashed" v-if="!data.pic.value[0].picUrl">
+            <div class="ph-empty dashed" v-if="!data.pic.value[0].url">
                 图片
             </div>
 
-            <div v-if="data.pic.value[0].picUrl">
-                <a :href="data.pic.value[0].url"
+            <div v-if="data.pic.value[0].url">
+                <a :href="data.pic.value[0].link"
                    class="img">
-                    <img :src="data.pic.value[0].picUrl" alt="">
+                    <img :src="data.pic.value[0].url" alt="">
                 </a>
 
             </div>

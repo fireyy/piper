@@ -42,8 +42,8 @@ export const modules = [{
           type: 'pic',
           title: '图片',
           value: [{
-            url: null,
-            picUrl: 'http://img1.ffan.com/T1xEWTBmET1RCvBVdK'
+            link: null,
+            url: 'http://img1.ffan.com/T1xEWTBmET1RCvBVdK'
           }],
           options: {
             max: 1
@@ -61,11 +61,11 @@ export const modules = [{
             type: 'pic',
             title: '幻灯片',
             value: [{
-              url: null,
-              picUrl: 'http://img1.ffan.com/T14.CTB4LT1RCvBVdK'
+              link: null,
+              url: 'http://img1.ffan.com/T14.CTB4LT1RCvBVdK'
             }, {
-              url: null,
-              picUrl: 'http://img1.ffan.com/T1xEWTBmET1RCvBVdK'
+              link: null,
+              url: 'http://img1.ffan.com/T1xEWTBmET1RCvBVdK'
             }],
             options: {
               max: 6

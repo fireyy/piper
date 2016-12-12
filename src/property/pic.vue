@@ -1,29 +1,28 @@
 <template>
 <div class="editor-container">
   <div class="editor-pic">
-    <div class="form" v-for="(item, index) in data.value" v-bind:key="index">
+    <div class="form">
       <el-form label-position="top">
-        <el-form-item label="链接">
-          <el-input placeholder="请输入跳转链接" v-model="item.url">
-          </el-input>
-        </el-form-item>
-        <el-form-item label="图片">
-          <div v-if="item.picUrl" class="img has-del">
-            <div class="middle">
-              <img :src="item.picUrl" alt="">
-              <button @click="item.picUrl = null" class="del"><i class="el-icon-circle-close"></i></button>
-            </div>
-          </div>
-          <el-upload v-if="!item.picUrl" action="/upload" type="drag"
-          :on-success="handleSuccess"
-          :on-error="handleError">
-            <i class="el-icon-upload"></i>
-            <div class="el-dragger__text">将文件拖到此处，或<em>点击上传</em></div>
-            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-          </el-upload>
-        </el-form-item>
+        <fieldset v-for="(item, index) in data.value" v-bind:key="index">
+          <el-form-item label="链接">
+            <el-input placeholder="请输入跳转链接" v-model="item.link">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="图片">
+            <el-upload :class="{'hasImage': item.url}" action="/api/files" type="drag"
+            :thumbnail-mode="true"
+            :default-file-list="[item]"
+            :on-success="handleSuccess(index)"
+            :on-preview="handlePreview(index)"
+            :on-remove="handleRemove(index)"
+            :on-error="handleError(index)">
+              <i class="el-icon-upload"></i>
+              <div class="el-dragger__text">将文件拖到此处，或<em>点击上传</em></div>
+              <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+            </el-upload>
+          </el-form-item>
+        </fieldset>
       </el-form>
-      <div class="hr"></div>
     </div>
   </div>
 </div>
@@ -46,6 +45,18 @@
         display: inline-block;
       }
     }
+    fieldset {
+      border: none;
+      border-bottom: 1px solid #eee;
+    }
+    // hack for hide element upload icon
+    .hasImage {
+      .el-draggeer__cover__btns {
+        .btn:first-child {
+          display: none;
+        }
+      }
+    }
   }
 </style>
 <script>
@@ -63,22 +74,35 @@ export default {
     if (diff > 0) {
       while (diff--) {
         this.data.value.push({
-          url: null,
-          picUrl: null
+          link: null,
+          url: null
         })
       }
     }
   },
 
   methods: {
-    handleSuccess(response, file, fileList) {
-      console.log(response, file, fileList)
-      if(response.status=="200"){
-        alert("http://img1.ffan.com/"+response.data.name)
+    handleSuccess(index) {
+      return (response, file, fileList)=>{
+        console.log(index, response, file, fileList)
+        this.data.value[index].url = response.url
       }
     },
-    handleError(err, response, file) {
-      console.log(err, response, file);
+    handleError(index) {
+      return (err, response, file)=>{
+        console.log(err, response, file);
+      }
+    },
+    handleRemove(index) {
+      return (file, fileList)=>{
+        console.log(file, fileList);
+        this.data.value[index].url = null
+      }
+    },
+    handlePreview(index) {
+      return (file)=>{
+        console.log(file);
+      }
     }
   },
 
