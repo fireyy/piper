@@ -31,14 +31,13 @@
   }
 
   .days {
-    margin-right: 25px;
+    margin-right: 35px;
 
     &:after:extend(.num) {
       position: absolute;
-      right: -44%;
+      top: 50%;
+      transform: translateY(-50%);
       font-size: 20px;
-      padding: 3px;
-      border-radius: 50%;
       content: '天';
     }
   }
@@ -49,7 +48,6 @@
     &:after {
 
       position: absolute;
-      right: -14%;
       content: ':';
     }
   }

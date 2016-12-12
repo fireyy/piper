@@ -47,9 +47,6 @@ export default {
   },
 
   computed: {
-    state() {
-      return this.status || ''
-    },
     isStart() {
       // return this.time.days && this.time.days.length > 0
       return true
@@ -137,6 +134,7 @@ export default {
 
   data() {
     return {
+      state: this.status || '',
       stateMap: {
         ready: '开始',
         underway: '结束',
