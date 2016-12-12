@@ -14,21 +14,50 @@
 </template>
 <style lang="less">
 .properties {
-    .ph-text {
+  .ph-text {
+    font-size: 20px;
+    margin-top: 30px;
+    color: #ddd;
+  }
+  h2 {
+    margin: 12px 15px;
+  }
+  .contents {
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    &:not(:last-child) {
+      border-bottom: 2px dashed #eee;
+    }
+  }
+  .form {
+    padding: 20px;
+  }
+  .hr {
+    height: 1px;
+    background: #eee;
+    margin-bottom: 15px;
+  }
+
+  .has-del {
+    position: relative;
+
+    .del {
+      cursor: pointer;
+      padding: 0;
+      color: #FF4949;
+      border-radius: 50%;
+      display: flex;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: -10px;
+      border: 2px solid #fff;
+
+      i {
         font-size: 20px;
-        margin-top: 30px;
-        color: #ddd;
+      }
     }
-    h2 {
-        margin: 12px 15px;
-    }
-    .contents {
-        padding-bottom: 10px;
-        margin-bottom: 20px;
-        &:not(:last-child) {
-            border-bottom: 2px dashed #eee;
-        }
-    }
+  }
 }
 </style>
 <script>
@@ -40,7 +69,7 @@ import components from '../property'
 
 export default {
   components,
-  
+
   computed: {
     ...mapGetters({
       render: 'render',

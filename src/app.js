@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
-import './assets/css/styles.less'
 
 import store from './store'
 import router from './router'
