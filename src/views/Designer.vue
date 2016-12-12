@@ -45,18 +45,7 @@ export default {
   },
 
   mounted() {
-    this.watchItems = this.$watch('renderData.items', function(val){
-      console.log("watch items", val)
-      this.changed--
-      this.unWatchChange();
-    }, {
-      deep: true
-    })
-    this.watchTitle = this.$watch('renderData.title', function(val){
-      console.log("watch title", val)
-      this.changed--
-      this.unWatchChange();
-    })
+    this.addDataWatcher()
     window.addEventListener("beforeunload", this.beforeunload);
     // 初始化数据
     if(this.id){
@@ -74,7 +63,7 @@ export default {
 
   beforeDestroy() {
     this.changed = -1;
-    this.unWatchChange();
+    this.removeDataWatcher();
     window.removeEventListener("beforeunload", this.beforeunload);
   },
 
@@ -111,7 +100,21 @@ export default {
       'focusDocumentTitle',
       'editRenderData'
     ]),
-    unWatchChange() {
+    addDataWatcher() {
+      this.watchItems = this.$watch('renderData.items', function(val){
+        console.log("watch items", val)
+        this.changed--
+        this.removeDataWatcher();
+      }, {
+        deep: true
+      })
+      this.watchTitle = this.$watch('renderData.title', function(val){
+        console.log("watch title", val)
+        this.changed--
+        this.removeDataWatcher();
+      })
+    },
+    removeDataWatcher() {
       if(this.changed < 0){
         //unwatch
         this.watchItems && this.watchItems();
