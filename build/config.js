@@ -1,5 +1,6 @@
 'use strict'
 const pkg = require('../package')
+const _ = require('./utils')
 
 module.exports = {
   port: 4000,
@@ -14,6 +15,7 @@ module.exports = {
     ]
   },
   vue: {
+    loaders: _.cssLoaders(),
     preserveWhitespace: false,
     postcss: [
       require('autoprefixer')({

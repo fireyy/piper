@@ -1,6 +1,6 @@
 @import "_variable";
 
-// 字体大小问题
+// 按照 dpr 计算 px
 .px2px(@name, @px){
   @{name}: round(@px / 2) * 1px;
   [data-dpr="2"] & {

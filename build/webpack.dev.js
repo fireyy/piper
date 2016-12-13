@@ -18,4 +18,8 @@ base.plugins.push(
   new webpack.NoErrorsPlugin()
 )
 
+base.module.rules = base.module.rules.concat(
+  _.styleLoaders({ sourceMap: config.cssSourceMap })
+)
+
 module.exports = base

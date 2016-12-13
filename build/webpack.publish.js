@@ -1,9 +1,7 @@
 'use strict'
 const path = require('path')
-const exec = require('child_process').execSync
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const PrerenderSpaPlugin = require('prerender-spa-plugin')
@@ -12,8 +10,6 @@ const pkg = require('../package')
 const _ = require('./utils')
 const config = require('./config')
 
-// remove dist folder in web app mode
-//exec('rm -rf dist/')
 // use source-map in web app mode
 base.devtool = 'source-map'
 
@@ -26,10 +22,11 @@ base.entry = {
 base.output.publicPath = './'
 // base.output.filename = '[name].[hash:8].js'
 base.output.filename = '[name].[chunkhash:8].js'
+
 // add webpack plugins
 base.plugins = [
-  new ProgressBarPlugin(),
   new LodashModuleReplacementPlugin(),
+  new ExtractTextPlugin("styles.[contenthash:8].css"),
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify('production')
   }),
@@ -44,8 +41,16 @@ base.plugins = [
     output: {
       comments: false
     }
+  }),
+  // extract vendor chunks
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor'
   })
 ];
+
+base.module.rules = base.module.rules.concat(
+  _.styleLoaders({ sourceMap: config.cssSourceMap, extract: true, px2rem: true })
+)
 
 module.exports = function(env) {
   let dir = path.join(__dirname, '../public/' + env.id)
@@ -53,18 +58,14 @@ module.exports = function(env) {
   base.plugins.push(
     new HtmlWebpackPlugin({
       template: dir + `/index.html`
-    }),
-    // extract vendor chunks
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
-    }),
-    new PrerenderSpaPlugin(
-      dir,
-      [ '/' ],
-      {
-        captureAfterElementExists: '#preview'
-      }
-    )
+    })
+    // new PrerenderSpaPlugin(
+    //   dir,
+    //   [ '/' ],
+    //   {
+    //     captureAfterElementExists: '#preview'
+    //   }
+    // )
   )
   return base
 }
