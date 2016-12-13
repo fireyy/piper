@@ -19,7 +19,7 @@
     background: #eee;
     font-size: 15px;
     margin-bottom: 5px;
-    padding: 12px 10px;
+    padding: 5px 10px;
     border-bottom: 1px solid #E7E8E7;
   }
   .items {
@@ -29,8 +29,9 @@
     padding: 0 14px;
     .item {
       user-select: none;
-      min-width: 95px;
+      min-width: 85px;
       height: 85px;
+      border-radius: 4px;
       border: 1px solid #E7E8E7;
       margin: 5px 0;
       display: flex;

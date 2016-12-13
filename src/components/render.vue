@@ -20,6 +20,20 @@
   </div>
 </template>
 <style lang="less" scoped>
+  .dropArea {
+    width: 98%;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 auto;
+    font-size: 14px;
+    text-align: center;
+    display: block;
+    content: '放这里';
+    border: 2px dashed #2196F3;
+    background: #E4F3FE;
+    padding: 5px 0;
+    color: #2196F3;
+  }
   .render-container {
     overflow-y: auto;
     .body {
@@ -44,6 +58,9 @@
       }
       &.active {
         outline: 2px solid #2196F3;
+        &:after:extend(.dropArea) {
+          //
+        }
       }
       .item {
         cursor: pointer;
@@ -55,23 +72,12 @@
       }
       .component {
         &.active.top {
-          &:before {
-            width: 98%;
-            height: 20px;
-            line-height: 20px;
-            margin: 0 auto;
-            font-size: 14px;
-            text-align: center;
-            display: block;
-            content: '放在这';
-            border: 2px dashed #2196F3;
-            background: #E4F3FE;
-            padding: 5px 0;
-            color: #2196F3;
+          &:before:extend(.dropArea) {
+            //
           }
         }
         &.active.bottom {
-          &:after:extend(.component.active.top:before) {
+          &:after:extend(.dropArea) {
             //
           }
         }
