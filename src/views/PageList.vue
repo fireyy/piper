@@ -1,47 +1,51 @@
 <template>
-  <div class="layout-content">
-    <el-row type="flex" class="row-bg" justify="space-between">
-      <el-col :span="12">
-        <el-form :inline="true">
-          <el-form-item>
-            <el-input placeholder="活动名称"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" icon="search" @click="onSearch">查询</el-button>
-          </el-form-item>
-        </el-form>
-      </el-col>
-      <el-col :span="6" class="text-right">
-        <el-button type="primary" icon="plus" @click="handleCreate">新建</el-button>
-      </el-col>
-    </el-row>
-    <el-table
-      :data="tableData"
-      style="width: 100%">
-      <el-table-column
-        prop="title"
-        label="名称">
-      </el-table-column>
-      <el-table-column
-        prop="create_at"
-        label="创建时间"
-        width="220">
-      </el-table-column>
-      <el-table-column
-        prop="update_at"
-        label="更新时间"
-        width="220">
-      </el-table-column>
-      <el-table-column
-        inline-template
-        label="操作"
-        width="180">
-        <span>
-          <el-button size="small" icon="edit" @click="handleEdit($index, row)">编辑</el-button>
-          <el-button size="small" icon="delete" type="danger" @click="handleDelete($index, row)">删除</el-button>
-        </span>
-      </el-table-column>
-    </el-table>
+  <div>
+    <div class="page-header">
+      <el-row type="flex" class="inner-row" justify="space-between">
+        <el-col :span="12">
+          <el-form :inline="true">
+            <el-form-item>
+              <el-input placeholder="活动名称"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" icon="search" @click="onSearch">查询</el-button>
+            </el-form-item>
+          </el-form>
+        </el-col>
+        <el-col :span="6" class="text-right">
+          <el-button type="primary" icon="plus" @click="handleCreate">新建</el-button>
+        </el-col>
+      </el-row>
+    </div>
+    <div class="layout-content inner-row">
+      <el-table
+        :data="tableData"
+        style="width: 100%">
+        <el-table-column
+          prop="title"
+          label="名称">
+        </el-table-column>
+        <el-table-column
+          prop="create_at"
+          label="创建时间"
+          width="220">
+        </el-table-column>
+        <el-table-column
+          prop="update_at"
+          label="更新时间"
+          width="220">
+        </el-table-column>
+        <el-table-column
+          inline-template
+          label="操作"
+          width="180">
+          <span>
+            <el-button size="small" icon="edit" @click="handleEdit($index, row)">编辑</el-button>
+            <el-button size="small" icon="delete" type="danger" @click="handleDelete($index, row)">删除</el-button>
+          </span>
+        </el-table-column>
+      </el-table>
+    </div>
   </div>
 </template>
 

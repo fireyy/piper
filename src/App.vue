@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <router-view class="view"></router-view>
     <loading :show="loading"></loading>
   </div>
@@ -41,7 +41,8 @@
 
 body {
   font-size: 14px;
-  color: #777;
+  color: #4e5b68;
+  background: #EBF1F2;
 }
 
 a {

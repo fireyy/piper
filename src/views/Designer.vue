@@ -1,15 +1,17 @@
 <template>
 <div v-loading.body.fullscreen="loading" element-loading-text="拼命加载中">
-  <header class="designer-header">
-    <div class="title">
-      {{ renderData.title }}
-    </div>
-    <div>
-      <el-button type="danger" icon="arrow-left" @click="back">返回</el-button>
-      <el-button type="warning" icon="document" @click="preview">预览</el-button>
-      <el-button type="primary" icon="check" @click="save">保存</el-button>
-      <el-button v-if="id" type="success" icon="upload" @click="publish">保存并发布</el-button>
-    </div>
+  <header class="page-header designer-header">
+    <el-row type="flex" justify="space-between">
+      <el-col :span="9" class="title">
+        {{ renderData.title }}
+      </el-col>
+      <el-col :span="9" class="text-right">
+        <el-button type="danger" icon="arrow-left" @click="back">返回</el-button>
+        <el-button type="warning" icon="document" @click="preview">预览</el-button>
+        <el-button type="primary" icon="check" @click="save">保存</el-button>
+        <el-button v-if="id" type="success" icon="upload" @click="publish">保存并发布</el-button>
+      </el-col>
+    </el-row>
   </header>
 
   <div class="container">
@@ -218,31 +220,17 @@ export default {
 <style lang="less">
 body,
 html {
-  margin: 0;
-  padding: 0;
   height: 100%;
   user-select: none;
 }
 
 .designer-header {
-  width: 100%;
-  height: 55px;
-  line-height: 55px;
-  color: #fff;
-  background: #ffffff;
-  padding: 0 30px;
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #E7E8E7;
+  padding: 10px 30px;
 
   .title {
     font-size: 24px;
+    line-height: 36px;
     color: #9B9B9B;
-  }
-
-  button {
-    margin-top: 6px;
   }
 }
 
@@ -250,8 +238,8 @@ html {
   display: flex;
   max-height: 100%;
   min-height: 100%;
-  padding-top: 55px;
   overflow: auto;
+  background: #fff;
 
   .module-box {
     flex: 0 0 230px;
