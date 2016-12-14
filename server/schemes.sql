@@ -6,7 +6,7 @@ CREATE TABLE `pages` (
   `items`       varchar(10240)  NOT NULL                                COMMENT 'json items',
   `create_by`   int(11)         NOT NULL                                COMMENT 'sso user_id',
   `is_delete`   tinyint(4)      NOT NULL        DEFAULT 0               COMMENT 'delete flag',
-  `publish_at`  timestamp       NOT NULL        DEFAULT 0               COMMENT 'published time',
+  `publish_at`  timestamp       NOT NULL        DEFAULT CURRENT_TIMESTAMP COMMENT 'published time',
   `update_at`   timestamp       NOT NULL        DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'last updated time',
   `create_at`   timestamp       NOT NULL        DEFAULT CURRENT_TIMESTAMP COMMENT 'created time',
   PRIMARY KEY (`id`),
