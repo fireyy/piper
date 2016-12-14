@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="input-color">
-    <input type="color"  v-model="data.value">
+    <input type="color" v-model="data.value">
   </div>
 </template>
 

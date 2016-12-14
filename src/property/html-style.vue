@@ -11,11 +11,8 @@
   </div>
 </template>
 
-<style lang="less" scoped>
-</style>
-
 <script>
-import components from './input'
+import components from './styles'
 export default {
   components,
   props: ['data'],

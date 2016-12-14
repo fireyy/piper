@@ -1,9 +1,11 @@
 <template>
 <div class="module-container">
-  <button class="btn"></button>
+  <button class="btn" :class="customClass">{{data.content.value}}</button>
 </div>
 </template>
 <style lang="less">
+@import '~_variable.less';
+
 .btn {
   text-align: center;
   font-size: 30px;
@@ -41,14 +43,13 @@
 export default {
   props: ['data'],
   computed: {
-    customStyle() {
-      let styles = {}
-      if(this.data.style) {
-        for(let key in this.data.style.value){
-          styles[key] = this.data.style.value[key].value
-        }
-      }
-      return styles
+    customClass() {
+      let classname = []
+      let arr = ['size', 'theme']
+      arr.forEach((item)=>{
+        this.data[item].value && classname.push("btn-" + this.data[item].value)
+      })
+      return classname
     }
   },
   data() {

@@ -1,9 +1,11 @@
 <template>
 <div class="editor-container">
-  <div class="editor-text form">
+  <div class="editor-radio form">
     <el-form label-position="top">
       <el-form-item :label="data.title">
-        <el-input v-model="data.value"></el-input>
+        <el-radio-group v-model="data.value">
+          <el-radio-button v-for="(item, index) in data.props" :label="item.value">{{item.title}}</el-radio-button>
+        </el-radio-group>
       </el-form-item>
     </el-form>
   </div>

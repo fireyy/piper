@@ -3,7 +3,7 @@
   <div class="editor-text form">
     <el-form label-position="top">
       <el-form-item :label="data.title">
-        <el-input v-model="data.value"></el-input>
+        <el-input type="textarea" v-model="data.value"></el-input>
       </el-form-item>
     </el-form>
   </div>

@@ -30,5 +30,6 @@ npm install
 - [x] store cache error
 - [x] hot reload not work
 - [x] 编辑器页面和预览页面的 rem 显示 bug
-- [ ] less to postcss
+- [x] px2rem bugfix
+- [ ] 拖拽模块导致数据还原
 - [ ] src 代码自动编译可能会导致 nodemoon watchr 报错
