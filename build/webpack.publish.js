@@ -58,14 +58,14 @@ module.exports = function(env) {
   base.plugins.push(
     new HtmlWebpackPlugin({
       template: dir + `/index.html`
-    })
-    // new PrerenderSpaPlugin(
-    //   dir,
-    //   [ '/' ],
-    //   {
-    //     captureAfterElementExists: '#preview'
-    //   }
-    // )
+    }),
+    new PrerenderSpaPlugin(
+      dir,
+      [ '/' ],
+      {
+        captureAfterElementExists: '#preview'
+      }
+    )
   )
   return base
 }
