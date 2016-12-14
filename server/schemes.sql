@@ -1,10 +1,10 @@
 CREATE TABLE `pages` (
   `id`          int(11)         NOT NULL        AUTO_INCREMENT          COMMENT 'physical primary key',
-  `path`        varchar(64)     NOT NULL                                COMMENT 'url path',
+  `path`        varchar(64)     NOT NULL        DEFAULT ''              COMMENT 'url path',
   `title`        varchar(64)     NOT NULL                               COMMENT 'page title',
   `comment`     varchar(128)    NOT NULL        DEFAULT ''              COMMENT 'comment',
   `items`       varchar(10240)  NOT NULL                                COMMENT 'json items',
-  `create_by`   int(11)         NOT NULL                                COMMENT 'sso user_id',
+  `create_by`   int(11)         NOT NULL        DEFAULT 0               COMMENT 'sso user_id',
   `is_delete`   tinyint(4)      NOT NULL        DEFAULT 0               COMMENT 'delete flag',
   `publish_at`  timestamp       NOT NULL        DEFAULT CURRENT_TIMESTAMP COMMENT 'published time',
   `update_at`   timestamp       NOT NULL        DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'last updated time',

@@ -31,6 +31,12 @@ module.exports = {
         loader: 'vue-loader',
         options: config.vue
       },
+      // {
+      //   test: /\.js$/,
+      //   loader: 'babel-loader',
+      //   exclude: /node_modules/,
+      //   options: config.babel
+      // },
       {
         test: /\.js$/,
         loader: 'buble-loader',
