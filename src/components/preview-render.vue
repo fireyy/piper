@@ -6,10 +6,7 @@
 </template>
 
 <style lang="less">
-body {
-  width: 100%;
-  margin: 0 auto;
-}
+@import '~_base.less';
 </style>
 
 <script>

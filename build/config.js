@@ -20,6 +20,11 @@ module.exports = {
     postcss: [
       require('autoprefixer')({
         browsers: ['last 3 versions']
+      }),
+      require('postcss-pxtorem')({
+        root_value: '20', // 基准值 html{ font-zise: 20px; }
+        prop_white_list: [], // 对所有 px 值生效
+        minPixelValue: 2 // 忽略 1px 值
       })
     ],
     buble: {

@@ -19,7 +19,9 @@
     <module-drag></module-drag>
   </div>
 </template>
-<style lang="less" scoped>
+<style lang="less">
+  @import '~_base.less';
+
   .dropArea {
     width: 98%;
     height: 20px;
@@ -107,7 +109,7 @@ export default {
     setFontSize()
 
     function setFontSize() {
-      document.documentElement.style.fontSize = `${(document.querySelector('[drag-tag="modules"]').clientWidth) * 20 / 320}px`
+      document.documentElement.style.fontSize = '20px'
     }
   },
 

@@ -38,8 +38,7 @@ _.cssLoaders = function (options) {
   // http://vuejs.github.io/vue-loader/configurations/extract-css.html
   return {
     css: generateLoaders(['css']),
-    postcss: generateLoaders(['css']),
-    less: generateLoaders(options.px2rem ? ['css', 'px2rem', 'less'] : ['css', 'less'])
+    less: generateLoaders(['css', 'less'])
   }
 }
 

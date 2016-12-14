@@ -19,7 +19,9 @@ module.exports = {
     extensions: ['.js', '.vue', '.css', '.json'],
     alias: {
       'vue': 'vue/dist/vue.common.js',
-      'src': path.join(__dirname, '../src')
+      'src': path.join(__dirname, '../src'),
+      '_variable.less': path.join(__dirname, '../src/skin/_variable.less'),
+      '_base.less': path.join(__dirname, '../src/skin/_base.less')
     }
   },
   module: {

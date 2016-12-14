@@ -49,7 +49,7 @@ base.plugins = [
 ];
 
 base.module.rules = base.module.rules.concat(
-  _.styleLoaders({ sourceMap: config.cssSourceMap, extract: true, px2rem: true })
+  _.styleLoaders({ sourceMap: config.cssSourceMap, extract: true })
 )
 
 module.exports = function(env) {

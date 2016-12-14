@@ -32,7 +32,6 @@
 
 <script>
 import api from '../api'
-import '../skin/default.less'
 import { mapGetters, mapActions } from 'vuex'
 import _ from 'lodash'
 import render from '../components/render.vue'

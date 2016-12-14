@@ -1,36 +1,42 @@
-* {
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-  box-sizing: border-box;
-}
+@import "_variable";
 
-a {
-  text-decoration: none;
-  display: inline-block;
-}
+.module-container {
+  margin-bottom: 20px;
 
-.color-primary {
-  color: @color-primary;
-}
+  * {
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    box-sizing: border-box;
+  }
 
-.color-default {
-  color: @color-default;
-}
+  a {
+    text-decoration: none;
+    display: inline-block;
+  }
 
-.color-muted {
-  color: @color-muted !important;
-}
+  .color-primary {
+    color: @color-primary;
+  }
 
-.text-center {
-  text-align: center;
-}
+  .color-default {
+    color: @color-default;
+  }
 
-.ph-empty {
-  width: 100%;
-  color: #aaa;
-  text-align: center;
-  padding: 10px 0;
+  .color-muted {
+    color: @color-muted !important;
+  }
 
-  &.dashed {
-    border: 1px dashed #ddd; /*no*/
+  .text-center {
+    text-align: center;
+  }
+
+  .ph-empty {
+    width: 100%;
+    color: #aaa;
+    text-align: center;
+    padding: 10px 0;
+
+    &.dashed {
+      border: 1px dashed #ddd;
+    }
   }
 }

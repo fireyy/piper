@@ -148,3 +148,62 @@ export default {
   }
 }
 </script>
+<style lang="less">
+@import '~_variable';
+
+.countdown {
+  white-space: nowrap;
+  color: @color-primary;
+  text-align: center;
+
+  &.end, &.ready {
+    color: @color-muted;
+
+    .num {
+      background: @color-muted;
+    }
+  }
+
+  .state {
+    margin-right: 5px;
+  }
+
+  .num {
+    font-size: 30px;
+    color: #fff;
+    margin-right: 1px; /*no*/
+    padding: 0 8px;
+    border-radius: 5px;
+    background: @color-primary;
+  }
+
+  .days, .hours, .minutes, .seconds, .milliseconds {
+    position: relative;
+    display: inline-table;
+  }
+
+  .days {
+    margin-right: 35px;
+
+    &:after {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      content: '天';
+    }
+  }
+
+  .hours, .minutes {
+    margin-right: 5px;
+
+    &:after {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      content: ':';
+    }
+  }
+}
+</style>
