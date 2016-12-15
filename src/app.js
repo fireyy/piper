@@ -11,19 +11,12 @@ sync(store, router)
 
 Vue.use(Element)
 
-// const app = new Vue({
-//   el: '#app',
-//   router,
-//   store,
-//   render: h => h(App)
-// })
-
-const app = new Vue(Vue.util.extend({
+const app = new Vue({
+  el: '#app',
   router,
-  store
-}, App))
-
-app.$mount('#app')
+  store,
+  render: h => h(App)
+})
 
 // design mode
 document.documentElement.classList.add('design-mode')

@@ -32,7 +32,6 @@ const dropRenderItem = ({
   commit
 }, event) => {
   let module = state.render.dragModule
-  console.log('module', module)
   let {
     dragTag,
     position

@@ -46,16 +46,12 @@ const mutations = {
       })
     })
 
-    console.log("module2", module)
-    console.log("module4", data)
-
     let newItem = flow(
-      merge({ data }),
-      cloneDeep,
-      pick(['type', 'alias', 'data'])
-    )(module);
+      pick(['type', 'alias', 'data']),
+      cloneDeep
+    )(module)
 
-    console.log("module3", newItem)
+    newItem = merge(newItem, { data })
 
     newItem._timestamp = newItem._timestamp || Date.now()
     state.items.splice(index, 0, newItem)
