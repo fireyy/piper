@@ -8,6 +8,22 @@ npm install
 
 **因为公司网络的问题，安装 `prerender-spa-plugin` 插件的依赖 `phantomjs` 可能会报错，可以自己下载 [phantomjs](http://phantomjs.org/download.html) 安装**
 
+
+### A message about px to rem
+
+```css
+// `px` is converted to `rem`
+.convert {
+    font-size: 16px; // converted to 1rem
+}
+
+// `Px` or `PX` is ignored by `postcss-pxtorem` but still accepted by browsers
+.ignore {
+    border: 1Px solid; // ignored
+    border-width: 2PX; // ignored
+}
+```
+
 ### TODO
 
 - [x] api server
@@ -19,7 +35,7 @@ npm install
 - [x] 图片上传
 - [x] css 导出成文件？
 - [x] 倒计时组件
-- [ ] 操作日志
+- [x] 操作日志
 - [ ] webpack code split lazy load
 - [ ] 用户系统／权限？接入CTX
 - [ ] 更多的组件

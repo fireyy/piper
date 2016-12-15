@@ -39,6 +39,10 @@
 
 }
 
+html {
+  font-size: 20PX;
+}
+
 body {
   font-size: 14px;
   color: #4e5b68;
