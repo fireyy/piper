@@ -72,6 +72,12 @@
             }
           },
           {
+            "title": "操作日志",
+            "route": {
+              "name": "changelog"
+            }
+          },
+          {
             "title": "用户",
             "route": {
               "name": "users"

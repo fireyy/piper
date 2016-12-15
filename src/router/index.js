@@ -7,6 +7,7 @@ import Login from '../views/Login.vue'
 import Layout from '../views/Layout.vue'
 import Home from '../views/Home.vue'
 import PageList from '../views/PageList.vue'
+import Changelog from '../views/Changelog.vue'
 import Designer from '../views/Designer.vue'
 import UserList from '../views/Users.vue'
 
@@ -23,6 +24,7 @@ export default new Router({
           component: Designer
         },
         { name: 'pages', path: '/pages', component: PageList },
+        { name: 'changelog', path: '/changelog', component: Changelog },
         { name: 'users', path: '/users', component: UserList }
       ]
     },

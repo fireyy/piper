@@ -26,14 +26,29 @@
           label="名称">
         </el-table-column>
         <el-table-column
-          prop="create_at"
-          label="创建时间"
+          prop="create_by.name"
+          label="操作人"
           width="220">
         </el-table-column>
         <el-table-column
+          inline-template
+          prop="create_at"
+          label="创建时间"
+          width="220">
+          <div>
+            <el-icon name="time"></el-icon>
+            <span style="margin-left: 10px">{{ row.create_at | formatDate }}</span>
+          </div>
+        </el-table-column>
+        <el-table-column
+          inline-template
           prop="update_at"
           label="更新时间"
           width="220">
+          <div>
+            <el-icon name="time"></el-icon>
+            <span style="margin-left: 10px">{{ row.update_at | formatDate }}</span>
+          </div>
         </el-table-column>
         <el-table-column
           inline-template

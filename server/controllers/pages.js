@@ -1,5 +1,6 @@
 const authorize = require('../lib/authorize');
 const __ = require('../constants');
+const createby = require('../lib/createby');
 
 module.exports = class {
   static url = '/pages';
@@ -10,6 +11,7 @@ module.exports = class {
       SELECT `id`, `path`, `title`, `comment`, `create_by`, `create_at`, `update_at`, `publish_at` \
         FROM `pages` WHERE `is_delete` = 0 \
     ');
+    await createby(result);
     ctx.body = result;
   }
 
@@ -31,8 +33,13 @@ module.exports = class {
       if (pages.length) throw { status: 400, name: 'DUP', message: '记录已存在' };
 
       data = await ctx.sql(
-        'INSERT INTO `pages` (`title`, `items`) VALUES (?)',
-        [ [ title, items ] ]
+        'INSERT INTO `pages` (`title`, `items`, `create_by`) VALUES (?)',
+        [ [ title, items, ctx.user.id ] ]
+      );
+
+      await ctx.sql(
+        'INSERT INTO `changelog` (`action`, `page_id`, `items`, `create_by`) VALUES (?)',
+        [ [ 1, data.insertId, items, ctx.user.id ] ]
       );
 
     });

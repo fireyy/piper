@@ -8,6 +8,10 @@ module.exports = class {
   static async delete(ctx) {
     let { id } = ctx.params;
     await ctx.sql.commit('UPDATE `pages` SET `is_delete` = 1 WHERE `id` = ?', [ id ]);
+    await ctx.sql(
+      'INSERT INTO `changelog` (`action`, `page_id`, `items`, `create_by`) VALUES (?)',
+      [ [ 3, id, '', ctx.user.id ] ]
+    );
     ctx.body = {
       message: 'Delete success'
     };
@@ -49,6 +53,12 @@ module.exports = class {
       let [ page ] = await ctx.sql('SELECT `is_delete`, `items` FROM `pages` WHERE `id` = ?', [ id ]);
       if (!page || page.is_delete) throw { status: 404, name: 'PAGE_NOT_FOUND', message: 'page is not found' };
       await ctx.sql('UPDATE `pages` SET ? WHERE `id` = ?', [ change, id ]);
+      if (page.items !== change.items) {
+        await ctx.sql(
+          'INSERT INTO `changelog` (`action`, `page_id`, `items`, `create_by`) VALUES (?)',
+          [ [ 2, id, change.items, ctx.user.id ] ]
+        );
+      }
     });
     ctx.body = {
       message: 'Save success'

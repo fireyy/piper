@@ -1,0 +1,15 @@
+module.exports = function (Vue) {
+  var http = Vue.http;
+
+  return {
+
+    /**
+     * 获取所有 changelog
+     * @returns {*}
+     */
+    getAll() {
+      return http
+        .get('changelogs')
+    }
+  }
+}
