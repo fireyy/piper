@@ -23,6 +23,7 @@ Vue.http.interceptors.push((request, next) => {
 export default {
   page: require('./page')(Vue),
   pages: require('./pages')(Vue),
+  users: require('./users')(Vue),
   changelog: require('./changelog')(Vue),
   publish(id) {
     return Vue.http

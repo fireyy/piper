@@ -1,10 +1,18 @@
 # piper
 
-### install
+### Install
 
 ```shell
 npm install
 ```
+
+### Run
+
+```shell
+npm run dev
+```
+
+### Phantomjs
 
 **因为公司网络的问题，安装 `prerender-spa-plugin` 插件的依赖 `phantomjs` 可能会报错，可以自己下载 [phantomjs](http://phantomjs.org/download.html) 安装**
 
@@ -37,7 +45,8 @@ npm install
 - [x] 倒计时组件
 - [x] 操作日志
 - [x] 页面发布到CDN
-- [ ] webpack code split lazy load
+- [x] webpack code split lazy load
+- [ ] 数据分页
 - [ ] 用户系统／权限？接入CTX
 - [ ] 更多的组件
 - [ ] 更多的可设置属性
@@ -50,5 +59,5 @@ npm install
 - [x] 编辑器页面和预览页面的 rem 显示 bug
 - [x] px2rem bugfix
 - [x] 拖拽模块导致数据还原
-- [ ] webpack performance warning
+- [x] webpack performance warning
 - [ ] src 代码自动编译可能会导致 nodemoon watchr 报错

@@ -13,6 +13,12 @@
     .layout-content {
       padding: 20px 0;
     }
+    .layout-box {
+      background-color: #FDFDFD;
+      padding: 25px 25px 50px;
+      border-radius: 3px;
+      border: 1px solid rgba(43, 50, 57, 0.15);
+    }
   }
   .page-header {
     background: #FDFDFD;

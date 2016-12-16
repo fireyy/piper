@@ -1,10 +1,10 @@
 <template>
 <header class="layout-header">
   <el-row class="inner-row">
-    <el-col :span="6">
-      <h1 class="logo">营销活动制作平台</h1>
+    <el-col :span="3">
+      <h1 class="logo"></h1>
     </el-col>
-    <el-col :span="14">
+    <el-col :span="17">
       <el-menu theme="dark" :default-active="current" mode="horizontal" router @select="handleSelect">
         <el-menu-item v-for="(item, index) in menus" :index="item.route.name" :route="item.route">{{item.title}}</el-menu-item>
       </el-menu>

@@ -46,7 +46,7 @@ html {
 body {
   font-size: 14px;
   color: #4e5b68;
-  background: #EBF1F2;
+  background: #F0F1F3;
 }
 
 a {
