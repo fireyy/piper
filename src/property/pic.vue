@@ -85,12 +85,13 @@ export default {
     handleSuccess(index) {
       return (response, file, fileList)=>{
         console.log(index, response, file, fileList)
-        this.data.value[index].url = response.url
+        this.data.value[index].url = response[0].url
       }
     },
     handleError(index) {
       return (err, response, file)=>{
         console.log(err, response, file);
+        this.$message.error(response.message)
       }
     },
     handleRemove(index) {

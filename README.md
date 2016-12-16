@@ -36,6 +36,7 @@ npm install
 - [x] css 导出成文件？
 - [x] 倒计时组件
 - [x] 操作日志
+- [x] 页面发布到CDN
 - [ ] webpack code split lazy load
 - [ ] 用户系统／权限？接入CTX
 - [ ] 更多的组件

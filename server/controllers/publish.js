@@ -6,6 +6,7 @@ const child_process = require('child_process');
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 const render = views(path.join(__dirname, '../views'), { ext: 'ejs' });
+const upload = require('../lib/upload');
 
 module.exports = class {
   static url = '/publish/:id';
@@ -58,7 +59,20 @@ module.exports = class {
 
     const stdout = child_process.execSync(command);
 
-    ctx.body = JSON.parse(stdout);
+    let packRes = JSON.parse(stdout);
+
+    if (packRes.errors.length == 0) {
+      let files = packRes.assets.map(item => {
+        return fs.createReadStream(dir + `/${item.name}`)
+      })
+      let uploadRes = await upload(files);
+
+      ctx.body = uploadRes
+    } else {
+
+      ctx.body = packRes;
+    }
+
   }
 
 }

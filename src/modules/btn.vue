@@ -1,12 +1,12 @@
 <template>
 <div class="module-container">
-  <button class="btn" :class="customClass">{{data.content.value}}</button>
+  <button class="piper-btn" :class="customClass">{{data.content.value}}</button>
 </div>
 </template>
 <style lang="less">
 @import '~_variable.less';
 
-.btn {
+.piper-btn {
   text-align: center;
   font-size: 30px;
   height: 75px;
@@ -47,7 +47,7 @@ export default {
       let classname = []
       let arr = ['size', 'theme']
       arr.forEach((item)=>{
-        this.data[item].value && classname.push("btn-" + this.data[item].value)
+        this.data[item].value && classname.push("piper-btn-" + this.data[item].value)
       })
       return classname
     }
