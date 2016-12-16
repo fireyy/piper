@@ -155,6 +155,7 @@ export default {
   white-space: nowrap;
   color: @color-primary;
   text-align: center;
+  font-size: 20px;
 
   &.end, &.ready {
     color: @color-muted;
@@ -169,11 +170,10 @@ export default {
   }
 
   .num {
-    font-size: 30px;
     color: #fff;
-    margin-right: 1px; /*no*/
-    padding: 0 8px;
-    border-radius: 5px;
+    margin-right: 1px;
+    padding: 0 4px;
+    border-radius: 4px;
     background: @color-primary;
   }
 
@@ -183,13 +183,13 @@ export default {
   }
 
   .days {
-    margin-right: 35px;
+    margin-right: 25px;
 
     &:after {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 20px;
+      right: -22px;
       content: '天';
     }
   }
@@ -201,7 +201,6 @@ export default {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 20px;
       content: ':';
     }
   }
