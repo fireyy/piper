@@ -19,8 +19,8 @@
         :data="tableData"
         style="width: 100%">
         <el-table-column
-          prop="page_id"
-          label="页面ID">
+          prop="title"
+          label="活动名称">
         </el-table-column>
         <el-table-column
           inline-template
