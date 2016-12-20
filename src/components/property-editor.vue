@@ -1,7 +1,15 @@
 <template>
 <div class="properties">
-  <div v-show="!currentModule.type" class="ph-text text-center">
-    未选中任何模块
+  <div v-show="!currentModule.type && !currentModule.style" class="ph-text text-center">
+    <i class="el-icon-information"></i>
+    <br>请选择一个模块
+  </div>
+  <div class="page-config-editor" v-show="render.config === currentModule">
+    <h2>页面设置</h2>
+    <div class="contents" v-bind:key="key" v-for="(value, key) in render.config">
+      <component :index="key" :data="value" :is="value.type">
+      </component>
+    </div>
   </div>
   <div v-for="(item, index) in items" v-bind:key="item._timestamp" v-show="item === currentModule">
     <h2>{{item.alias}}</h2>
@@ -18,19 +26,24 @@
     font-size: 20px;
     margin-top: 30px;
     color: #ddd;
+    i {
+      font-size: 60px;
+      margin-bottom: 10px;
+    }
   }
   h2 {
     margin: 12px 15px;
   }
   .contents {
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    &:not(:last-child) {
-      border-bottom: 2px dashed #eee;
+    h3 {
+      padding: 10px 0;
+      margin-bottom: 10px;
     }
-  }
-  .form {
-    padding: 20px;
+    .el-form-item {
+      padding: 10px 20px 0;
+      margin-bottom: 12px;
+      border-top: 1px solid #eee;
+    }
   }
   .hr {
     height: 1px;

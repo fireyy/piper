@@ -27,7 +27,7 @@
           prop="action"
           label="操作"
           width="220">
-          <el-tag :type="actionStyle[row.action]" close-transition>{{lang['action'+row.action]}}</el-tag>
+          <el-tag :type="actionStyle[row.action]" close-transition>{{'action'+row.action | lang}}</el-tag>
         </el-table-column>
         <el-table-column
           prop="create_by.name"
@@ -47,7 +47,6 @@
 
 <script>
   import api from '../api'
-  import lang from '../constants'
   import filters from '../filters'
 
   export default {
@@ -66,7 +65,6 @@
     },
     data() {
       return {
-        lang: lang,
         tableData: [],
         actionStyle: {
           1: 'primary',

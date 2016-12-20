@@ -21,12 +21,15 @@ module.exports = class {
   static async get(ctx) {
     let { id } = ctx.params;
     let result = await ctx.sql('                                                               \
-      SELECT `id`, `path`, `title`, `comment`, `items`, `create_by`, `create_at`               \
+      SELECT `id`, `title`, `config`, `items`, `create_by`, `create_at`               \
         FROM `pages` WHERE `id` = ? AND `is_delete` = 0                                        \
     ', [ id ]);
     let page = result[0];
     if (!page) throw { status: 404, name: 'PAGES_NOT_FOUND', message: 'page is not found' };
-    try { page.items = JSON.parse(page.items); } catch(error) {
+    try {
+      page.items = JSON.parse(page.items);
+      if(page.config) page.config = JSON.parse(page.config);
+    } catch(error) {
       throw { status: 500, name: 'JSON_PARSE_ERROR', message: 'json parse error' }
     };
     ctx.body = page;
@@ -37,7 +40,7 @@ module.exports = class {
     let { id } = ctx.params;
     let { body } = ctx.request;
     let change = Object.create(null);
-    let count = [ 'title', 'items' ].reduce((count, name) => {
+    let count = [ 'title', 'config', 'items' ].reduce((count, name) => {
       if (!(name in body)) return count;
       change[name] = body[name];
       return count + 1;
@@ -49,11 +52,17 @@ module.exports = class {
       change.items = JSON.stringify(change.items);
       if (change.items.length > __.VALUE_MAX_LENGTH) throw __.VALUE_TOO_LONG;
     }
+    if ('config' in change) {
+      change.config = JSON.stringify(change.config);
+    }
     await ctx.sql.commit(async () => {
       let [ page ] = await ctx.sql('SELECT `is_delete`, `items` FROM `pages` WHERE `id` = ?', [ id ]);
       if (!page || page.is_delete) throw { status: 404, name: 'PAGE_NOT_FOUND', message: 'page is not found' };
       await ctx.sql('UPDATE `pages` SET ? WHERE `id` = ?', [ change, id ]);
-      if (page.items !== change.items) {
+      let changed = [ 'title', 'config', 'items' ].reduce((changed, name) => {
+        return (page[name] !== change[name]) ? changed + 1 : changed;
+      }, 0);
+      if (changed > 0) {
         await ctx.sql(
           'INSERT INTO `changelog` (`action`, `page_id`, `items`, `create_by`) VALUES (?)',
           [ [ 2, id, change.items, ctx.user.id ] ]

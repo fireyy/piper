@@ -1,12 +1,10 @@
 <template>
 <div class="editor-container">
-  <div class="editor-text form">
-    <el-form label-position="top">
-      <el-form-item :label="data.title">
-        <el-input v-model="data.value"></el-input>
-      </el-form-item>
-    </el-form>
-  </div>
+  <el-form class="editor-text" label-width="80px">
+    <el-form-item :label="data.title">
+      <el-input v-model="data.value"></el-input>
+    </el-form-item>
+  </el-form>
 </div>
 </template>
 <script>

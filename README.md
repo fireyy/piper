@@ -46,10 +46,14 @@ npm run dev
 - [x] 操作日志
 - [x] 页面发布到CDN
 - [x] webpack code split lazy load
+- [x] 增加活动的一些全局属性，比如背景图，分享信息等
+- [ ] property 拆分的更细
+- [ ] property 数据校验
 - [ ] 数据分页
+- [ ] 保存的时候对页面进行截图当作封面
 - [ ] 用户系统／权限？接入CTX
-- [ ] 更多的组件
-- [ ] 更多的可设置属性
+- [ ] 更多的 modules 组件
+- [ ] 更多的 property 组件
 - [ ] ...
 
 ### Issues
@@ -60,4 +64,5 @@ npm run dev
 - [x] px2rem bugfix
 - [x] 拖拽模块导致数据还原
 - [x] webpack performance warning
+- [ ] publish 后 css 重复的bug
 - [ ] src 代码自动编译可能会导致 nodemoon watchr 报错

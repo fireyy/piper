@@ -1,18 +1,16 @@
 <template>
 <div class="editor-container">
-  <div class="editor-text form">
-    <el-form label-width="80px">
-      <el-form-item v-for="(item, key) in data.value" :label="key">
-        <el-date-picker
-          v-model="data.value[key]"
-          type="datetime"
-          placeholder="选择日期时间"
-          align="right"
-          :picker-options="pickerOptions">
-        </el-date-picker>
-      </el-form-item>
-    </el-form>
-  </div>
+  <el-form class="editor-text" label-width="80px">
+    <el-form-item v-for="(item, key) in data.value" :label="key | lang">
+      <el-date-picker
+        v-model="data.value[key]"
+        type="datetime"
+        placeholder="选择日期时间"
+        align="right"
+        :picker-options="pickerOptions">
+      </el-date-picker>
+    </el-form-item>
+  </el-form>
 </div>
 </template>
 <script>

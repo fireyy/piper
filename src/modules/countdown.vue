@@ -1,6 +1,6 @@
 <template>
   <div class="module-container">
-    <countdown :start="data.time.value.start" :end="data.time.value.end">
+    <countdown :start="data.time.value.startTime" :end="data.time.value.endTime">
     </countdown>
   </div>
 </template>

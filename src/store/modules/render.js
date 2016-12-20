@@ -14,9 +14,12 @@ import {
   modules
 } from '../../modules'
 
+import defaultConfig from '../../constants/default'
+
 const state = {
   items: [],
   title: '网页标题',
+  config: {},
   current: {},
   dragInfo: {},
   dragModule: {},
@@ -66,6 +69,7 @@ const mutations = {
   [EDIT_RENDER_DATA](state, render) {
     state.items = render.items
     state.title = render.title
+    state.config = render.config ? render.config : defaultConfig.config
   },
 
   [EDIT_DRAG_MODULE](state, dragModule) {

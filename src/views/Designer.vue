@@ -41,6 +41,7 @@ import render from '../components/render.vue'
 import moduleBox from '../components/module-box.vue'
 import propertyEditor from '../components/property-editor.vue'
 import Qrcode from '../components/qrcode.vue'
+import defaultConfig from '../constants/default'
 
 export default {
   components: {
@@ -60,10 +61,7 @@ export default {
         this.editRenderData(data)
       });
     }else{
-      this.editRenderData({
-        title: '网页标题',
-        items: []
-      })
+      this.editRenderData(defaultConfig)
     }
   },
 
@@ -130,6 +128,7 @@ export default {
     getData() {
       let {
         items,
+        config,
         title
       } = _.clone(this.renderData)
 
@@ -140,6 +139,7 @@ export default {
 
       let data = {
         items,
+        config,
         title
       }
 

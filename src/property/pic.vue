@@ -1,30 +1,26 @@
 <template>
 <div class="editor-container">
-  <div class="editor-pic">
-    <div class="form">
-      <el-form label-position="top">
-        <fieldset v-for="(item, index) in data.value" v-bind:key="index">
-          <el-form-item label="链接">
-            <el-input placeholder="请输入跳转链接" v-model="item.link">
-            </el-input>
-          </el-form-item>
-          <el-form-item label="图片">
-            <el-upload :class="{'hasImage': item.url}" action="/api/files" type="drag"
-            :thumbnail-mode="true"
-            :default-file-list="[item]"
-            :on-success="handleSuccess(index)"
-            :on-preview="handlePreview(index)"
-            :on-remove="handleRemove(index)"
-            :on-error="handleError(index)">
-              <i class="el-icon-upload"></i>
-              <div class="el-dragger__text">将文件拖到此处，或<em>点击上传</em></div>
-              <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-            </el-upload>
-          </el-form-item>
-        </fieldset>
-      </el-form>
-    </div>
-  </div>
+  <el-form class="editor-pic" label-position="top">
+    <fieldset v-for="(item, index) in data.value" v-bind:key="index">
+      <el-form-item label="链接">
+        <el-input placeholder="请输入跳转链接" v-model="item.link">
+        </el-input>
+      </el-form-item>
+      <el-form-item label="图片">
+        <el-upload :class="{'hasImage': item.url}" action="/api/files" type="drag"
+        :thumbnail-mode="true"
+        :default-file-list="[item]"
+        :on-success="handleSuccess(index)"
+        :on-preview="handlePreview(index)"
+        :on-remove="handleRemove(index)"
+        :on-error="handleError(index)">
+          <i class="el-icon-upload"></i>
+          <div class="el-dragger__text">将文件拖到此处，或<em>点击上传</em></div>
+          <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
+      </el-form-item>
+    </fieldset>
+  </el-form>
 </div>
 </template>
 <style lang="less">

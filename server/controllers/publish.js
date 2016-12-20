@@ -15,7 +15,7 @@ module.exports = class {
   static async get(ctx) {
     let { id } = ctx.params;
     let result = await ctx.sql('                                                              \
-      SELECT `id`, `path`, `title`, `comment`, `items`, `create_by`, `create_at`              \
+      SELECT `id`, `title`, `config`, `items`, `create_by`, `create_at`              \
         FROM `pages` WHERE `id` = ? AND `is_delete` = 0                                       \
     ', [ id ]);
     let page = result[0];
@@ -30,7 +30,7 @@ module.exports = class {
   static async put(ctx) {
     let { id } = ctx.params;
     let result = await ctx.sql('                                                              \
-      SELECT `id`, `path`, `title`, `comment`, `items`, `create_by`, `create_at`              \
+      SELECT `id`, `title`, `config`, `items`, `create_by`, `create_at`              \
         FROM `pages` WHERE `id` = ? AND `is_delete` = 0                                       \
     ', [ id ]);
     let page = result[0];
@@ -47,7 +47,10 @@ module.exports = class {
       });
     }
 
-    try { page.items = JSON.parse(page.items); } catch(error) {
+    try {
+      page.config = JSON.parse(page.config);
+      page.items = JSON.parse(page.items);
+    } catch(error) {
       throw { status: 500, name: 'JSON_PARSE_ERROR', message: 'json parse error' }
     };
 

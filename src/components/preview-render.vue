@@ -5,10 +5,6 @@
   </div>
 </template>
 
-<style lang="less">
-@import '~_base.less';
-</style>
-
 <script>
 import Vue from 'vue'
 import {

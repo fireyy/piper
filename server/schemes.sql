@@ -1,8 +1,7 @@
 CREATE TABLE `pages` (
   `id`          int(11)         NOT NULL        AUTO_INCREMENT          COMMENT 'physical primary key',
-  `path`        varchar(64)     NOT NULL        DEFAULT ''              COMMENT '自定义路径',
   `title`       varchar(64)     NOT NULL                                COMMENT '页面标题',
-  `comment`     varchar(128)    NOT NULL        DEFAULT ''              COMMENT '注释',
+  `config`      varchar(512)    NOT NULL        DEFAULT ''              COMMENT '页面配置信息',
   `items`       varchar(10240)  NOT NULL                                COMMENT '页面数据 json格式',
   `create_by`   int(11)         NOT NULL        DEFAULT 0               COMMENT 'user id',
   `is_delete`   tinyint(4)      NOT NULL        DEFAULT 0               COMMENT '删除标记',

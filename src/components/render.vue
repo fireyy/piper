@@ -1,7 +1,12 @@
 <template>
   <div @click="blurRenderItem" class="render-container">
-    <div drag-tag="modules" :class="{active: activeModules}" class="body">
-      <input class="page-title animated" :class="{flash:base.activeDocumentTitle}" type="text" ref="documentTitle" v-model="render.title">
+    <div drag-tag="modules" :class="{'active': activeModules, 'current': currentModule === render.config}" class="body" :style="customStyle">
+      <input class="page-title" type="text" ref="documentTitle" v-model="render.title">
+      <div class="page-config" @click.stop.prevent="editRenderItem(render.config)">
+        <el-tooltip content="页面设置" placement="top">
+          <i class="el-icon-setting"></i>
+        </el-tooltip>
+      </div>
       <div class="item" :key="index" v-bind:key="item._timestamp" :class="{'current': currentModule === item}" v-for="(item, index) in items">
         <sort-bar @on-sort="onSort" v-show="currentModule === item" :items="items" :item="item">
           <el-tooltip content="拖拽" placement="top" v-if="items.length > 1">
@@ -57,6 +62,21 @@
         left: 73px;
         width: 210px;
         background: transparent;
+      }
+      .page-config {
+        cursor: pointer;
+        font-size: 18px;
+        position: absolute;
+        top: 27px;
+        right: 10px;
+        text-align: center;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        color: #fff;
+      }
+      &.current {
+        outline: 2px solid #2196F3;
       }
       &.active {
         outline: 2px solid #2196F3;
@@ -116,20 +136,29 @@ export default {
   watch: {
     'base.activeDocumentTitle' (newVal) {
       this.$refs.documentTitle.focus()
-      this.$refs.documentTitle.addEventListener('webkitAnimationEnd', () => {
-        this.base.activeDocumentTitle = false
-      })
+      this.base.activeDocumentTitle = false
     }
   },
 
-  computed: mapGetters({
-    base: 'base',
-    render: 'render',
-    items: 'renderItems',
-    activeModules: 'activeModules',
-    activeModule: 'activeModule',
-    currentModule: 'currentModule'
-  }),
+  computed: {
+    ...mapGetters({
+      base: 'base',
+      render: 'render',
+      items: 'renderItems',
+      activeModules: 'activeModules',
+      activeModule: 'activeModule',
+      currentModule: 'currentModule'
+    }),
+    customStyle() {
+      let styles = {}, config = this.render.config
+      if(config.style) {
+        for(let key in config.style.value){
+          styles[key] = config.style.value[key].value
+        }
+      }
+      return styles
+    }
+  },
 
   methods: {
     ...mapActions([

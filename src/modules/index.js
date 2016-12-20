@@ -140,8 +140,8 @@ export const modules = [
             type: 'timer',
             title: '倒计时',
             value: {
-              start: Date.now(),
-              end: Date.now() + 1000 * 60 * 60 * 24 *2
+              startTime: Date.now(),
+              endTime: Date.now() + 1000 * 60 * 60 * 24 *2
             }
           }
         },
