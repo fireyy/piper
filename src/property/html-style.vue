@@ -1,7 +1,7 @@
 <template>
   <div class="editor-container">
     <div class="editor-html-style">
-      <el-form label-width="80px">
+      <el-form label-width="100px">
         <el-form-item v-for="(item, key) in data.value" :label="key | lang">
           <component :index="key" :data="item" :is="item.type"></component>
         </el-form-item>

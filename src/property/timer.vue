@@ -1,6 +1,6 @@
 <template>
 <div class="editor-container">
-  <el-form class="editor-text" label-width="80px">
+  <el-form class="editor-text" label-width="100px">
     <el-form-item v-for="(item, key) in data.value" :label="key | lang">
       <el-date-picker
         v-model="data.value[key]"

@@ -13,6 +13,10 @@ export default {
         backgroundColor: {
           type: "color",
           value: "#ff0000"
+        },
+        backgroundImage: {
+          type: "upload",
+          value: null
         }
       }
     },
