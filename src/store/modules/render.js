@@ -67,7 +67,7 @@ const mutations = {
   },
 
   [EDIT_RENDER_DATA](state, render) {
-    state.items = render.items
+    if(render.items) state.items = render.items
     state.title = render.title
     state.config = render.config ? render.config : defaultConfig.config
   },
