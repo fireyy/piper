@@ -7,32 +7,29 @@ export default {
       title: '样式',
       value: {
         color: {
-          type: "color",
-          value: "#ffffff"
+          type: "inputColor",
+          value: "#c8c58a"
         },
         backgroundColor: {
-          type: "color",
-          value: "#ff0000"
+          type: "inputColor",
+          value: "#fffbcb"
         },
         backgroundImage: {
-          type: "upload",
+          type: "inputImage",
           value: null
         }
       }
     },
     shareTitle: {
       type: 'inputText',
-      title: '分享标题',
       value: '测试文字'
     },
     shareLink: {
       type: 'inputText',
-      title: '分享链接',
       value: 'http://'
     },
     shareContent: {
       type: 'inputTextarea',
-      title: '分享文案',
       value: '测试文字'
     }
   }

@@ -1,11 +1,13 @@
 <template>
   <div @click="blurRenderItem" class="render-container">
     <div drag-tag="modules" :class="{'active': activeModules, 'current': currentModule === render.config}" class="body" :style="customStyle">
-      <input class="page-title" type="text" ref="documentTitle" v-model="render.title">
-      <div class="page-config" @click.stop.prevent="editRenderItem(render.config)">
-        <el-tooltip content="页面设置" placement="top">
-          <i class="el-icon-setting"></i>
-        </el-tooltip>
+      <div class="phone-head">
+        <input class="page-title" type="text" ref="documentTitle" v-model="render.title">
+        <div class="page-config" @click.stop.prevent="editRenderItem(render.config)">
+          <el-tooltip content="页面设置" placement="top">
+            <i class="el-icon-setting"></i>
+          </el-tooltip>
+        </div>
       </div>
       <div class="item" :key="index" v-bind:key="item._timestamp" :class="{'current': currentModule === item}" v-for="(item, index) in items">
         <sort-bar @on-sort="onSort" v-show="currentModule === item" :items="items" :item="item">
@@ -46,12 +48,23 @@
     .body {
       width: 375px;
       min-height: 667px;
-      background: #fff url("../assets/img/phone-head.png") no-repeat;
       padding-top: 64px;
       margin: 20px auto 30px;
       user-select: none;
       box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.30);
       position: relative;
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-origin: content-box;
+      background-size: cover;
+      .phone-head {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background: #fff url("../assets/img/phone-head.png") no-repeat;
+        height: 64px;
+      }
       .page-title {
         color: #fff;
         border: none;
@@ -116,6 +129,7 @@ import {
 } from '../modules'
 import moduleDrag from './module-drag.vue'
 import sortBar from './sort-bar.vue'
+import { createStyles } from '../utils'
 
 export default {
   components: {
@@ -150,13 +164,7 @@ export default {
       currentModule: 'currentModule'
     }),
     customStyle() {
-      let styles = {}, config = this.render.config
-      if(config.style) {
-        for(let key in config.style.value){
-          styles[key] = config.style.value[key].value
-        }
-      }
-      return styles
+      return createStyles(this.render.config)
     }
   },
 

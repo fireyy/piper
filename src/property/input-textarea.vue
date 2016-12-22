@@ -1,11 +1,7 @@
 <template>
-<div class="editor-container">
-  <el-form class="editor-text" :model="formData" label-width="100px">
     <el-form-item :label="data.title || title" :prop="'text-'+index" :rules="rules">
       <el-input type="textarea" v-model="data.value"></el-input>
     </el-form-item>
-  </el-form>
-</div>
 </template>
 <script>
 export default {

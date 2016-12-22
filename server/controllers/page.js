@@ -27,7 +27,7 @@ module.exports = class {
     let page = result[0];
     if (!page) throw { status: 404, name: 'PAGES_NOT_FOUND', message: 'page is not found' };
     try {
-      page.items = JSON.parse(page.items);
+      if(page.items) page.items = JSON.parse(page.items);
       if(page.config) page.config = JSON.parse(page.config);
     } catch(error) {
       throw { status: 500, name: 'JSON_PARSE_ERROR', message: 'json parse error' }

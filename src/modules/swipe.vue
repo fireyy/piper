@@ -8,7 +8,7 @@
     <div v-if="items.length">
       <swiper auto loop :aspect-ratio="200/640" dots-position="center">
         <swiper-item v-for="(item, index) in items">
-          <a :href="item.link"><img :src="item.url"></a>
+          <a :href="item.link.value"><img :src="item.image.value"></a>
         </swiper-item>
       </swiper>
     </div>
@@ -29,11 +29,11 @@ export default {
 
   computed: {
     isEmpty() {
-      return this.data.pic.value.every((value) => !value.url)
+      return this.data.pic.value.every((value) => !value.image.value)
     },
 
     items() {
-      return this.data.pic.value.filter((value) => value.url)
+      return this.data.pic.value.filter((value) => value.image.value)
     }
   },
 

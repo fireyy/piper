@@ -31,7 +31,6 @@ module.exports = async (files) => {
   try {
     let uploadRes = await request.post(options);
     if(uploadRes.code == 0) {
-      console.log(uploadRes.data)
       return getUploadData(uploadRes.data)
     } else {
       throw { status: 404, name: 'UPLOAD_ERROR_' + uploadRes.code, message: uploadRes.msg };

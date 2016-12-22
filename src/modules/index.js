@@ -17,15 +17,15 @@ export const modules = [
             title: '样式',
             value: {
               color: {
-                type: "color",
+                type: "inputColor",
                 value: "#ffffff"
               },
               backgroundColor: {
-                type: "color",
+                type: "inputColor",
                 value: "#ff0000"
               },
               padding: {
-                type: "string",
+                type: "inputText",
                 value: "10px"
               }
             }
@@ -93,10 +93,16 @@ export const modules = [
           pic: {
             type: 'pic',
             title: '图片',
-            value: [{
-              link: null,
-              url: 'http://img1.ffan.com/T1xEWTBmET1RCvBVdK'
-            }],
+            value: [
+              {
+                'link': {
+                  value: null,
+                },
+                'image': {
+                  value: 'http://img1.ffan.com/T1xEWTBmET1RCvBVdK'
+                }
+              }
+            ],
             options: {
               max: 1
             }
@@ -112,15 +118,26 @@ export const modules = [
           pic: {
             type: 'pic',
             title: '幻灯片',
-            value: [{
-              link: null,
-              url: 'http://img1.ffan.com/T14.CTB4LT1RCvBVdK'
-            }, {
-              link: null,
-              url: 'http://img1.ffan.com/T1xEWTBmET1RCvBVdK'
-            }],
+            value: [
+              {
+                'link': {
+                  value: null,
+                },
+                'image': {
+                  value: 'http://img1.ffan.com/T14.CTB4LT1RCvBVdK'
+                }
+              },
+              {
+                'link': {
+                  value: null,
+                },
+                'image': {
+                  value: 'http://img1.ffan.com/T1xEWTBmET1RCvBVdK'
+                }
+              }
+            ],
             options: {
-              max: 6
+              max: 4
             }
           }
         },

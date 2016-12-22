@@ -1,52 +1,39 @@
 <template>
-<div class="editor-container">
-  <div v-for="(item, index) in data.value" v-bind:key="index">
-    <inputText :index="index" :data="item" title="链接"></inputText>
-    <inputUpload :index="index" :data="item"></inputUpload>
+<div class="pic-items">
+  <div class="pic-item" v-for="(item, index) in data.value" v-bind:key="index">
+    <inputText :index="index" :data="item.link" title="链接"></inputText>
+    <inputImage :index="index" :data="item.image"></inputImage>
   </div>
-
 </div>
 </template>
 <style lang="less">
-  .editor-pic {
-    .img {
-      width: 100%;
-      height: 150px;
-      display: table;
-
-      .middle {
-        text-align: center;
-        display: table-cell;
-        vertical-align: middle;
-      }
-
-      img {
-        width: 100%;
-        display: inline-block;
-      }
-    }
-    fieldset {
-      border: none;
-      border-bottom: 1px solid #eee;
-    }
-    // hack for hide element upload icon
-    .hasImage {
-      .el-draggeer__cover__btns {
-        .btn:first-child {
-          display: none;
-        }
-      }
+.pic-items {
+  counter-reset: picitem;
+  .pic-item {
+    position: relative;
+    &:before {
+      counter-increment: picitem;
+      content: counter(picitem) ". ";
+      font-size: 40px;
+      color: #eee;
+      background-color: #fff;
+      width: 70px;
+      text-align: center;
+      position: absolute;
+      top: 30px;
+      left: 0;
     }
   }
+}
 </style>
 <script>
 import Vue from 'vue'
 import inputText from './input-text.vue'
-import inputUpload from './input-upload.vue'
+import inputImage from './input-image.vue'
 
 export default {
   components: {
-    inputUpload,
+    inputImage,
     inputText
   },
   props: {
@@ -59,36 +46,16 @@ export default {
 
     if (diff > 0) {
       while (diff--) {
-        this.data.value.push({
-          link: null,
-          url: null
-        })
-      }
-    }
-  },
-
-  methods: {
-    handleSuccess(index) {
-      return (response, file, fileList)=>{
-        console.log(index, response, file, fileList)
-        this.data.value[index].url = response[0].url
-      }
-    },
-    handleError(index) {
-      return (err, response, file)=>{
-        console.log(err, response, file);
-        this.$message.error(response.message)
-      }
-    },
-    handleRemove(index) {
-      return (file, fileList)=>{
-        console.log(file, fileList);
-        this.data.value[index].url = null
-      }
-    },
-    handlePreview(index) {
-      return (file)=>{
-        console.log(file);
+        this.data.value.push(
+          {
+            'link': {
+              value: null,
+            },
+            'image': {
+              value: null
+            }
+          }
+        )
       }
     }
   },

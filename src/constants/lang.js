@@ -6,5 +6,8 @@ export default {
   endTime: '结束时间',
   color: '文字颜色',
   backgroundColor: '背景色',
-  padding: '内补丁'
+  padding: '内补丁',
+  shareTitle: '分享标题',
+  shareLink: '分享链接',
+  shareContent: '分享内容',
 }

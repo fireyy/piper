@@ -19,6 +19,7 @@ html {
 
 <script>
 import PreviewRender from '../components/preview-render.vue'
+import { createStyles } from '../utils'
 
 export default {
 
@@ -31,13 +32,7 @@ export default {
       return window.PIPER_DATA || window.parent.DATA
     },
     customStyle() {
-      let styles = {}, config = this.data.config
-      if(config.style) {
-        for(let key in config.style.value){
-          styles[key] = config.style.value[key].value
-        }
-      }
-      return styles
+      return createStyles(this.data.config)
     }
   }
 }

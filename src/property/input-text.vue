@@ -1,11 +1,7 @@
 <template>
-<div class="editor-container">
-  <el-form class="editor-text" :model="formData" label-width="100px">
-    <el-form-item :label="data.title || title" :prop="'text-'+index" :rules="rules">
+    <el-form-item :label="label" :prop="'text-'+index" :rules="rules">
       <el-input v-model="data.value"></el-input>
     </el-form-item>
-  </el-form>
-</div>
 </template>
 <script>
 export default {
@@ -18,6 +14,9 @@ export default {
   },
 
   computed: {
+    label() {
+      return this.data.title || this.title
+    },
     formData() {
       let tmp = {}
       tmp['text-'+this.index] = this.data.value

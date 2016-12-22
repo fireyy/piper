@@ -1,12 +1,18 @@
-<template lang="html">
-  <div class="input-color">
+<template>
+  <el-form-item :label="data.title || title" class="input-color">
     <input type="color" v-model="data.value">
-  </div>
+  </el-form-item>
 </template>
 
 <script>
 export default {
-  props: ['data']
+  props: {
+    data: {
+      type: Object
+    },
+    title: String,
+    index: [String, Number]
+  }
 }
 </script>
 

@@ -9,18 +9,12 @@
 </template>
 
 <script>
-
+import { createStyles } from '../utils'
 export default {
   props: ['data'],
   computed: {
     customStyle() {
-      let styles = {}
-      if(this.data.style) {
-        for(let key in this.data.style.value){
-          styles[key] = this.data.style.value[key].value
-        }
-      }
-      return styles
+      return createStyles(this.data)
     }
   },
   data() {

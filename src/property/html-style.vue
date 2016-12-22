@@ -1,17 +1,11 @@
 <template>
-  <div class="editor-container">
-    <div class="editor-html-style">
-      <el-form label-width="100px">
-        <el-form-item v-for="(item, key) in data.value" :label="key | lang">
-          <component :index="key" :data="item" :is="item.type"></component>
-        </el-form-item>
-      </el-form>
-    </div>
+  <div>
+    <component v-for="(item, key) in data.value" :index="key" :title="key | lang" :data="item" :is="item.type"></component>
   </div>
 </template>
 
 <script>
-import components from './styles'
+import components from './input.js'
 export default {
   components,
   props: ['data'],
