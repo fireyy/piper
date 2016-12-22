@@ -1,5 +1,5 @@
 <template>
-<div class="module-container">
+<div class="module-container" style="text-align: center">
   <button class="piper-btn" :class="customClass">{{data.content.value}}</button>
 </div>
 </template>
@@ -20,6 +20,12 @@
 
   &-primary {
     border-color: @color-primary;
+    color: @color-primary;
+  }
+
+  &-blank {
+    border: transparent;
+    background: transparent;
     color: @color-primary;
   }
 

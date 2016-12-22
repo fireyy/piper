@@ -56,7 +56,7 @@
       background-repeat: no-repeat;
       background-position: center top;
       background-origin: content-box;
-      background-size: cover;
+      background-size: 100% auto;
       .phone-head {
         position: absolute;
         width: 100%;
@@ -103,6 +103,10 @@
         &.current {
           outline: 2px solid #2196F3;
           z-index: 998;
+        }
+        .placeholder {
+          opacity: 0.6;
+          background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjOWU5ZTllIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA2Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiM4ODgiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=");
         }
       }
       .component {

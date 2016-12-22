@@ -1,3 +1,19 @@
 <template>
-  <div style="position: relative;width: 100%;height: 300px;border: 1px solid red;"></div>
+<div class="module-container">
+  <div class="placeholder" :style="customStyle"></div>
+</div>
 </template>
+<script>
+import { createStyles } from '../utils'
+export default {
+  props: ['data'],
+  computed: {
+    customStyle() {
+      return createStyles(this.data)
+    }
+  },
+  data() {
+    return {}
+  }
+}
+</script>

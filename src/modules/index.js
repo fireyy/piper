@@ -3,10 +3,21 @@ export const modules = [
     title: '常规',
     items: [
       {
-        alias: '布局',
+        alias: '占位',
         type: 'relative',
         icon: 'menu', //from http://element.eleme.io/#/zh-CN/component/icon
-        data: {},
+        data: {
+          style: {
+            type: 'htmlStyle',
+            title: '样式',
+            value: {
+              height: {
+                type: "inputText",
+                value: "100px"
+              }
+            }
+          }
+        },
         component: require('./relative.vue')
       },
       {
@@ -23,6 +34,24 @@ export const modules = [
             type: 'htmlStyle',
             title: '样式',
             value: {
+              textAlign: {
+                type: "inputRadio",
+                props: [
+                  {
+                    title: "左",
+                    value: 'left'
+                  },
+                  {
+                    title: "中",
+                    value: 'center'
+                  },
+                  {
+                    title: "右",
+                    value: 'right'
+                  }
+                ],
+                value: 'center'
+              },
               color: {
                 type: "inputColor",
                 value: "#ffffff"
@@ -34,6 +63,10 @@ export const modules = [
               padding: {
                 type: "inputText",
                 value: "10px"
+              },
+              margin: {
+                type: "inputText",
+                value: "0px"
               }
             }
           }
@@ -80,6 +113,10 @@ export const modules = [
               {
                 title: "主要",
                 value: 'primary'
+              },
+              {
+                title: "透明",
+                value: 'blank'
               }
             ],
             value: ''

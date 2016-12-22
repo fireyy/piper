@@ -14,6 +14,10 @@ html {
 }
 #preview {
   height: 100%;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-origin: content-box;
+  background-size: 100% auto;
 }
 </style>
 
