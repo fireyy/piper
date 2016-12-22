@@ -6,16 +6,19 @@
 npm install
 ```
 
-### Run
-
-```shell
-npm run dev
-```
-
 ### Phantomjs
 
 **因为公司网络的问题，安装 `prerender-spa-plugin` 插件的依赖 `phantomjs` 可能会报错，可以自己下载 [phantomjs](http://phantomjs.org/download.html) 安装**
 
+### Run
+
+开始开发之前，请确认安装了 `Mysql` 服务，并创建名为 `piper` 的数据库
+
+项目的 `Mysql` 配置位于 `./server/config.js`，可供修改
+
+```shell
+npm run dev
+```
 
 ### A message about px to rem
 
@@ -47,7 +50,7 @@ npm run dev
 - [x] 页面发布到CDN
 - [x] webpack code split lazy load
 - [x] 增加活动的一些全局属性，比如背景图，分享信息等
-- [ ] property 拆分的更细
+- [x] property 拆分的更细
 - [ ] property 数据校验
 - [ ] 数据分页
 - [ ] 保存的时候对页面进行截图当作封面
