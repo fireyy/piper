@@ -3,6 +3,9 @@
   <div class="group-item" v-for="(item, index) in data.value" v-bind:key="index">
     <component v-for="(obj, key) in item" :index="key" :title="key | lang" :data="obj" :is="obj.type" :rules="getRules(obj)"></component>
   </div>
+  <div class="text-center">
+    <el-button type="primary" icon="plus" @click="handleAdd" v-if="left > 0">加一项</el-button>
+  </div>
 </div>
 </template>
 <style lang="less">
@@ -37,30 +40,20 @@ export default {
       type: Object
     }
   },
-  created() {
-    let diff = this.data.options.max - this.data.value.length
-
-    if (diff > 0) {
-      while (diff--) {
-        this.data.value.push(
-          {
-            'link': {
-              type: 'inputText',
-              value: null,
-            },
-            'image': {
-              type: 'inputImage',
-              value: null
-            }
-          }
-        )
-      }
+  computed: {
+    left() {
+      return this.data.options.max - this.data.value.length
     }
   },
 
   methods: {
-    getRules(item){
+    getRules(item) {
       return getRules(item)
+    },
+    handleAdd() {
+      let tmp = _.cloneDeep(this.data.value[0])
+      _.forEach(tmp, (value, key, obj) => obj[key].value = null)
+      this.data.value.push(tmp)
     }
   },
 

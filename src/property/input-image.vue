@@ -18,6 +18,9 @@
   </el-form-item>
 </template>
 <style lang="less">
+.el-upload {
+  width: 100%;
+}
 .el-tag {
   em {
     white-space: nowrap;
