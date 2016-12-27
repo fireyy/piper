@@ -8,6 +8,7 @@ export default {
   backgroundColor: '背景色',
   padding: '内补丁',
   height: '高度',
+  link: '链接',
   shareTitle: '分享标题',
   shareLink: '分享链接',
   shareContent: '分享内容',

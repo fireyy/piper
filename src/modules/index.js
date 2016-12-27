@@ -81,6 +81,9 @@ export const modules = [
           content: {
             type: 'inputText',
             title: '按钮文字',
+            rule: {
+              type: 'text'
+            },
             value: '按钮'
           },
           size: {
@@ -135,14 +138,16 @@ export const modules = [
         icon: 'picture',
         data: {
           pic: {
-            type: 'pic',
+            type: 'group',
             title: '图片',
             value: [
               {
                 'link': {
+                  type: 'inputText',
                   value: null,
                 },
                 'image': {
+                  type: 'inputImage',
                   value: 'http://img1.ffan.com/T1xEWTBmET1RCvBVdK'
                 }
               }
@@ -160,22 +165,26 @@ export const modules = [
         icon   : 'picture',
         data: {
           pic: {
-            type: 'pic',
+            type: 'group',
             title: '幻灯片',
             value: [
               {
                 'link': {
+                  type: 'inputText',
                   value: null,
                 },
                 'image': {
+                  type: 'inputImage',
                   value: 'http://img1.ffan.com/T14.CTB4LT1RCvBVdK'
                 }
               },
               {
                 'link': {
+                  type: 'inputText',
                   value: null,
                 },
                 'image': {
+                  type: 'inputImage',
                   value: 'http://img1.ffan.com/T1xEWTBmET1RCvBVdK'
                 }
               }

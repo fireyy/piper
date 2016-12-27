@@ -133,9 +133,9 @@ export default {
       } = _.clone(this.renderData)
 
       // 删除多余数据
-      _.each(items, (value) => {
-        delete value._timestamp
-      })
+      // _.each(items, (value) => {
+      //   delete value._timestamp
+      // })
 
       let data = {
         items,

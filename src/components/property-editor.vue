@@ -13,8 +13,8 @@
   </div>
   <div v-for="(item, index) in items" v-bind:key="item._timestamp" v-show="item === currentModule">
     <h2>{{item.alias}}</h2>
-    <el-form label-width="100px">
-      <component v-bind:key="key" v-for="(value, key) in item.data" :index="key" :data="value" :is="value.type">
+    <el-form label-width="100px" :model="moduleForm[item._timestamp+'']">
+      <component v-bind:key="key" v-for="(value, key) in item.data" :index="key" :data="value" :is="value.type" :prop="key" :rules="getRules()">
       </component>
     </el-form>
   </div>
@@ -51,6 +51,8 @@ import {
   mapActions
 } from 'vuex'
 import components from '../property'
+import { getRules } from '../utils'
+import _ from 'lodash'
 
 export default {
   components,
@@ -60,7 +62,38 @@ export default {
       render: 'render',
       items: 'renderItems',
       currentModule: 'currentModule'
-    })
+    }),
+    moduleForm() {
+      let moduleForm = {};
+      this.items.forEach(function(item){
+        let key = item._timestamp + ''
+        if(!moduleForm[key]) moduleForm[key] = {}
+        for(const it in item.data) {
+          if(_.isString(item.data[it].value)) {
+            moduleForm[key][it] = item.data[it].value
+          }else if(_.isArray(item.data[it].value)) {
+            item.data[it].value.forEach(function(em, i){
+              for(const te in item.data[it].value[i]) {
+                moduleForm[key][te+i] = item.data[it].value[i][te].value
+              }
+            })
+          }else if(_.isObject(item.data[it].value)) {
+            for(const ite in item.data[it].value){
+              moduleForm[key][ite] = item.data[it].value[ite].value
+            }
+          }else{
+            //catch error
+          }
+        }
+      })
+      return moduleForm
+    }
+  },
+
+  methods: {
+    getRules(item){
+      return getRules(item)
+    }
   },
 
   data() {

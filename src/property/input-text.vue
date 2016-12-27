@@ -1,5 +1,5 @@
 <template>
-    <el-form-item :label="label">
+    <el-form-item :label="label" :prop="index" :rules="rules">
       <el-input v-model="data.value"></el-input>
     </el-form-item>
 </template>
@@ -10,7 +10,8 @@ export default {
       type: Object
     },
     title: String,
-    index: [String, Number]
+    index: [String, Number],
+    rules: Object
   },
 
   computed: {

@@ -2,7 +2,7 @@ import inputs from './input'
 
 export default {
   ...inputs,
-  pic   : require('./pic.vue'),
+  group   : require('./group.vue'),
   htmlStyle : require('./html-style.vue'),
   timer : require('./timer.vue')
 }

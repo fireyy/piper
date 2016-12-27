@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-form-item v-for="(item, key) in data.value" :label="key | lang">
+  <el-form-item v-for="(item, key) in data.value" :label="key | lang" :prop="key" :rules="rules">
     <el-date-picker
       v-model="data.value[key]"
       type="datetime"
@@ -16,7 +16,8 @@ export default {
   props: {
     data: {
       type: Object
-    }
+    },
+    rules: Object
   },
 
   data() {

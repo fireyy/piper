@@ -1,19 +1,18 @@
 <template>
-<div class="pic-items">
-  <div class="pic-item" v-for="(item, index) in data.value" v-bind:key="index">
-    <inputText :index="index" :data="item.link" title="链接"></inputText>
-    <inputImage :index="index" :data="item.image"></inputImage>
+<div class="group-items">
+  <div class="group-item" v-for="(item, index) in data.value" v-bind:key="index">
+    <component v-for="(obj, key) in item" :index="key" :title="key | lang" :data="obj" :is="obj.type" :rules="getRules(obj)"></component>
   </div>
 </div>
 </template>
 <style lang="less">
-.pic-items {
-  counter-reset: picitem;
-  .pic-item {
+.group-items {
+  counter-reset: group;
+  .group-item {
     position: relative;
     &:before {
-      counter-increment: picitem;
-      content: counter(picitem) ". ";
+      counter-increment: group;
+      content: counter(group) ". ";
       font-size: 40px;
       color: #eee;
       background-color: #fff;
@@ -28,14 +27,11 @@
 </style>
 <script>
 import Vue from 'vue'
-import inputText from './input-text.vue'
-import inputImage from './input-image.vue'
+import components from './input.js'
+import { getRules } from '../utils'
 
 export default {
-  components: {
-    inputImage,
-    inputText
-  },
+  components,
   props: {
     data: {
       type: Object
@@ -49,14 +45,22 @@ export default {
         this.data.value.push(
           {
             'link': {
+              type: 'inputText',
               value: null,
             },
             'image': {
+              type: 'inputImage',
               value: null
             }
           }
         )
       }
+    }
+  },
+
+  methods: {
+    getRules(item){
+      return getRules(item)
     }
   },
 
