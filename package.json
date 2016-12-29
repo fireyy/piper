@@ -24,6 +24,7 @@
     "element-ui": "^1.0.7",
     "es6-promisify": "^5.0.0",
     "glob": "^7.1.1",
+    "interactjs": "^1.2.8",
     "koa": "^2.0.0-alpha.7",
     "koa-bodyparser": "^3.2.0",
     "koa-router": "^7.0.1",

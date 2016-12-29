@@ -6,6 +6,7 @@ export const modules = [
         alias: '占位',
         type: 'relative',
         icon: 'menu', //from http://element.eleme.io/#/zh-CN/component/icon
+        children: [],
         data: {
           style: {
             type: 'htmlStyle',
@@ -13,7 +14,7 @@ export const modules = [
             value: {
               height: {
                 type: "inputText",
-                value: "100px"
+                value: "300px"
               }
             }
           }
@@ -77,6 +78,10 @@ export const modules = [
         alias: '按钮',
         type: 'btn',
         icon: 'minus',
+        style: {
+          "top"   : "20px",
+          "left"  : "20px"
+        },
         data: {
           content: {
             type: 'inputText',

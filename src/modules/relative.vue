@@ -1,8 +1,15 @@
 <template>
 <div class="module-container">
-  <div class="placeholder" :style="customStyle"></div>
+  <div class="placeholder relative" :style="customStyle">
+    <slot></slot>
+  </div>
 </div>
 </template>
+<style>
+.relative {
+  position: relative;
+}
+</style>
 <script>
 import { createStyles } from '../utils'
 export default {

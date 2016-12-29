@@ -8,7 +8,8 @@ import {
   BLUR_RENDER_ITEM,
   EDIT_DRAG_MODULE,
   EDIT_DRAGING,
-  EDIT_RENDER_DATA
+  EDIT_RENDER_DATA,
+  SET_MOVING
 } from '../mutation-types'
 import {
   modules
@@ -38,7 +39,7 @@ const getters = {
 }
 
 const mutations = {
-  [ADD_RENDER_ITEM](state, { type, data, index: index = state.items.length + 1 }) {
+  [ADD_RENDER_ITEM](state, { type, data, index: index = state.items.length + 1, parent: parent = null }) {
     let module = null
 
     _.each(modules, (moduleItem) => {
@@ -50,14 +51,20 @@ const mutations = {
     })
 
     let newItem = flow(
-      pick(['type', 'alias', 'data']),
+      pick(['type', 'alias', 'data', 'children', 'style']),
       cloneDeep
     )(module)
 
     newItem = merge(newItem, { data })
 
     newItem._timestamp = newItem._timestamp || Date.now()
-    state.items.splice(index, 0, newItem)
+
+    if(parent === null) {
+      state.items.splice(index, 0, newItem)
+    } else {
+      state.items[parent].children.push(newItem)
+    }
+
     state.current = newItem
     state.dragInfo = {}
   },
@@ -86,6 +93,10 @@ const mutations = {
 
   [BLUR_RENDER_ITEM](state) {
     state.current = {}
+  },
+
+  [SET_MOVING](state, status) {
+    //state.moving = status
   }
 }
 

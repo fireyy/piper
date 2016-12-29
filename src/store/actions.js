@@ -50,7 +50,8 @@ const dropRenderItem = ({
       commit(t.ADD_RENDER_ITEM, {
         type: module.type,
         data: data,
-        index: position === 'bottom' ? ++index : index
+        index: position === 'bottom' ? ++index : index,
+        parent: position === 'inner' ? index : null
       })
     }
   }
@@ -100,10 +101,25 @@ function getDragTarget(target) {
  */
 function getDragPosition(event, dragTarget) {
   if (dragTarget) {
+    let isDragZone = dragTarget.getAttribute('drag-zone')
     let rect = dragTarget.getBoundingClientRect()
     let halfHeight = rect.height / 2
 
-    return halfHeight > event.y - rect.top ? 'top' : 'bottom'
+    if(isDragZone) {
+      let position = 'inner', spaceing = 30
+
+      if(event.y - rect.top <= spaceing) {
+        position = 'top'
+      }
+
+      if (rect.height - (event.y - rect.top) <= spaceing) {
+        position = 'bottom'
+      }
+
+      return position
+    } else {
+      return halfHeight > event.y - rect.top ? 'top' : 'bottom'
+    }
   }
 }
 

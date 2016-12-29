@@ -9,7 +9,7 @@
           </el-tooltip>
         </div>
       </div>
-      <div class="item" :key="index" v-bind:key="item._timestamp" :class="{'current': currentModule === item}" v-for="(item, index) in items">
+      <div class="item" :key="item._timestamp" :class="{'current': currentModule === item}" v-for="(item, index) in items">
         <sort-bar @on-sort="onSort" v-show="currentModule === item" :items="items" :item="item">
           <el-tooltip content="拖拽" placement="top" v-if="items.length > 1">
             <li>
@@ -17,8 +17,13 @@
             </li>
           </el-tooltip>
         </sort-bar>
-        <div :drag-tag="'module-'+index" @click.stop.prevent="editRenderItem(item)" :index="index" class="component" :class="[{active: activeModule.dragTag === 'module-' + index}, activeModule.position]">
+        <div :drag-tag="'module-'+index" :drag-zone="!!item.children" @click.stop.prevent="editRenderItem(item)" :index="index" class="component" :class="[{active: activeModule.dragTag === 'module-' + index}, activeModule.position]">
           <component :data="item.data" :is="components[item.type]">
+            <div :key="child._timestamp" v-if="item.children && item.children.length > 0" v-for="(child, childIndex) in item.children" @click.stop.prevent="editRenderItem(child)">
+              <child :class="{'current': currentModule === child}" :drag="true" restriction=".component" @update="updateStyle(child, $event)" :p-style="child.style" :allowKeyMove="child === currentModule">
+                <component :data="child.data" :is="components[child.type]" :style="child.style"></component>
+              </child>
+            </div>
           </component>
         </div>
       </div>
@@ -115,6 +120,10 @@
             //
           }
         }
+        &.active.inner {
+          outline: 2px solid #2196F3;
+          background-color: #E4F3FE;
+        }
         &.active.bottom {
           &:after:extend(.dropArea) {
             //
@@ -132,6 +141,7 @@ import {
   modules
 } from '../modules'
 import moduleDrag from './module-drag.vue'
+import child from './child.vue'
 import sortBar from './sort-bar.vue'
 import { createStyles } from '../utils'
 
@@ -139,7 +149,8 @@ export default {
   components: {
     ...components,
     moduleDrag,
-    sortBar
+    sortBar,
+    child
   },
 
   mounted() {
@@ -188,6 +199,12 @@ export default {
         this.editRenderItem(this.items[newIndex]);
         //this.$store.commit('EDIT_RENDER_ITEM', this.items[newIndex])
       }, 0)
+    },
+    updateStyle(item, position) {
+      item.style = {
+        ...item.style,
+        ...position
+      }
     }
   },
 
