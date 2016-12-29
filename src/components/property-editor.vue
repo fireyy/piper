@@ -4,17 +4,17 @@
     <i class="el-icon-information"></i>
     <br>请选择一个模块
   </div>
-  <div class="page-config-editor" v-show="render.config === currentModule">
+  <div class="page-config-editor" v-if="render.config === currentModule">
     <h2>页面设置</h2>
     <el-form label-width="100px">
       <component v-bind:key="key" v-for="(value, key) in render.config" :title="key | lang" :index="key" :data="value" :is="value.type">
       </component>
     </el-form>
   </div>
-  <div v-for="(item, index) in items" v-bind:key="item._timestamp" v-show="item === currentModule">
-    <h2>{{item.alias}}</h2>
-    <el-form label-width="100px" :model="moduleForm[item._timestamp+'']">
-      <component v-bind:key="key" v-for="(value, key) in item.data" :index="key" :data="value" :is="value.type" :prop="key" :rules="getRules()">
+  <div v-bind:key="currentModule._timestamp" v-if="currentModule.type">
+    <h2>{{currentModule.alias}}</h2>
+    <el-form label-width="100px" :model="moduleForm[currentModule._timestamp+'']">
+      <component v-bind:key="key" v-for="(value, key) in currentModule.data" :index="key" :data="value" :is="value.type" :prop="key" :rules="getRules()">
       </component>
     </el-form>
   </div>

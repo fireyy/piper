@@ -1,5 +1,5 @@
 <template>
-  <div ref="drag" :style="dragStyle" @click="bindClick" @mousedown="bindMousedown" class="drag-move">
+  <div ref="drag" :style="dragStyle" @click="bindMousedown" class="drag-move">
     <slot></slot>
   </div>
 </template>
@@ -44,13 +44,11 @@ export default {
   },
 
   methods: {
-    bindClick() {
-      this.$emit('click')
-    },
-    bindMousedown() {
+    bindMousedown(event) {
+      if (event) event.preventDefault()
       this.$emit('mousedown')
+      if (event) event.stopPropagation()
     },
-
     getPosition(event) {
       let style = event.target.style
 
@@ -117,29 +115,6 @@ export default {
     ]),
   },
 
-  created() {
-    let keyMap = {
-      38: 't',
-      39: 'r',
-      40: 'b',
-      37: 'l'
-    }
-
-    // $(document)
-    //   .on('keydown', (event) => {
-    //     if (!this.allowKeyMove || !keyMap[event.keyCode] || event.target.tagName === 'INPUT') return
-
-    //     this.movePosition(keyMap[event.keyCode])
-    //     this.$emit('update', this.getPosition({
-    //       target: this.$refs.drag
-    //     }))
-    //     event.preventDefault()
-    //   })
-    //   .on('keyup', () => {
-    //     this.SET_MOVING(false)
-    //   })
-  },
-
   mounted() {
     let that = this
 
@@ -166,25 +141,14 @@ export default {
           let x = (parseFloat(target.getAttribute('data-x')) || style.left)
           let y = (parseFloat(target.getAttribute('data-y')) || style.top)
 
-          // 没有宽高时, 要设置宽高
-          if (that.pStyle && (!that.pStyle.width || !that.pStyle.height)) {
-            let childStyle = target.childNodes[0].getBoundingClientRect()
-
-            target.style.width = `${childStyle.width}px`
-            target.style.height = `${childStyle.height}px`
-          }
-
           that.setPosition(target, 'left', x += event.dx)
           that.setPosition(target, 'top', y += event.dy)
         },
-        // call this function on every dragend event
         onend: function(event) {
           that.$emit('update', that.getPosition(event))
           that.SET_MOVING(false)
         }
       })
-
-    if (that.handle) dragInstance.allowFrom(that.handle)
   },
 }
 </script>
