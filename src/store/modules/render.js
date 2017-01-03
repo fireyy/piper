@@ -8,8 +8,7 @@ import {
   BLUR_RENDER_ITEM,
   EDIT_DRAG_MODULE,
   EDIT_DRAGING,
-  EDIT_RENDER_DATA,
-  SET_MOVING
+  EDIT_RENDER_DATA
 } from '../mutation-types'
 import {
   modules
@@ -93,10 +92,6 @@ const mutations = {
 
   [BLUR_RENDER_ITEM](state) {
     state.current = {}
-  },
-
-  [SET_MOVING](state, status) {
-    //state.moving = status
   }
 }
 

@@ -12,9 +12,6 @@
   }
 </style>
 <script>
-import {
-  mapMutations
-} from 'vuex'
 import interact from 'interactjs'
 import { offset } from '../utils'
 
@@ -22,12 +19,9 @@ window.interact = interact
 export default {
   props: {
     drag: Boolean,
-    resize: Boolean,
     pStyle: Object,
-    className: String,
     allowKeyMove: Boolean,
-    restriction: String,
-    handle: String,
+    restriction: String
   },
 
   data() {
@@ -69,7 +63,6 @@ export default {
 
       el.style[curMap[0]] = `${value}px`
       el.setAttribute(curMap[1], value)
-      this.SET_MOVING(true)
     },
 
     getPositionStyle(target) {
@@ -82,37 +75,7 @@ export default {
       }
 
       return style
-    },
-
-    movePosition(direction, value = 1) {
-      let target = this.$refs.drag
-      let style = this.getPositionStyle(target)
-
-      switch (direction) {
-        case 't':
-          this.setPosition(target, 'top', style.top -= 1)
-          break;
-
-        case 'r':
-          this.setPosition(target, 'left', style.left += 1)
-          break;
-
-        case 'b':
-          this.setPosition(target, 'top', style.top += 1)
-          break;
-
-        case 'l':
-          this.setPosition(target, 'left', style.left -= 1)
-          break;
-
-        default:
-          //
-      }
-    },
-
-    ...mapMutations([
-      'SET_MOVING'
-    ]),
+    }
   },
 
   mounted() {
@@ -146,7 +109,6 @@ export default {
         },
         onend: function(event) {
           that.$emit('update', that.getPosition(event))
-          that.SET_MOVING(false)
         }
       })
   },
