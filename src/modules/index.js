@@ -3,7 +3,7 @@ export const modules = [
     title: '常规',
     items: [
       {
-        alias: '占位',
+        alias: '相对定位',
         type: 'relative',
         icon: 'menu', //from http://element.eleme.io/#/zh-CN/component/icon
         children: [],
