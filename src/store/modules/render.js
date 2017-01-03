@@ -39,23 +39,23 @@ const getters = {
 }
 
 const mutations = {
-  [ADD_RENDER_ITEM](state, { type, data, index: index = state.items.length + 1, parent: parent = null }) {
-    let module = null
+  [ADD_RENDER_ITEM](state, { type, module, index: index = state.items.length + 1, parent: parent = null }) {
+    //let module = null
 
-    _.each(modules, (moduleItem) => {
-      _.each(moduleItem.items, (item) => {
-        if (module) return
+    // _.each(modules, (moduleItem) => {
+    //   _.each(moduleItem.items, (item) => {
+    //     if (module) return
 
-        module = item.type === type && item
-      })
-    })
+    //     module = item.type === type && item
+    //   })
+    // })
 
     let newItem = flow(
       pick(['type', 'alias', 'data', 'children', 'style']),
       cloneDeep
     )(module)
 
-    newItem = merge(newItem, { data })
+    // newItem = merge(newItem, { data })
 
     newItem._timestamp = newItem._timestamp || Date.now()
 

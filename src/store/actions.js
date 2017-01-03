@@ -43,13 +43,13 @@ const dropRenderItem = ({
     if (dragTag === 'modules') {
       commit(t.ADD_RENDER_ITEM, {
         type: module.type,
-        data: data
+        module: module
       })
     } else {
       let index = +(dragTag.split('-')[1])
       commit(t.ADD_RENDER_ITEM, {
         type: module.type,
-        data: data,
+        module: module,
         index: position === 'bottom' ? ++index : index,
         parent: position === 'inner' ? index : null
       })
