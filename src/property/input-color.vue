@@ -5,7 +5,7 @@
             ref="popover2"
             class="color-popover"
             trigger="click">
-        <color-picker v-model="data.value" @change-color="onChange"></color-picker>
+        <color-picker v-model="mColor" @change-color="onChange"></color-picker>
     </el-popover>
     <span :style="{background:data.value}" class="color" v-popover:popover2></span>
   </el-form-item>
@@ -13,6 +13,7 @@
 
 <script>
 import { Sketch } from 'vue-color'
+import tinycolor from 'tinycolor2'
 export default {
   components: {'color-picker': Sketch},
   props: {
@@ -22,9 +23,20 @@ export default {
     title: String,
     index: [String, Number]
   },
+  computed: {
+    mColor(){
+      let color = tinycolor(this.data.value)
+      return {
+        hex: color.toHexString(),
+        rgba: color.toRgb(),
+        a: color.getAlpha()
+      }
+    }
+  },
   methods: {
     onChange(val){
-      this.data.value = `rgba(${val.rgba.r},${val.rgba.g},${val.rgba.b},${val.rgba.a})`
+      let rgba = val.rgba
+      this.data.value = `rgba(${[rgba.r, rgba.g, rgba.b, rgba.a].join(',')})`
     }
   }
 }
