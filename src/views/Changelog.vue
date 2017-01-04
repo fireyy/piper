@@ -41,26 +41,58 @@
           width="220">
         </el-table-column>
       </el-table>
+      <el-pagination
+        class="piper-page"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[10, 20, 30, 40]"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
+      </el-pagination>
     </div>
   </div>
 </template>
-
+<style lang="less">
+.piper-page {
+  padding: 10px;
+  text-align: right;
+}
+</style>
 <script>
   import api from '../api'
   import filters from '../filters'
 
   export default {
     mounted() {
-      api.changelog.getAll().then((res)=>{
-        this.tableData = res.data
-      })
+      this.pageChange()
     },
     methods: {
+      pageChange(page, size){
+        api.changelog.getAll({
+          size: size || this.pageSize,
+          page: page || this.currentPage
+        }).then((res)=>{
+          this.tableData = res.data.data
+          this.pageSize = res.data.size
+          this.currentPage = res.data.page
+          this.total = res.data.total
+        })
+      },
       onSearch() {
         alert("todo")
       },
       formatDate(row) {
         return filters.formatDate(row.create_at)
+      },
+      handleSizeChange(val) {
+        this.pageSize = val
+        this.pageChange(1, val)
+      },
+      handleCurrentChange(val) {
+        this.currentPage = val;
+        this.pageChange(val)
       }
     },
     data() {
@@ -70,7 +102,10 @@
           1: 'primary',
           2: 'success',
           3: 'danger'
-        }
+        },
+        currentPage: 1,
+        pageSize: 10,
+        total: 10
       }
     }
   }

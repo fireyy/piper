@@ -7,9 +7,11 @@ module.exports = function (Vue) {
      * 获取所有 changelog
      * @returns {*}
      */
-    getAll() {
+    getAll(params) {
       return http
-        .get('changelogs')
+        .get('changelogs', {
+          params: params
+        })
     }
   }
 }
