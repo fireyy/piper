@@ -8,6 +8,8 @@ const mkdirp = require('mkdirp');
 const render = views(path.join(__dirname, '../views'), { ext: 'ejs' });
 const upload = require('../lib/upload');
 
+const webshot = require('webshot');
+
 module.exports = class {
   static url = '/publish/:id';
 
@@ -23,7 +25,10 @@ module.exports = class {
     try { page.items = JSON.parse(page.items); } catch(error) {
       throw { status: 500, name: 'JSON_PARSE_ERROR', message: 'json parse error' }
     };
-    ctx.body = await render('activity', { page: page });
+
+    let html = await render('activity', { page: page });
+
+    ctx.body = html
   }
 
   @authorize([ 'EDIT' ])
@@ -69,6 +74,25 @@ module.exports = class {
         return fs.createReadStream(dir + `/${item.name}`)
       })
       let uploadRes = await upload(files);
+
+      var options = {
+        screenSize: {
+          width: 375
+        , height: 375
+        }
+      , shotSize: {
+          width: 375
+        , height: 'all'
+        }
+      , userAgent: 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_2 like Mac OS X; en-us)'
+          + ' AppleWebKit/531.21.20 (KHTML, like Gecko) Mobile/7B298g'
+      };
+
+      webshot(uploadRes[0].url, `${dir}/cover.png`, options, function(err) {
+        if(err) {
+          throw { status: 404, name: 'WEBSHOT_ERR', message: 'webshot failed' };
+        }
+      });
 
       ctx.body = uploadRes
     } else {

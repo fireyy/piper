@@ -18,52 +18,61 @@
       </el-row>
     </div>
     <div class="layout-content inner-row">
-      <el-table
-        :data="tableData"
-        style="width: 100%">
-        <el-table-column
-          prop="title"
-          label="名称">
-        </el-table-column>
-        <el-table-column
-          prop="create_by.name"
-          label="操作人"
-          width="220">
-        </el-table-column>
-        <el-table-column
-          inline-template
-          prop="create_at"
-          label="创建时间"
-          width="220">
-          <div>
-            <el-icon name="time"></el-icon>
-            <span style="margin-left: 10px">{{ row.create_at | formatDate }}</span>
-          </div>
-        </el-table-column>
-        <el-table-column
-          inline-template
-          prop="update_at"
-          label="更新时间"
-          width="220">
-          <div>
-            <el-icon name="time"></el-icon>
-            <span style="margin-left: 10px">{{ row.update_at | formatDate }}</span>
-          </div>
-        </el-table-column>
-        <el-table-column
-          inline-template
-          label="操作"
-          width="180">
-          <span>
-            <el-button size="small" icon="edit" @click="handleEdit($index, row)">编辑</el-button>
-            <el-button size="small" icon="delete" type="danger" @click="handleDelete($index, row)">删除</el-button>
-          </span>
-        </el-table-column>
-      </el-table>
+      <el-row :gutter="20">
+        <el-col :span="6" v-for="(item, index) in tableData">
+          <el-card class="page-card" :body-style="{ padding: '0px' }">
+            <span :style="{backgroundImage: 'url(/'+item.id+'/cover.png)'}" class="image" @click="handleEdit(index, item)"></span>
+            <div style="padding: 14px;">
+              <span>{{item.title}}</span>
+              <div class="bottom clearfix">
+                <time class="time">{{ item.create_at | formatDate }}</time>
+                <div class="button">
+                  <i class="el-icon-delete" @click="handleDelete(index, item)"></i>
+                </div>
+              </div>
+            </div>
+          </el-card>
+        </el-col>
+      </el-row>
     </div>
   </div>
 </template>
+<style lang="less">
+.page-card {
+  .time {
+    font-size: 13px;
+    color: #999;
+  }
 
+  .bottom {
+    margin-top: 13px;
+    line-height: 12px;
+  }
+
+  .button {
+    padding: 0;
+    float: right;
+  }
+
+  .image {
+    width: 100%;
+    height: 200px;
+    display: block;
+    background-size: 100% auto;
+    cursor: pointer;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+
+  .clearfix:after {
+    clear: both
+  }
+}
+</style>
 <script>
   import api from '../api'
 
