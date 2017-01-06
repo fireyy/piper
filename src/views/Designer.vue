@@ -15,11 +15,11 @@
   </header>
 
   <div class="container">
-    <module-box></module-box>
+    <module-container></module-container>
 
     <render></render>
 
-    <property-editor></property-editor>
+    <property></property>
   </div>
   <el-dialog size="full" custom-class="preview-dialog" title="预览" v-model="previewVisible">
     <div class="preview-frame">
@@ -38,15 +38,15 @@ import api from '../api'
 import { mapGetters, mapActions } from 'vuex'
 import _ from 'lodash'
 import render from '../components/render.vue'
-import moduleBox from '../components/module-box.vue'
-import propertyEditor from '../components/property-editor.vue'
+import moduleContainer from '../components/module-container.vue'
+import property from '../components/property.vue'
 import Qrcode from '../components/qrcode.vue'
 import defaultConfig from '../constants/default'
 
 export default {
   components: {
-    propertyEditor,
-    moduleBox,
+    property,
+    moduleContainer,
     render,
     Qrcode
   },

@@ -21,14 +21,23 @@
       <el-row :gutter="20">
         <el-col :span="6" v-for="(item, index) in tableData">
           <el-card class="page-card" :body-style="{ padding: '0px' }">
-            <span :style="{backgroundImage: 'url(/'+item.id+'/cover.png)'}" class="image" @click="handleEdit(index, item)"></span>
+            <div :style="{backgroundImage: 'url(/'+item.id+'/cover.png)'}" class="image" @click="handleEdit(index, item)">
+              <div class="hover-settings-container">
+                <div class="main-link">
+                  <h3 class="designer">
+                    <span class="">Open Designer</span>
+                  </h3>
+                  <i class="el-icon-arrow-right"></i>
+                </div>
+                <div class="operations">
+                  <i class="el-icon-delete" @click="handleDelete(index, item)" title="Delete"></i>
+                </div>
+              </div>
+            </div>
             <div style="padding: 14px;">
-              <span>{{item.title}}</span>
+              <h4>{{item.title}}</h4>
               <div class="bottom clearfix">
                 <time class="time">{{ item.create_at | formatDate }}</time>
-                <div class="button">
-                  <i class="el-icon-delete" @click="handleDelete(index, item)"></i>
-                </div>
               </div>
             </div>
           </el-card>
@@ -39,6 +48,10 @@
 </template>
 <style lang="less">
 .page-card {
+  margin-bottom: 20px;
+  h4 {
+    font-weight: normal;
+  }
   .time {
     font-size: 13px;
     color: #999;
@@ -60,6 +73,10 @@
     display: block;
     background-size: 100% auto;
     cursor: pointer;
+    position: relative;
+    &:hover .hover-settings-container {
+      opacity: 1;
+    }
   }
 
   .clearfix:before,
@@ -70,6 +87,40 @@
 
   .clearfix:after {
     clear: both
+  }
+  .hover-settings-container {
+    z-index: 9;
+    background-color: rgba(43, 50, 57, 0.8);
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    -webkit-transition: opacity 100ms ease;
+    transition: opacity 100ms ease;
+    color: #ccc;
+    .main-link {
+      width: 100%;
+      text-align: center;
+      margin-top: 83px;
+      pointer-events: none;
+      h3.designer {
+        display: inline;
+        width: 100%;
+      }
+      .el-icon-arrow-right {
+        display: inline-block;
+        height: 10px;
+      }
+    }
+    .operations {
+      position: absolute;
+      top: 13px;
+      right: 10px;
+    }
   }
 }
 </style>

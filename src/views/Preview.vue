@@ -22,7 +22,7 @@ html {
 </style>
 
 <script>
-import PreviewRender from '../components/preview-render.vue'
+import PreviewRender from '../components/preview.vue'
 import { createStyles } from '../utils'
 
 export default {
