@@ -10,13 +10,13 @@
         </div>
       </div>
       <div class="item" :key="item._timestamp" :class="{'current': currentModule === item}" v-for="(item, index) in items">
-        <sort-bar @on-sort="onSort" v-show="currentModule === item" :items="items" :item="item">
+        <ctrl-bar @on-sort="onSort" v-show="currentModule === item" :items="items" :item="item">
           <el-tooltip content="拖拽" placement="top" v-if="items.length > 1">
             <li>
               <i class="el-icon-d-caret" @mousedown="drag(item)"></i>
             </li>
           </el-tooltip>
-        </sort-bar>
+        </ctrl-bar>
         <div :drag-tag="'module-'+index" :drag-zone="!!item.children" @click.stop.prevent="editRenderItem(item)" :index="index" class="component" :class="[{active: activeModule.dragTag === 'module-' + index}, activeModule.position]">
           <component :data="item.data" :is="components[item.type]">
             <div :key="child._timestamp" v-if="item.children && item.children.length > 0" v-for="(child, childIndex) in item.children">
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <module-drag></module-drag>
+    <drag-drop></drag-drop>
   </div>
 </template>
 <style lang="less">
@@ -140,16 +140,16 @@ import {
   components,
   modules
 } from '../modules'
-import moduleDrag from './module-drag.vue'
+import dragDrop from './drag-drop.vue'
 import dragMove from './drag-move.vue'
-import sortBar from './sort-bar.vue'
+import ctrlBar from './ctrl-bar.vue'
 import { createStyles } from '../utils'
 
 export default {
   components: {
     ...components,
-    moduleDrag,
-    sortBar,
+    dragDrop,
+    ctrlBar,
     dragMove
   },
 

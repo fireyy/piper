@@ -10,7 +10,7 @@
       </el-tooltip>
     </ul>
   </div>
-  <module-drag></module-drag>
+  <drag-drop></drag-drop>
 </div>
 </template>
 <style lang="less" scoped>
@@ -52,11 +52,11 @@ import { mapGetters, mapActions } from 'vuex'
 import {
   modules
 } from '../modules'
-import moduleDrag from './module-drag.vue'
+import dragDrop from './drag-drop.vue'
 
 export default {
   components: {
-    moduleDrag
+    dragDrop
   },
 
   methods: {
