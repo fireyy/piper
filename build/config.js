@@ -15,7 +15,7 @@ module.exports = {
     ]
   },
   vue: {
-    loaders: _.cssLoaders(),
+    loaders: _.cssLoaders(process.env.NODE_ENV === 'production' ? { sourceMap: false, extract: true } : ''),
     preserveWhitespace: false,
     postcss: [
       require('autoprefixer')({

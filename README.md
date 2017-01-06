@@ -69,6 +69,6 @@ npm run dev
 - [x] px2rem bugfix
 - [x] 拖拽模块导致数据还原
 - [x] webpack performance warning
-- [ ] publish 后 css 重复的bug
+- [x] publish 后 css 重复的bug
 - [ ] 判断是否有数据修改的方法不准确
 - [ ] src 代码自动编译可能会导致 nodemoon watchr 报错
