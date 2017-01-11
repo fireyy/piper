@@ -1,4 +1,5 @@
 const request = require('request-promise');
+const config = require('../../config.js')
 
 const getUploadData = data => {
   let arr = [];
@@ -19,11 +20,11 @@ module.exports = async (files) => {
   })
 
   var options = {
-    url: 'http://opads.intra.ffan.com/openapi/nres-upload',
+    url: config.opads.url,
     json: true,
     formData: {
-      project     : 'test',
-      authkey     : 'a17e3218be131bc8029a4da605c0dd1f',
+      project: config.opads.project,
+      authkey: config.opads.authkey,
       ...uploadObj
     }
   };

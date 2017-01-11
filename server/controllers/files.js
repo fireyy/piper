@@ -1,6 +1,6 @@
 const asyncBusboy = require('async-busboy');
 const authorize = require('../lib/authorize');
-const upload = require('../lib/upload');
+const upload = require('../lib/publish');
 
 module.exports = class {
   static url = '/files';

@@ -31,6 +31,7 @@
     "koa-static": "^3.0.0",
     "lodash": "^4.13.1",
     "mysql": "^2.12.0",
+    "qiniu": "^6.1.13",
     "qr.js": "0.0.0",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",

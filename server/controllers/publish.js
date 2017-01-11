@@ -6,7 +6,7 @@ const child_process = require('child_process');
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 const render = views(path.join(__dirname, '../views'), { ext: 'ejs' });
-const upload = require('../lib/upload');
+const upload = require('../lib/publish');
 
 const webshot = require('webshot');
 
