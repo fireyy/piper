@@ -1,7 +1,7 @@
 <template>
 <div v-loading.body.fullscreen="loading" element-loading-text="拼命加载中">
   <header class="page-header designer-header">
-    <el-row type="flex" justify="space-between">
+    <el-row class="inner-row" type="flex" justify="space-between">
       <el-col :span="9" class="title">
         {{ renderData.title }}
       </el-col>
@@ -14,7 +14,7 @@
     </el-row>
   </header>
 
-  <div class="container">
+  <div class="container inner-row">
     <module-container></module-container>
 
     <render></render>
@@ -239,6 +239,7 @@ html {
 
 .designer-header {
   padding: 10px 30px;
+  margin-bottom: 20px;
 
   .title {
     font-size: 24px;
@@ -253,14 +254,11 @@ html {
   min-height: 100%;
   overflow: auto;
   background: #fff;
+  border: 1px solid #E7E8E7;
 
   .module-box {
     flex: 0 0 230px;
     border-right: 1px solid #E7E8E7;
-
-    li {
-      margin: 30px;
-    }
   }
 
   .render-container {

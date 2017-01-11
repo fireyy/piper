@@ -49,6 +49,7 @@ export default {
     height: 30px;
     display: inline-block;
     border-radius: 5px;
+    border: 1px solid #ccc;
   }
 }
 </style>

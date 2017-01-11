@@ -3,11 +3,9 @@
   <div class="modules" v-for="moduleItem in modules">
     <div class="title">{{moduleItem.title}}</div>
     <ul class="items">
-      <el-tooltip content="按住拖拽" placement="top" v-for="item in moduleItem.items">
-        <li @mousedown="drag(item)" class="item">
-          <i :class="'el-icon-'+item.icon"></i> {{item.alias}}
-        </li>
-      </el-tooltip>
+      <li v-for="item in moduleItem.items" title="按住拖拽" @mousedown="drag(item)" class="item">
+        <i :class="'el-icon-'+item.icon"></i> {{item.alias}}
+      </li>
     </ul>
   </div>
   <drag-drop></drag-drop>
@@ -18,7 +16,6 @@
   .title {
     background: #eee;
     font-size: 15px;
-    margin-bottom: 5px;
     padding: 5px 10px;
     border-bottom: 1px solid #E7E8E7;
   }
@@ -26,20 +23,21 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    padding: 0 14px;
     .item {
       user-select: none;
-      min-width: 85px;
+      width: 50%;
       height: 85px;
-      border-radius: 4px;
-      border: 1px solid #E7E8E7;
-      margin: 5px 0;
+      border-right: 1px solid #E7E8E7;
+      border-bottom: 1px solid #E7E8E7;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-flow: column;
       cursor: move;
       font-size: 13px;
+      &:nth-child(2n){
+        border-right: 0;
+      }
       i {
         margin-bottom: 10px;
       }
