@@ -8,13 +8,21 @@ npm install
 
 ### Phantomjs
 
-**因为公司网络的问题，安装 `prerender-spa-plugin` 插件的依赖 `phantomjs` 可能会报错，可以自己下载 [phantomjs](http://phantomjs.org/download.html) 安装**
+**因为网络问题，安装 `prerender-spa-plugin` 插件的依赖 `phantomjs` 可能会报错，可以自己下载 [phantomjs](http://phantomjs.org/download.html) 安装，并加入到系统的 PATH**
 
-### Run
+### Config
 
 开始开发之前，请确认安装了 `Mysql` 服务，并创建名为 `piper` 的数据库
 
-项目的 `Mysql` 配置位于 `./server/config.js`，可供修改
+项目的范例配置位于 `./server/config.sample.js`，复制并重命名为 `./server/config.js`
+
+```shell
+cp ./server/config.sample.js ./server/config.js
+```
+
+用自己喜欢的编辑器修改 `./server/config.js`, 可修改 `Mysql` `qiniu` `opads` 等配置
+
+### Develop
 
 ```shell
 npm run dev
@@ -53,6 +61,7 @@ npm run dev
 - [x] property 拆分的更细
 - [ ] property 数据校验
 - [ ] modules 数据更新的方式（目前的不对）
+- [ ] property 的 px 需要转换到 rem
 - [x] 添加 布局 组件，实现布局内的子元素可相对定位
 - [x] 数据分页
 - [x] 保存发布的时候对页面进行截图当作封面
