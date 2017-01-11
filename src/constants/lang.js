@@ -6,6 +6,7 @@ export default {
   endTime: '结束时间',
   color: '文字颜色',
   backgroundColor: '背景色',
+  textAlign: '对齐方式',
   padding: '内补丁',
   height: '高度',
   link: '链接',

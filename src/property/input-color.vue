@@ -50,6 +50,7 @@ export default {
     display: inline-block;
     border-radius: 5px;
     border: 1px solid #ccc;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2) inset;
   }
 }
 </style>
