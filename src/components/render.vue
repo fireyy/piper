@@ -35,18 +35,17 @@
   @import '~_base.less';
 
   .dropArea {
-    width: 98%;
-    height: 20px;
-    line-height: 20px;
+    width: 95%;
+    height: 2px;
+    line-height: 0;
+    font-size: 0;
     margin: 0 auto;
-    font-size: 14px;
-    text-align: center;
     display: block;
-    content: '放这里';
-    border: 2px dashed #2196F3;
-    background: #E4F3FE;
-    padding: 5px 0;
-    color: #2196F3;
+    content: '';
+    border: 4px solid;
+    border-color: transparent #2196F3;
+    background: #2196F3;
+    background-clip: content-box;
   }
   .render-container {
     overflow-y: auto;
