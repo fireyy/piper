@@ -63,10 +63,7 @@ export default {
         'seconds',
         'minutes',
         'hours',
-        'days',
-        'weeks',
-        'months',
-        'years'
+        'days'
       ]
 
       this.stop()
@@ -96,10 +93,7 @@ export default {
           seconds     : Math.floor(countdownTime % 60),
           minutes     : Math.floor(countdownTime / 60) % 60,
           hours       : Math.floor(countdownTime / 60 / 60) % 24,
-          days        : Math.floor(countdownTime / 60 / 60 / 24) % 7,
-          weeks       : Math.floor(countdownTime / 60 / 60 / 24 / 7),
-          months      : Math.floor(countdownTime / 60 / 60 / 24 / 30.4368),
-          years       : Math.abs(new Date(+this.end).getFullYear() - new Date().getFullYear())
+          days        : Math.floor(countdownTime / 60 / 60 / 24)
         };
 
         keys.forEach((key) => {

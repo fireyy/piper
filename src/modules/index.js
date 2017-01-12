@@ -24,11 +24,10 @@ export const modules = [
       {
         alias: '文本',
         type: 'txt',
-        icon: 'edit', //from http://element.eleme.io/#/zh-CN/component/icon
+        icon: 'edit',
         data: {
           content: {
             type: 'inputTextarea',
-            title: '内容',
             value: '测试文字'
           },
           style: {
@@ -165,9 +164,9 @@ export const modules = [
         component: require('./poster.vue')
       },
       {
-        alias    : '幻灯片',
-        type     : 'swipe',
-        icon   : 'picture',
+        alias: '幻灯片',
+        type: 'swipe',
+        icon: 'picture',
         data: {
           pic: {
             type: 'group',
@@ -208,16 +207,14 @@ export const modules = [
     items: [
       {
         alias: '倒计时',
-        type: 'timer',
+        type: 'countdown',
         icon: 'time',
         data: {
           time: {
-            type: 'timer',
-            title: '倒计时',
-            value: {
-              startTime: Date.now(),
-              endTime: Date.now() + 1000 * 60 * 60 * 24 *2
-            }
+            type: 'inputDate',
+            sub: 'datetimerange',
+            rule: 'timerange',
+            value: []
           }
         },
         component: require('./countdown.vue')

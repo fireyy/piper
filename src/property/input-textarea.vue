@@ -1,5 +1,5 @@
 <template>
-  <el-form-item :label="label" :prop="index" :rules="rules">
+  <el-form-item :label="label" :prop="prop" :rules="rules">
     <el-input type="textarea" v-model="data.value"></el-input>
   </el-form-item>
 </template>

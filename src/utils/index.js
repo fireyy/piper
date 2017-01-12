@@ -1,5 +1,3 @@
-import rules from '../constants/rules'
-
 let styleKey = {
   "backgroundImage": "url(%s)"
 }
@@ -17,13 +15,6 @@ export function createStyles(data) {
     }
   }
   return styles
-}
-
-export function getRules(item) {
-  // return rules
-  return {
-    required: true, message: '不能为空', trigger: 'blur'
-  }
 }
 
 /**
@@ -99,6 +90,5 @@ function offsetParent (element) {
 }
 
 export default {
-  createStyles,
-  getRules
+  createStyles
 }

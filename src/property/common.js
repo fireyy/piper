@@ -1,4 +1,5 @@
 import { mapActions } from 'vuex'
+import rules from '../constants/rules'
 export default {
   props: {
     data: {
@@ -11,6 +12,12 @@ export default {
   computed: {
     label() {
       return this.data.title || this.title
+    },
+    prop() {
+      return this.index
+    },
+    rules() {
+      return this.data.rule ? rules[this.data.rule] : rules[this.index] ? rules[this.index] : []
     }
   },
   methods: {
@@ -23,8 +30,6 @@ export default {
       deep: true,
       handler: function(newVal, oldVal) {
         if(!newVal) return
-
-        console.log(newVal)
 
         this.editModuleData(newVal)
       }

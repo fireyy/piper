@@ -1,7 +1,7 @@
 <template>
 <div class="group-items">
   <div class="group-item" v-for="(item, index) in data.value" v-bind:key="index">
-    <component v-for="(obj, key) in item" :index="key" :title="key | lang" :data="obj" :is="obj.type" :rules="getRules(obj)"></component>
+    <component v-for="(obj, key) in item" :index="key" :title="key | lang" :data="obj" :is="obj.type"></component>
   </div>
   <div class="text-center">
     <el-button type="primary" icon="plus" @click="handleAdd" v-if="left > 0">加一项</el-button>
@@ -31,7 +31,6 @@
 <script>
 import Vue from 'vue'
 import components from './input.js'
-import { getRules } from '../utils'
 
 export default {
   components,
@@ -47,9 +46,6 @@ export default {
   },
 
   methods: {
-    getRules(item) {
-      return getRules(item)
-    },
     handleAdd() {
       let tmp = _.cloneDeep(this.data.value[0])
       _.forEach(tmp, (value, key, obj) => obj[key].value = null)

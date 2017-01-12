@@ -1,6 +1,6 @@
 <template>
   <div class="module-container">
-    <countdown :start="data.time.value.startTime" :end="data.time.value.endTime">
+    <countdown :start="pickerVal[0]" :end="pickerVal[1]">
     </countdown>
   </div>
 </template>
@@ -14,9 +14,17 @@ export default {
     countdown
   },
 
+  computed: {
+    pickerVal(){
+      if(_.isArray(this.data.time.value)){
+        this.data.time.value = this.data.time.value.map(item => _.isDate(item) ? item : new Date(item))
+      }
+      return this.data.time.value
+    }
+  },
+
   data() {
     return {
-      status: null
     }
   }
 }
