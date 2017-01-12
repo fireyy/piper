@@ -12,13 +12,10 @@
 </div>
 </template>
 <script>
+import common from './common'
+
 export default {
-  props: {
-    data: {
-      type: Object
-    },
-    rules: Object
-  },
+  mixins: [common],
 
   data() {
     return {

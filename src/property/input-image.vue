@@ -1,5 +1,5 @@
 <template>
-  <el-form-item :label="data.title || '图片'">
+  <el-form-item :label="label">
     <el-tag
       v-if="data.value"
       :closable="true"
@@ -34,13 +34,10 @@
 }
 </style>
 <script>
+import common from './common'
+
 export default {
-  props: {
-    data: {
-      type: Object
-    },
-    index: [String, Number]
-  },
+  mixins: [common],
   methods: {
     handleSuccess(response, file, fileList) {
       console.log(response, file, fileList)

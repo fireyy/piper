@@ -1,22 +1,16 @@
 <template>
-  <el-form-item :label="data.title || title" :prop="index" :rules="rules">
+  <el-form-item :label="label" :prop="index" :rules="rules">
     <el-input type="textarea" v-model="data.value"></el-input>
   </el-form-item>
 </template>
 <script>
+import common from './common'
+
 export default {
-  props: {
-    data: {
-      type: Object
-    },
-    title: String,
-    index: [String, Number],
-    rules: Object
-  },
+  mixins: [common],
 
   data() {
     return {
-
     }
   }
 }

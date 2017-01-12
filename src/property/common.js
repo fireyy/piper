@@ -24,6 +24,8 @@ export default {
       handler: function(newVal, oldVal) {
         if(!newVal) return
 
+        console.log(newVal)
+
         this.editModuleData(newVal)
       }
     }

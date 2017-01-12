@@ -1,5 +1,5 @@
 <template>
-  <el-form-item :label="data.title || title" class="input-color">
+  <el-form-item :label="label" class="input-color">
     <!-- <input type="color" v-model="data.value"> -->
     <el-popover
             ref="popover2"
@@ -12,17 +12,12 @@
 </template>
 
 <script>
+import common from './common'
 import { Sketch } from 'vue-color'
 import tinycolor from 'tinycolor2'
 export default {
+  mixins: [common],
   components: {'color-picker': Sketch},
-  props: {
-    data: {
-      type: Object
-    },
-    title: String,
-    index: [String, Number]
-  },
   computed: {
     mColor(){
       let color = tinycolor(this.data.value)
@@ -45,12 +40,11 @@ export default {
 <style lang="less">
 .input-color {
   .color {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
     display: inline-block;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 2px rgba(0,0,0,0.2) inset;
+    border-radius: 3px;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.15), inset 0 0 4px rgba(0,0,0,.25);
   }
 }
 </style>

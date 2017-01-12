@@ -6,19 +6,10 @@
     </el-form-item>
 </template>
 <script>
-export default {
-  props: {
-    data: {
-      type: Object
-    },
-    title: String
-  },
+import common from './common'
 
-  computed: {
-    label() {
-      return this.data.title || this.title
-    }
-  },
+export default {
+  mixins: [common],
 
   data() {
     return {
