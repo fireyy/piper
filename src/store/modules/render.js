@@ -8,7 +8,8 @@ import {
   BLUR_RENDER_ITEM,
   EDIT_DRAG_MODULE,
   EDIT_DRAGING,
-  EDIT_RENDER_DATA
+  EDIT_RENDER_DATA,
+  EDIT_MODULE_DATA
 } from '../mutation-types'
 import {
   modules
@@ -70,6 +71,11 @@ const mutations = {
 
   [EDIT_RENDER_ITEM](state, item) {
     state.current = item
+  },
+
+  [EDIT_MODULE_DATA](state, item) {
+    let index = state.items.indexOf(item)
+    if(index !== -1) state.items.splice(index, 1, item)
   },
 
   [EDIT_RENDER_DATA](state, render) {
