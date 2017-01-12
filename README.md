@@ -60,7 +60,7 @@ npm run dev
 - [x] 增加活动的一些全局属性，比如背景图，分享信息等
 - [x] property 拆分的更细
 - [ ] property 数据校验
-- [ ] modules 数据更新的方式（目前的不对）
+- [x] modules 数据更新的方式（目前的不对）
 - [ ] property 的 px 需要转换到 rem
 - [x] 添加 布局 组件，实现布局内的子元素可相对定位
 - [x] 数据分页
