@@ -21,6 +21,7 @@
           <component :data="item.data" :is="components[item.type]">
             <div :key="child._timestamp" v-if="item.children && item.children.length > 0" v-for="(child, childIndex) in item.children">
               <dragMove :class="{'current': currentModule === child}" :drag="true" restriction=".component" @update="updateStyle(child, $event)" :p-style="child.style" :allowKeyMove="child === currentModule" @mousedown="editRenderItem(child)">
+                <ctrl-bar :hide-sort="true" v-show="currentModule === child" :items="item.children" :item="child"></ctrl-bar>
                 <component :data="child.data" :is="components[child.type]" :style="child.style"></component>
               </dragMove>
             </div>
@@ -109,8 +110,17 @@
           z-index: 998;
         }
         .placeholder {
-          opacity: 0.6;
-          background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjOWU5ZTllIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA2Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiM4ODgiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=");
+          position: relative;
+          &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            opacity: 0.4;
+            background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3MCIgaGVpZ2h0PSI3MCI+CjxyZWN0IHdpZHRoPSI3MCIgaGVpZ2h0PSI3MCIgZmlsbD0iI2ZmZiI+PC9yZWN0Pgo8ZyB0cmFuc2Zvcm09InJvdGF0ZSg0NSkiPgo8cmVjdCB3aWR0aD0iOTkiIGhlaWdodD0iMjUiIGZpbGw9IiNlZWUiPjwvcmVjdD4KPHJlY3QgeT0iLTUwIiB3aWR0aD0iOTkiIGhlaWdodD0iMjUiIGZpbGw9IiNlZWUiPjwvcmVjdD4KPC9nPgo8L3N2Zz4=");
+          }
         }
       }
       .component {

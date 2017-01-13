@@ -13,7 +13,7 @@
       <drag-drop></drag-drop>
     </el-tab-pane>
     <el-tab-pane label="已添加组件">
-      <el-tree :data="items" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+      <el-tree :data="items" :default-expand-all="true" node-key="_timestamp" :current-node-key="currentNodeKey" :highlight-current="true" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
     </el-tab-pane>
   </el-tabs>
 </div>
@@ -73,6 +73,7 @@
 }
 </style>
 <script>
+import _ from 'lodash'
 import { mapGetters, mapActions } from 'vuex'
 import {
   modules
@@ -88,7 +89,10 @@ export default {
     ...mapGetters({
       items: 'renderItems',
       currentModule: 'currentModule'
-    })
+    }),
+    currentNodeKey(){
+      return this.currentModule._timestamp ? this.currentModule._timestamp : 0
+    }
   },
 
   methods: {

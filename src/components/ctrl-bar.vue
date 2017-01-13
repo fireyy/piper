@@ -1,12 +1,12 @@
 <template>
 <ul class="ctrl-actions">
   <slot></slot>
-  <el-tooltip content="上移" placement="top" v-if="index !== 0">
+  <el-tooltip content="上移" placement="top" v-if="index !== 0 && !hideSort">
     <li>
       <i class="el-icon-arrow-up" @click="move('up',item)"></i>
     </li>
   </el-tooltip>
-  <el-tooltip content="下移" placement="top" v-if="index !== items.length - 1">
+  <el-tooltip content="下移" placement="top" v-if="index !== items.length - 1 && !hideSort">
     <li>
       <i class="el-icon-arrow-down" @click="move('down',item)"></i>
     </li>
@@ -44,7 +44,8 @@ export default {
     },
     item: {
       type: Object
-    }
+    },
+    hideSort: Boolean
   },
   data() {
     return {

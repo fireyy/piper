@@ -36,20 +36,7 @@ export const modules = [
             value: {
               textAlign: {
                 type: "inputRadio",
-                props: [
-                  {
-                    title: "左",
-                    value: 'left'
-                  },
-                  {
-                    title: "中",
-                    value: 'center'
-                  },
-                  {
-                    title: "右",
-                    value: 'right'
-                  }
-                ],
+                props: 'align',
                 value: 'center'
               },
               color: {
@@ -93,39 +80,13 @@ export const modules = [
           size: {
             type: 'inputRadio',
             title: '按钮文字',
-            props: [
-              {
-                title: "默认",
-                value: ''
-              },
-              {
-                title: "小",
-                value: 'sm'
-              },
-              {
-                title: "超小",
-                value: 'xs'
-              }
-            ],
+            props: 'btn-size',
             value: ''
           },
           theme: {
             type: 'inputRadio',
             title: '按钮颜色',
-            props: [
-              {
-                title: "默认",
-                value: ''
-              },
-              {
-                title: "主要",
-                value: 'primary'
-              },
-              {
-                title: "透明",
-                value: 'blank'
-              }
-            ],
+            props: 'btn-theme',
             value: ''
           }
         },
