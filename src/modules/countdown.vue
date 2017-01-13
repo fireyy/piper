@@ -16,9 +16,7 @@ export default {
 
   computed: {
     pickerVal(){
-      if(_.isArray(this.data.time.value)){
-        this.data.time.value = this.data.time.value.map(item => _.isDate(item) ? item : new Date(item))
-      }
+      this.data.time.value = this.data.time.value.map(item => item instanceof Date ? item : new Date(item))
       return this.data.time.value
     }
   },

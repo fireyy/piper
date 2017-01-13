@@ -34,11 +34,10 @@ module.exports = class {
   @authorize([ 'EDIT' ])
   static async put(ctx) {
     let { id } = ctx.params;
-    let result = await ctx.sql('                                                              \
+    let [page] = await ctx.sql('                                                              \
       SELECT `id`, `title`, `config`, `items`, `create_by`, `create_at`              \
         FROM `pages` WHERE `id` = ? AND `is_delete` = 0                                       \
     ', [ id ]);
-    let page = result[0];
     if (!page) throw { status: 404, name: 'PAGES_NOT_FOUND', message: 'page is not found' };
 
     const dir = `public/${id}`;
