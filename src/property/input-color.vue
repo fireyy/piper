@@ -43,6 +43,7 @@ export default {
     width: 24px;
     height: 24px;
     display: inline-block;
+    vertical-align: middle;
     border-radius: 3px;
     box-shadow: inset 0 0 0 1px rgba(0,0,0,.15), inset 0 0 4px rgba(0,0,0,.25);
   }

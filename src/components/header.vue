@@ -24,9 +24,8 @@
 </template>
 <style lang="less">
   .layout-header {
-    background: #2A3239;
+    background: #324057;
     .el-menu--dark {
-      background: #2A3239;
       .el-menu-item {
         height: 65px;
         line-height: 65px;

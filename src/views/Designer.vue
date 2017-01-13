@@ -254,23 +254,23 @@ html {
   min-height: 100%;
   overflow: auto;
   background: #fff;
-  border: 1px solid #E7E8E7;
+  border: 1px solid #d3dce6;
 
   .module-box {
     flex: 0 0 230px;
-    border-right: 1px solid #E7E8E7;
+    border-right: 1px solid #d3dce6;
   }
 
   .render-container {
     min-width: 470px;
     flex: 1;
-    background: #F7F7F7;
+    background: #F9FAFC;
   }
 
   .properties {
     flex: 0 0 450px;
     position: relative;
-    border-left: 1px solid #E7E8E7;
+    border-left: 1px solid #d3dce6;
     overflow: auto;
   }
 
