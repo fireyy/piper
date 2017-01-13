@@ -1,5 +1,5 @@
 <template>
-<div class="module-box">
+<div class="modules-container">
   <el-tabs type="border-card">
     <el-tab-pane label="组件库">
       <div class="modules" v-for="moduleItem in modules">
@@ -19,7 +19,7 @@
 </div>
 </template>
 <style lang="less">
-.module-box {
+.modules-container {
   .el-tabs__header {
     margin-bottom: 0;
   }

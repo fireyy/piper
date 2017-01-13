@@ -256,7 +256,7 @@ html {
   background: #fff;
   border: 1px solid #d3dce6;
 
-  .module-box {
+  .modules-container {
     flex: 0 0 230px;
     border-right: 1px solid #d3dce6;
   }
@@ -274,7 +274,7 @@ html {
     overflow: auto;
   }
 
-  .module-box,
+  .modules-container,
   .render-container {
     user-select: none;
     -webkit-user-drag: none;
