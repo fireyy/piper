@@ -24,7 +24,7 @@
   <el-dialog size="full" custom-class="preview-dialog" title="预览" v-model="previewVisible">
     <div class="preview-frame">
       <div class="page-title"></div>
-      <iframe src="/preview.html" frameborder="0"></iframe>
+      <iframe src="/#preview" frameborder="0"></iframe>
     </div>
   </el-dialog>
   <el-dialog size="tiny" title="二维码" v-model="qrcode.visible">

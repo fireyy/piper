@@ -18,6 +18,7 @@ const PageList = () => System.import('../views/PageList.vue')
 const Changelog = () => System.import('../views/Changelog.vue')
 const Designer = () => System.import('../views/Designer.vue')
 const Users = () => System.import('../views/Users.vue')
+const Preview = () => System.import('../views/Preview.vue')
 
 export default new Router({
   routes: [
@@ -37,6 +38,7 @@ export default new Router({
         { name: 'users', path: '/users', component: Users }
       ]
     },
+    { name: 'preview', path: '/preview', component: Preview },
     { name: 'login', path: '/login', component: Login }
   ]
 })
