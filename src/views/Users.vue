@@ -19,7 +19,7 @@
     </div>
     <div class="layout-content inner-row">
       <el-row>
-        <el-col :span="6" v-for="(o, index) in tableData" :offset="index > 0 ? 2 : 0">
+        <el-col :span="6" v-for="(o, index) in tableData" :offset="index > 0 ? 2 : 0" :key="index">
           <el-card :body-style="{ padding: '0px' }">
             <img src="" class="image">
             <div style="padding: 14px;">

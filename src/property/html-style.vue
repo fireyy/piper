@@ -1,6 +1,6 @@
 <template>
   <div>
-    <component v-for="(item, key) in data.value" :index="key" :title="key | lang" :data="item" :is="item.type"></component>
+    <component v-for="(item, key) in data.value" :key="key" :index="key" :title="key | lang" :data="item" :is="item.type"></component>
   </div>
 </template>
 

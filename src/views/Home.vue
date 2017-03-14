@@ -13,9 +13,9 @@
     <div class="layout-content inner-row">
       <div class="dashboard layout-box">
         <el-row class="inner-row" type="flex" justify="space-around">
-          <el-col :span="6" class="text-center" v-for="o in 4">
+          <el-col :span="6" class="text-center" v-for="o in 4" :key="o">
             <div class="section">
-              2
+              {{o}}
               <div class="name">制作中</div>
             </div>
           </el-col>

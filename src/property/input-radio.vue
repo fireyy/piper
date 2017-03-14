@@ -1,7 +1,7 @@
 <template>
     <el-form-item :label="label">
       <el-radio-group v-model="data.value">
-        <el-radio-button v-for="(item, index) in props" :label="item.value">{{item.title}}</el-radio-button>
+        <el-radio-button v-for="(item, index) in props" :key="index" :label="item.value">{{item.title}}</el-radio-button>
       </el-radio-group>
     </el-form-item>
 </template>

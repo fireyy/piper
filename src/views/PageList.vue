@@ -19,7 +19,7 @@
     </div>
     <div class="layout-content inner-row">
       <el-row :gutter="20">
-        <el-col :span="6" v-for="(item, index) in tableData">
+        <el-col :span="6" v-for="(item, index) in tableData" :key="index">
           <el-card class="page-card" :body-style="{ padding: '0px' }">
             <div :style="{backgroundImage: 'url(/'+item.id+'/cover.png)'}" class="image" @click="handleEdit(index, item)">
               <div class="hover-settings-container">

@@ -6,7 +6,7 @@
     </el-col>
     <el-col :span="17">
       <el-menu theme="dark" :default-active="current" mode="horizontal" router @select="handleSelect">
-        <el-menu-item v-for="(item, index) in menus" :index="item.route.name" :route="item.route">{{item.title}}</el-menu-item>
+        <el-menu-item v-for="(item, index) in menus" :key="index" :index="item.route.name" :route="item.route">{{item.title}}</el-menu-item>
       </el-menu>
     </el-col>
     <el-col :span="4" class="text-right">
