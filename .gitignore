@@ -5,3 +5,4 @@ node_modules
 .idea
 public/*
 server/config.js
+.vscode

@@ -7,7 +7,7 @@
 
     <div v-if="items.length">
       <swiper auto loop :aspect-ratio="200/640" dots-position="center">
-        <swiper-item v-for="(item, index) in items">
+        <swiper-item v-for="(item, index) in items" :key="index">
           <a :href="item.link.value"><img :src="item.image.value"></a>
         </swiper-item>
       </swiper>

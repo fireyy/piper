@@ -62,9 +62,9 @@ module.exports = class {
 
     await fs.writeFileSync(dir + `/index.html`, html, 'utf-8', {'flags': 'w+'});
 
-    const command = `NODE_ENV=production webpack --config ./build/webpack.publish.js --env.id=${id} --hide-modules --json`;
+    const command = `NODE_ENV=production webpack --config ./build/webpack.publish.conf.js --env.id=${id} --hide-modules --json --verbose`;
 
-    const stdout = child_process.execSync(command);
+    const stdout = child_process.execSync(command).toString();
 
     let packRes = JSON.parse(stdout);
 
