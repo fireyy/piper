@@ -9,7 +9,6 @@ const config = require('./config')
 // automatically open browser, if not set will be false
 var autoOpenBrowser = !!config.dev.autoOpenBrowser
 
-require('babel-polyfill');
 if (env === 'development') {
   require('babel-register');
 }
