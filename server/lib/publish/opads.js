@@ -12,6 +12,14 @@ const getUploadData = data => {
 
 module.exports = async (files) => {
 
+  if (
+    config.opads.url === 'YOUR OPADS URL' ||
+    config.opads.project === 'YOUR OPADS PROJECT' ||
+    config.opads.authkey === 'YOUR OPADS AUTHKEY'
+    ) {
+    throw { status: 404, name: 'UPLOAD_ERROR_CONFIG', message: '请在 server/config.js 里修改 opads 上传相关的配置' };
+  }
+
   let uploadObj = {}
 
   files.forEach((file, key) => {

@@ -33,6 +33,15 @@ const upload = (uptoken, localFile) => {
 
 module.exports = async (files) => {
 
+  if (
+    config.qiniu.ACCESS_KEY === 'YOUR QINIU AK' ||
+    config.qiniu.SECRET_KEY === 'YOUR QINIU SK' ||
+    config.qiniu.bucket === 'YOUR QINIU BUCKET' ||
+    config.qiniu.baseUrl === 'YOUR QINIU URL'
+    ) {
+    throw { status: 404, name: 'UPLOAD_ERROR_CONFIG', message: '请在 server/config.js 里修改 qiniu 上传相关的配置' };
+  }
+
   let tasks = files.map((file, key) => upload(getUptoken(file.name), file.path));
 
   return await Promise.all(tasks);
