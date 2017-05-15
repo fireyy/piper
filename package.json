@@ -13,8 +13,6 @@
     "not ie <= 8"
   ],
   "scripts": {
-    "webpack": "webpack --help",
-    "test:publish": "webpack --config ./build/webpack.publish.conf.js --env.id=3 --hide-modules --json",
     "build": "webpack --config build/webpack.prod.conf.js",
     "build:server": "babel server --out-dir dist",
     "start": "node index.js",

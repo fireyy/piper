@@ -1,4 +1,4 @@
-let styleKey = {
+var styleKey = {
   "backgroundImage": "url(%s)"
 }
 

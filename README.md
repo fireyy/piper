@@ -1,5 +1,9 @@
 # piper
 
+<p align="center">
+  <img src="screen.png" width="700px">
+</p>
+
 > A drag-and-drop mobile website builder base on Vue.
 
 ### Install

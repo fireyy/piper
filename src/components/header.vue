@@ -12,7 +12,7 @@
     <el-col :span="4" class="text-right">
       <el-dropdown>
         <span class="user-setting">
-          zhuyuan6@wanda.cn<i class="el-icon-caret-bottom el-icon--right"></i>
+          fireyy<i class="el-icon-caret-bottom el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item><router-link to="login">注销</router-link></el-dropdown-item>
