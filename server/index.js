@@ -42,7 +42,6 @@ if (env === 'development') {
 koa.use(require('koa-bodyparser')());
 koa.use(require('./lib/errorlog'));
 koa.use(require('./lib/api'));
-koa.use(require('koa-static')('../dist'));
-koa.use(require('koa-static')('public'));
+koa.use(require('koa-static')('dist'));
 
 module.exports = koa;

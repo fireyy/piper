@@ -15,8 +15,9 @@
   "scripts": {
     "build": "webpack --config build/webpack.prod.conf.js",
     "build:server": "babel server --out-dir dist",
-    "start": "node index.js",
-    "dev": "nodemon --watch server --watch build --exec npm run start"
+    "server": "node index.js",
+    "start": "NODE_ENV=production node index.js",
+    "dev": "nodemon --watch server --watch build --exec npm run server"
   },
   "dependencies": {
     "async-busboy": "^0.3.4",
@@ -48,6 +49,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.0",
     "babel-plugin-lodash": "^3.2.11",
