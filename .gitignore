@@ -4,6 +4,7 @@ node_modules
 /dist
 .idea
 public/*
-server/config.js
-server/config.prod.js
 .vscode
+now.json
+.env
+.env.now

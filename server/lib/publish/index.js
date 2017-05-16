@@ -1,4 +1,4 @@
 const qiniu = require('./qiniu');
 const opads = require('./opads');
 
-module.exports = opads;
+module.exports = qiniu;

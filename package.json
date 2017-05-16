@@ -13,7 +13,8 @@
     "not ie <= 8"
   ],
   "scripts": {
-    "build": "webpack --config build/webpack.prod.conf.js",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "webpack --config build/webpack.prod.conf.js",
     "build:server": "babel server --out-dir dist",
     "server": "node index.js",
     "start": "NODE_ENV=production node index.js",
@@ -24,6 +25,7 @@
     "babel-polyfill": "^6.23.0",
     "co": "^4.6.0",
     "co-views": "^2.1.0",
+    "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "element-ui": "^1.2.4",
     "es6-promisify": "^5.0.0",

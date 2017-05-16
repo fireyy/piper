@@ -1,5 +1,11 @@
+require('dotenv').config();
 const request = require('request-promise');
-const config = require('../../config.js')
+
+let {
+  OPADS_URL,
+  OPADS_PROJECT,
+  OPADS_AUTHKEY
+} = process.env;
 
 const getUploadData = data => {
   let arr = [];
@@ -13,11 +19,11 @@ const getUploadData = data => {
 module.exports = async (files) => {
 
   if (
-    config.opads.url === 'YOUR OPADS URL' ||
-    config.opads.project === 'YOUR OPADS PROJECT' ||
-    config.opads.authkey === 'YOUR OPADS AUTHKEY'
+    OPADS_URL === 'YOUR OPADS URL' ||
+    OPADS_PROJECT === 'YOUR OPADS PROJECT' ||
+    OPADS_AUTHKEY === 'YOUR OPADS AUTHKEY'
     ) {
-    throw { status: 404, name: 'UPLOAD_ERROR_CONFIG', message: '请在 server/config.js 里修改 opads 上传相关的配置' };
+    throw { status: 404, name: 'UPLOAD_ERROR_CONFIG', message: '请在 process.env 里配置 opads 上传相关的配置：OPADS_URL/OPADS_PROJECT/OPADS_AUTHKEY' };
   }
 
   let uploadObj = {}
@@ -28,11 +34,11 @@ module.exports = async (files) => {
   })
 
   var options = {
-    url: config.opads.url,
+    url: OPADS_URL,
     json: true,
     formData: {
-      project: config.opads.project,
-      authkey: config.opads.authkey,
+      project: OPADS_PROJECT,
+      authkey: OPADS_AUTHKEY,
       ...uploadObj
     }
   };

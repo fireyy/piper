@@ -1,11 +1,21 @@
+require('dotenv').config();
 const _ = require('lodash')
 const qiniu = require('qiniu')
-const config = require('../../config.js')
+
+let {
+  QINIU_ACCESS_KEY,
+  QINIU_SECRET_KEY,
+  QINIU_BUCKET,
+  QINIU_BASEURL
+} = process.env;
+
+qiniu.conf.ACCESS_KEY = QINIU_ACCESS_KEY;
+qiniu.conf.SECRET_KEY = QINIU_SECRET_KEY;
 
 const getUptoken = (key) => {
   if (_.isEmpty(key)) return
 
-  const putPolicy = new qiniu.rs.PutPolicy(`${config.qiniu.bucket}/${key}`)
+  const putPolicy = new qiniu.rs.PutPolicy(`${QINIU_BUCKET}/${key}`)
   return putPolicy.token()
 }
 
@@ -21,7 +31,7 @@ const upload = (uptoken, localFile) => {
         resolve({
           hash: ret.hash,
           key: ret.key,
-          url: `${config.qiniu.baseUrl}/${ret.key}`
+          url: `${QINIU_BASEURL}/${ret.key}`
         })
       } else {
         console.log(err)
@@ -34,15 +44,15 @@ const upload = (uptoken, localFile) => {
 module.exports = async (files) => {
 
   if (
-    config.qiniu.ACCESS_KEY === 'YOUR QINIU AK' ||
-    config.qiniu.SECRET_KEY === 'YOUR QINIU SK' ||
-    config.qiniu.bucket === 'YOUR QINIU BUCKET' ||
-    config.qiniu.baseUrl === 'YOUR QINIU URL'
+    QINIU_ACCESS_KEY === 'YOUR QINIU AK' ||
+    QINIU_SECRET_KEY === 'YOUR QINIU SK' ||
+    QINIU_BUCKET === 'YOUR QINIU BUCKET' ||
+    QINIU_BASEURL === 'YOUR QINIU URL'
     ) {
-    throw { status: 404, name: 'UPLOAD_ERROR_CONFIG', message: '请在 server/config.js 里修改 qiniu 上传相关的配置' };
+    throw { status: 404, name: 'UPLOAD_ERROR_CONFIG', message: '请在 process.env 里配置 qiniu 上传相关的配置: QINIU_ACCESS_KEY/QINIU_SECRET_KEY/QINIU_BUCKET/QINIU_BASEURL' };
   }
 
-  let tasks = files.map((file, key) => upload(getUptoken(file.name), file.path));
+  let tasks = files.map((file, key) => upload(getUptoken(file.filename), file.path));
 
   return await Promise.all(tasks);
 }

@@ -16,10 +16,10 @@ npm install
 
 First of all，create a database `piper` in `Mysql`, and import `./server/schemes.sql`.
 
-Then set up `./server/config.js` file with your `Mysql` database connection details.
+Then set up `.env` file with your `Mysql` database connection details and qiniu upload config.
 
 ```shell
-cp ./server/config.sample.js ./server/config.js
+cp env.sample .env
 ```
 
 ### Develop
