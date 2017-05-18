@@ -1,6 +1,7 @@
 var styleKey = {
   "backgroundImage": "url(%s)"
 }
+var styleArr = ['padding','margin']
 
 export function createStyles(data) {
   let styles = {}
@@ -10,6 +11,9 @@ export function createStyles(data) {
       if(!val) continue;
       if(key in styleKey) {
         val = styleKey[key].replace("%s", val)
+      }
+      if(styleArr.indexOf(key) !== -1) {
+        val = val.split(" ").map(a=>`${a}px`).join(" ")
       }
       styles[key] = val
     }

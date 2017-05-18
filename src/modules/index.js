@@ -48,12 +48,12 @@ export const modules = [
                 value: "#ff0000"
               },
               padding: {
-                type: "inputText",
-                value: "10px"
+                type: "inputWheel",
+                value: "0 0 0 0"
               },
               margin: {
-                type: "inputText",
-                value: "0px"
+                type: "inputWheel",
+                value: "0 0 0 0"
               }
             }
           }

@@ -4,5 +4,6 @@ export default {
   inputColor  : require('./input-color.vue'),
   inputRadio  : require('./input-radio.vue'),
   inputImage  : require('./input-image.vue'),
-  inputDate  : require('./input-date.vue')
+  inputDate  : require('./input-date.vue'),
+  inputWheel  : require('./input-wheel.vue')
 }
