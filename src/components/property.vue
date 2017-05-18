@@ -13,7 +13,7 @@
   </div>
   <div v-bind:key="currentModule._timestamp" v-if="currentModule.type">
     <h2>{{currentModule.alias}}</h2>
-    <el-form label-width="100px" label-position="left" :model="moduleForm[currentModule._timestamp+'']">
+    <el-form label-width="100px" label-position="left">
       <component v-bind:key="key" v-for="(value, key) in currentModule.data" :title="key | lang" :index="key" :data="value" :is="value.type" :prop="key">
       </component>
     </el-form>
@@ -72,34 +72,7 @@ export default {
       render: 'render',
       items: 'renderItems',
       currentModule: 'currentModule'
-    }),
-    moduleForm() {
-      let moduleForm = {};
-      this.items.forEach(function(item){
-        let key = item._timestamp + ''
-        if(!moduleForm[key]) moduleForm[key] = {}
-        for(const it in item.data) {
-          if(_.isString(item.data[it].value) || item.data[it].type == "inputDate") {
-            moduleForm[key][it] = item.data[it].value
-          }else if(_.isArray(item.data[it].value)) {
-            item.data[it].value.forEach(function(em, i){
-              if(_.isObject(em)){
-                for(const te in item.data[it].value[i]) {
-                  moduleForm[key][te+i] = item.data[it].value[i][te].value
-                }
-              }
-            })
-          }else if(_.isObject(item.data[it].value)) {
-            for(const ite in item.data[it].value){
-              moduleForm[key][ite] = item.data[it].value[ite].value
-            }
-          }else{
-            //catch error
-          }
-        }
-      })
-      return moduleForm
-    }
+    })
   },
 
   data() {

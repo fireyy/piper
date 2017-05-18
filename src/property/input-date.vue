@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-form-item :label="label" :prop="index" :rules="rules">
+  <el-form-item :label="label" :prop="index">
     <el-date-picker
       v-model="data.value"
       :type="pickerType"

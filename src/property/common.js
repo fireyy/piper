@@ -6,8 +6,7 @@ export default {
       type: Object
     },
     title: String,
-    index: [String, Number],
-    rules: Object
+    index: [String, Number]
   },
   computed: {
     label() {
@@ -15,9 +14,6 @@ export default {
     },
     prop() {
       return this.index
-    },
-    rules() {
-      return this.data.rule ? rules[this.data.rule] : rules[this.index] ? rules[this.index] : []
     }
   },
   methods: {
