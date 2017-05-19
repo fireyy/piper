@@ -39,6 +39,10 @@ export const modules = [
                 props: 'align',
                 value: 'center'
               },
+              font: {
+                type: "inputFont",
+                value: "normal normal 12px sans-serif"
+              },
               color: {
                 type: "inputColor",
                 value: "#ffffff"

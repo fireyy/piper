@@ -17,4 +17,5 @@ export default {
   shareLink: '分享链接',
   shareContent: '分享内容',
   wheel: ['上','右','下','左'],
+  font: '文字样式'
 }

@@ -1,8 +1,8 @@
 <template>
     <el-form-item :label="label">
-      <el-radio-group v-model="data.value" size="small">
-        <el-radio-button v-for="(item, index) in props" :key="index" :label="item.value">{{item.title}}</el-radio-button>
-      </el-radio-group>
+      <el-checkbox-group v-model="data.value" size="small">
+        <el-checkbox-button v-for="(item, index) in props" :key="index" :label="item.value">{{item.title}}</el-checkbox-button>
+      </el-checkbox-group>
     </el-form-item>
 </template>
 <script>
