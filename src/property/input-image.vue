@@ -41,7 +41,7 @@ export default {
   methods: {
     handleSuccess(response, file, fileList) {
       console.log(response, file, fileList)
-      this.data.value = response[0].url
+      this.data.value = (response[0].url.indexOf('http') === -1) ? 'http://' + response[0].url : response[0].url;
     },
     handleError(err, response, file) {
       console.log(err, response, file);
