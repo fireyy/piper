@@ -13,7 +13,7 @@ export const modules = [
             title: '样式',
             value: {
               height: {
-                type: "inputText",
+                type: "inputNumber",
                 value: "300px"
               }
             }

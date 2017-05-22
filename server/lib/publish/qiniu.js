@@ -1,5 +1,4 @@
 require('dotenv').config();
-const path = require('path')
 const _ = require('lodash')
 const qiniu = require('qiniu')
 
@@ -21,8 +20,6 @@ const getUptoken = (key) => {
 }
 
 const upload = (uptoken, localFile) => {
-
-  console.log(uptoken, localFile)
 
   if (_.isEmpty(uptoken)) return
 
