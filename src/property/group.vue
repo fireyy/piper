@@ -3,7 +3,7 @@
   <div class="group-item" v-for="(item, index) in data.value" v-bind:key="index">
     <component v-for="(obj, key) in item" :key="key" :index="key" :title="key | lang" :data="obj" :is="obj.type"></component>
   </div>
-  <div class="text-center">
+  <div class="btn-area text-center">
     <el-button type="primary" icon="plus" @click="handleAdd" v-if="left > 0">加一项</el-button>
   </div>
 </div>
@@ -25,6 +25,13 @@
       top: 30px;
       left: 0;
     }
+    .el-form-item__label {
+      text-align: right;
+    }
+  }
+  .btn-area {
+    border-top: 1px solid #EFF2F7;
+    padding-top: 10px;
   }
 }
 </style>

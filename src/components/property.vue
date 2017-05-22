@@ -48,7 +48,7 @@
     margin-bottom: 12px;
     border-top: 1px solid #EFF2F7;
     &:first-child {
-      border-top: none;
+      // border-top: none;
     }
     .el-date-editor {
       width: 100%;
