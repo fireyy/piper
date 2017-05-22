@@ -74,6 +74,11 @@ module.exports = class {
       })
       let uploadRes = await upload(files);
 
+      let shotUrl = uploadRes.filter(item => {
+        return item.url.indexOf('index.html') !== -1
+      })
+      shotUrl[0].url = "http://" + shotUrl[0].url
+
       var options = {
         screenSize: {
           width: 375
@@ -87,13 +92,13 @@ module.exports = class {
           + ' AppleWebKit/531.21.20 (KHTML, like Gecko) Mobile/7B298g'
       };
 
-      webshot(uploadRes[0].url, `${dir}/cover.png`, options, function(err) {
+      webshot(shotUrl[0].url, `${dir}/cover.png`, options, function(err) {
         if(err) {
           throw { status: 404, name: 'WEBSHOT_ERR', message: 'webshot failed' };
         }
       });
 
-      ctx.body = uploadRes
+      ctx.body = shotUrl
     } else {
 
       ctx.body = packRes;

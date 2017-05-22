@@ -21,7 +21,7 @@ export default {
   mixins: [common],
 
   mounted () {
-    let arr = this.data.value.split(" ");
+    let arr = this.data.value.split(' ');
     this.fontFamily = arr.pop();
     this.fontSize = arr.pop().replace('px', '') * 1;
     this.fs = arr;

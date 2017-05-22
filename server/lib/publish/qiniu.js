@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require('path')
 const _ = require('lodash')
 const qiniu = require('qiniu')
 
@@ -21,12 +22,14 @@ const getUptoken = (key) => {
 
 const upload = (uptoken, localFile) => {
 
+  console.log(uptoken, localFile)
+
   if (_.isEmpty(uptoken)) return
 
   const extra = new qiniu.io.PutExtra()
 
   return new Promise((resolve, reject) => {
-    qiniu.io.putFile(uptoken, null, localFile, extra, (err, ret) => {
+    qiniu.io.putFile(uptoken, localFile, localFile, extra, (err, ret) => {
       if (!err) {
         resolve({
           hash: ret.hash,
@@ -52,7 +55,7 @@ module.exports = async (files) => {
     throw { status: 404, name: 'UPLOAD_ERROR_CONFIG', message: '请在 process.env 里配置 qiniu 上传相关的配置: QINIU_ACCESS_KEY/QINIU_SECRET_KEY/QINIU_BUCKET/QINIU_BASEURL' };
   }
 
-  let tasks = files.map((file, key) => upload(getUptoken(file.filename), file.path));
+  let tasks = files.map((file, key) => upload(getUptoken(file.path), file.path));
 
   return await Promise.all(tasks);
 }
