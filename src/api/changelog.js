@@ -12,6 +12,19 @@ module.exports = function (Vue) {
         .get('changelogs', {
           params: params
         })
+    },
+    /**
+     * 获取最新的 changelog
+     * @returns {*}
+     */
+    getRecent() {
+      return http
+        .get('changelogs', {
+          params: {
+            size: 5,
+            page: 1
+          }
+        })
     }
   }
 }

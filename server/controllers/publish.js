@@ -34,11 +34,21 @@ module.exports = class {
   @authorize([ 'EDIT' ])
   static async put(ctx) {
     let { id } = ctx.params;
-    let [page] = await ctx.sql('                                                              \
-      SELECT `id`, `title`, `config`, `items`, `create_by`, `create_at`              \
-        FROM `pages` WHERE `id` = ? AND `is_delete` = 0                                       \
-    ', [ id ]);
-    if (!page) throw { status: 404, name: 'PAGES_NOT_FOUND', message: 'page is not found' };
+    let page;
+    await ctx.sql.commit(async () => {
+      let [record] = await ctx.sql('                                                              \
+        SELECT `id`, `title`, `config`, `items`, `create_by`, `create_at`              \
+          FROM `pages` WHERE `id` = ? AND `is_delete` = 0                                       \
+      ', [ id ]);
+      if (!record) throw { status: 404, name: 'PAGES_NOT_FOUND', message: 'page is not found' };
+
+      if (record.is_publish == 0) await ctx.sql('UPDATE `pages` SET ? WHERE `id` = ?', [ {'is_publish': 1}, id ]);
+      await ctx.sql(
+        'INSERT INTO `changelog` (`action`, `page_id`, `items`, `create_by`) VALUES (?)',
+        [ [ 4, id, null, ctx.user.id ] ]
+      );
+      page = record;
+    })
 
     const dir = `public/${id}`;
 

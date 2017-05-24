@@ -28,5 +28,13 @@ export default {
   publish(id) {
     return Vue.http
         .put('publish/'+id)
+  },
+  /**
+   * 获取 制作中和已发布 的项目
+   * @returns {*}
+   */
+  count(id) {
+    return Vue.http
+        .get('count')
   }
 }

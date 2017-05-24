@@ -8,11 +8,6 @@
             <el-input-number size="small" :value="item" @change="val=>handleChange(val, index)"></el-input-number>
             <div class="drag-handler" slot="reference">{{item}}</div>
           </el-popover>
-          <!-- <el-slider
-            :value="sliders[index]"
-            @input="(val)=>handleInput(val,index)"
-            show-input>
-          </el-slider> -->
         </div>
       </div>
     </el-form-item>

@@ -2,6 +2,7 @@ export default {
   action1: '创建',
   action2: '更新',
   action3: '删除',
+  action4: '发布',
   time: '时间范围',
   image: '图片',
   content: '内容',
