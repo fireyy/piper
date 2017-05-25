@@ -11,7 +11,7 @@ module.exports = function (Vue) {
      */
     saveData(data) {
       return http
-        .post('pages', JSON.stringify(data))
+        .put('pages', JSON.stringify(data))
     }
   }
 }

@@ -1,14 +1,9 @@
 <template>
   <div>
     <div class="page-header">
-      <el-row type="flex" class="inner-row" justify="space-between">
-        <el-col :span="6">
-          <h3>完成进度</h3>
-        </el-col>
-        <el-col :span="18">
-          <el-progress :text-inside="true" :stroke-width="18" :percentage="60"></el-progress>
-        </el-col>
-      </el-row>
+      <div class="inner-row">
+        项目进度：<el-progress :stroke-width="6" :percentage="75"></el-progress>
+      </div>
     </div>
     <div class="layout-content inner-row">
       <div class="dashboard layout-box">
@@ -46,18 +41,18 @@
   import api from '../api'
 
   export default {
-    mounted() {
+    mounted () {
       this.getPagesCount()
       this.getRecentChangeLog()
     },
     methods: {
-      getPagesCount(){
-        api.count().then((res)=>{
+      getPagesCount () {
+        api.count().then((res) => {
           this.count = res.data
         })
       },
-      getRecentChangeLog(){
-        api.changelog.getRecent().then((res)=>{
+      getRecentChangeLog () {
+        api.changelog.getRecent().then((res) => {
           this.recentChangeLog = res.data.data
         })
       }

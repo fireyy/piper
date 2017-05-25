@@ -7,16 +7,29 @@ module.exports = class {
 
   @authorize(['EDIT'])
   static async get(ctx) {
-    let result = await ctx.sql('\
+    let { page, size, title, isPublish } = ctx.query;
+    page = parseInt(page, 10)
+    size = parseInt(size, 10)
+    let start = (page - 1) * size;
+    let limit = size;
+    let where = (title ? ' and `title` LIKE "%' + title + '%"' : '') + (isPublish != -1 ? ' and `is_publish` = ' + isPublish : '');
+    let [total] = await ctx.sql('SELECT COUNT(*) AS count FROM `pages` WHERE `is_delete` = 0' + where);
+    let query = '\
       SELECT `id`, `title`, `create_by`, `create_at`, `update_at`, `publish_at` \
-        FROM `pages` WHERE `is_delete` = 0 \
-    ');
+        FROM `pages` WHERE `is_delete` = 0' + where + ' ORDER BY `create_at` DESC LIMIT ?,? \
+    ';
+    let result = await ctx.sql(query, [start, limit]);
     await createby(result);
-    ctx.body = result;
+    ctx.body = {
+      total: total.count,
+      page: page,
+      size: size,
+      data: result
+    };
   }
 
   @authorize(['CHANGE'])
-  static async post(ctx) {
+  static async put(ctx) {
     let { title = '', config = '', items = '' } = ctx.request.body;
     title = title.trim();
     if (!title) throw { status: 400, name: 'ERROR_PARAMS', message: 'Title 不能为空' };

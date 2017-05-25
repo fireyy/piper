@@ -2,13 +2,20 @@
   <div>
     <div class="page-header">
       <el-row type="flex" class="inner-row" justify="space-between">
-        <el-col :span="12">
-          <el-form :inline="true">
-            <el-form-item>
-              <el-input placeholder="活动名称"></el-input>
+        <el-col :span="18">
+          <el-form ref="searchForm" :modle="searchForm" :inline="true">
+            <el-form-item prop="title">
+              <el-input style="width: 300px;" v-model="searchForm.title" placeholder="活动名称"></el-input>
+            </el-form-item>
+            <el-form-item prop="isPublish">
+              <el-radio-group v-model="searchForm.isPublish">
+                <el-radio-button :label="-1">全部</el-radio-button>
+                <el-radio-button :label="0">制作中</el-radio-button>
+                <el-radio-button :label="1">已发布</el-radio-button>
+              </el-radio-group>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" icon="search" @click="onSearch">查询</el-button>
+              <el-button type="primary" icon="search" @click="submitForm">查询</el-button>
             </el-form-item>
           </el-form>
         </el-col>
@@ -18,9 +25,9 @@
       </el-row>
     </div>
     <div class="layout-content inner-row">
-      <el-row :gutter="20">
-        <el-col :span="6" v-for="(item, index) in tableData" :key="index">
-          <el-card class="page-card" :body-style="{ padding: '0px' }">
+      <div class="page-cards">
+        <div class="page-card" v-for="(item, index) in tableData" :key="index">
+          <el-card :body-style="{ padding: '0px' }">
             <div :style="{backgroundImage: 'url(/'+item.id+'/cover.png)'}" class="image" @click="handleEdit(index, item)">
               <div class="hover-settings-container">
                 <div class="main-link">
@@ -41,14 +48,30 @@
               </div>
             </div>
           </el-card>
-        </el-col>
-      </el-row>
+        </div>
+      </div>
+      <el-pagination
+        class="piper-page"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[10, 20, 30, 40]"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
+      </el-pagination>
     </div>
   </div>
 </template>
 <style lang="less">
+.page-cards {
+  display: flex;
+  flex-wrap: wrap;
+}
 .page-card {
-  margin-bottom: 20px;
+  width: 20%;
+  padding: 10px;
+  box-sizing: border-box;
   h4 {
     font-weight: normal;
   }
@@ -129,13 +152,29 @@
 
   export default {
     mounted() {
-      api.pages.get().then((res)=>{
-        this.tableData = res.data
-      })
+      this.pageChange()
     },
     methods: {
-      onSearch() {
-        alert("todo")
+      pageChange(){
+        let query = {
+          size: this.pageSize,
+          page: this.currentPage,
+          title: this.searchForm.title,
+          isPublish: this.searchForm.isPublish
+        };
+        api.pages.get(query).then((res)=>{
+          this.tableData = res.data.data
+          this.pageSize = res.data.size
+          this.currentPage = res.data.page
+          this.total = res.data.total
+        })
+      },
+      submitForm() {
+        this.$refs['searchForm'].validate((valid) => {
+          if (valid) {
+            this.pageChange()
+          }
+        });
       },
       handleCreate() {
         this.$router.push('design')
@@ -155,11 +194,26 @@
         }).catch(()=>{
           //
         })
+      },
+      handleSizeChange(val) {
+        this.pageSize = val
+        this.pageChange()
+      },
+      handleCurrentChange(val) {
+        this.currentPage = val;
+        this.pageChange()
       }
     },
     data() {
       return {
-        tableData: []
+        tableData: [],
+        searchForm: {
+          title: '',
+          isPublish: -1
+        },
+        currentPage: 1,
+        pageSize: 10,
+        total: 10
       }
     }
   }
