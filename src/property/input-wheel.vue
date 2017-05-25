@@ -60,7 +60,6 @@ export default {
 
   data() {
     return {
-      visible: [false, false, false, false],
       drag: 0,
       lang: lang,
       klass: ['top', 'right', 'bottom', 'left']
@@ -69,9 +68,6 @@ export default {
 }
 </script>
 <style lang="less">
-.a1 {
-  cursor: col-resize;
-}
 .piper-wheels {
   position: relative;
   width: 100px;
@@ -83,38 +79,40 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 15;
     &:hover {
       color: #fff;
       background-color: #58B7FF;
+      z-index: 18;
     }
     &.piper-wheel-item-top {
       top: 0;
-      left: 20px;
-      right: 20px;
-      border-radius: 50% 50% 0 0;
+      left: 0;
+      right: 0;
+      border-radius: 200em 200em 0 0;
       cursor: n-resize;
     }
     &.piper-wheel-item-right {
       width: 20px;
-      top: 20px;
-      bottom: 20px;
+      top: 0;
+      bottom: 0;
       right: 0;
-      border-radius: 0 50% 50% 0;
+      border-radius: 0 200em 200em 0;
       cursor: e-resize;
     }
     &.piper-wheel-item-bottom {
-      left: 20px;
-      right: 20px;
+      left: 0;
+      right: 0;
       bottom: 0;
-      border-radius: 0 0 50% 50%;
+      border-radius: 0 0 200em 200em;
       cursor: s-resize;
     }
     &.piper-wheel-item-left {
       width: 20px;
-      top: 20px;
-      bottom: 20px;
+      top: 0;
+      bottom: 0;
       left: 0;
-      border-radius: 50% 0 0 50%;
+      border-radius: 200em 0 0 200em;
       cursor: w-resize;
     }
     .drag-handler {
