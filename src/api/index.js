@@ -25,9 +25,9 @@ export default {
   pages: require('./pages')(Vue),
   users: require('./users')(Vue),
   changelog: require('./changelog')(Vue),
-  publish(id) {
+  publish(id, data) {
     return Vue.http
-        .put('publish/'+id)
+        .put('publish/'+id, JSON.stringify(data))
   },
   /**
    * 获取 制作中和已发布 的项目

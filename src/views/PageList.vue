@@ -28,7 +28,7 @@
       <div class="page-cards">
         <div class="page-card" v-for="(item, index) in tableData" :key="index">
           <el-card :body-style="{ padding: '0px' }">
-            <div :style="{backgroundImage: 'url(/'+item.id+'/cover.png)'}" class="image" @click="handleEdit(index, item)">
+            <div :style="{backgroundImage: 'url(http://ojlbbvhpq.bkt.clouddn.com/public/'+item.id+'/cover.png)'}" class="image" @click="handleEdit(index, item)">
               <div class="hover-settings-container">
                 <div class="main-link">
                   <h3 class="designer">

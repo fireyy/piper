@@ -186,16 +186,14 @@ export default {
     publish() {
       let data = this.getData()
 
-      this.submitSave(data).then(()=>{
-        api.publish(this.id).then((res)=>{
-          if(res.data.errors && res.data.errors.length > 0){
-            // 打包失败
-          }else{
-            this.$message.success('发布成功')
-            this.qrcode.visible = true
-            this.qrcode.url = res.data[0].url
-          }
-        })
+      api.publish(this.id, data).then((res)=>{
+        if(res.data.errors && res.data.errors.length > 0){
+          // 打包失败
+        }else{
+          this.$message.success('发布成功')
+          this.qrcode.visible = true
+          this.qrcode.url = res.data[0].url
+        }
       })
     },
 
