@@ -13,7 +13,6 @@
     </el-form-item>
 </template>
 <script>
-import _ from 'lodash'
 import common from './common'
 import lang from '../constants/lang'
 
