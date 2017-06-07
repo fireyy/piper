@@ -9,23 +9,24 @@ import {
   EDIT_DRAG_MODULE,
   EDIT_DRAGING,
   EDIT_RENDER_DATA,
-  EDIT_MODULE_DATA
+  EDIT_MODULE_DATA,
+  RESET_RENDER_STATE
 } from '../mutation-types'
-import {
-  modules
-} from '../../modules'
 
-import defaultConfig from '../../constants/default'
+import defaultConfig from '@/constants/default'
 
-const state = {
-  items: [],
-  title: '网页标题',
-  config: {},
-  current: {},
-  dragInfo: {},
-  dragModule: {},
-  draging: false
+const createDefaultState = (data) => {
+  data.items = []
+  data.title = '网页标题'
+  data.config = _.cloneDeep(defaultConfig)
+  data.current = {}
+  data.dragInfo = {}
+  data.dragModule = {}
+  data.draging = false
 }
+
+const state = {}
+createDefaultState(state)
 
 const getters = {
   activeModules: state => state.dragInfo.dragTag === 'modules',
@@ -40,15 +41,6 @@ const getters = {
 
 const mutations = {
   [ADD_RENDER_ITEM](state, { type, module, index: index = state.items.length + 1, parent: parent = null }) {
-    //let module = null
-
-    // _.each(modules, (moduleItem) => {
-    //   _.each(moduleItem.items, (item) => {
-    //     if (module) return
-
-    //     module = item.type === type && item
-    //   })
-    // })
 
     let newItem = flow(
       pick(['type', 'alias', 'data', 'children', 'style']),
@@ -98,6 +90,10 @@ const mutations = {
 
   [BLUR_RENDER_ITEM](state) {
     state.current = {}
+  },
+
+  [RESET_RENDER_STATE](state, store) {
+    createDefaultState(state)
   }
 }
 

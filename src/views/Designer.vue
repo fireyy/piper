@@ -41,7 +41,6 @@ import render from '../components/render.vue'
 import moduleContainer from '../components/module-container.vue'
 import property from '../components/property.vue'
 import Qrcode from '../components/qrcode.vue'
-import defaultConfig from '../constants/default'
 
 export default {
   components: {
@@ -61,7 +60,7 @@ export default {
         this.editRenderData(data)
       });
     }else{
-      this.editRenderData(defaultConfig)
+      this.resetRenderState()
     }
   },
 
@@ -102,7 +101,8 @@ export default {
   methods: {
     ...mapActions([
       'focusDocumentTitle',
-      'editRenderData'
+      'editRenderData',
+      'resetRenderState'
     ]),
     addDataWatcher() {
       this.watchItems = this.$watch('renderData.items', function(val){

@@ -20,7 +20,8 @@ const normalMutations = {
   focusDocumentTitle: t.FOCUS_DOCUMENT_TITLE,
   editDraging: t.EDIT_DRAGING,
   editRenderData: t.EDIT_RENDER_DATA,
-  editModuleData: t.EDIT_MODULE_DATA
+  editModuleData: t.EDIT_MODULE_DATA,
+  resetRenderState: t.RESET_RENDER_STATE
 };
 
 const activeRenderItem = ({
