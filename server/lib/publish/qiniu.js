@@ -15,7 +15,7 @@ qiniu.conf.SECRET_KEY = QINIU_SECRET_KEY;
 const getUptoken = (key) => {
   if (_.isEmpty(key)) return
 
-  const putPolicy = new qiniu.rs.PutPolicy(`${QINIU_BUCKET}/${key}`)
+  const putPolicy = new qiniu.rs.PutPolicy(`${QINIU_BUCKET}:${key}`)
   return putPolicy.token()
 }
 
@@ -34,7 +34,7 @@ const upload = (uptoken, localFile) => {
           url: `${QINIU_BASEURL}/${ret.key}`
         })
       } else {
-        console.log(err)
+        console.log("upload error", err, localFile)
         reject(err)
       }
     })

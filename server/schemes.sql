@@ -1,6 +1,7 @@
 CREATE TABLE `pages` (
   `id`          int(11)         NOT NULL        AUTO_INCREMENT          COMMENT 'physical primary key',
   `title`       varchar(64)     NOT NULL                                COMMENT '页面标题',
+  `cover`       varchar(64)                     DEFAULT ''              COMMENT '页面封面',
   `config`      varchar(512)    NOT NULL        DEFAULT ''              COMMENT '页面配置信息',
   `items`       varchar(10240)  NOT NULL                                COMMENT '页面数据 json格式',
   `create_by`   int(11)         NOT NULL        DEFAULT 0               COMMENT 'user id',

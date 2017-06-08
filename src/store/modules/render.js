@@ -73,7 +73,7 @@ const mutations = {
   [EDIT_RENDER_DATA](state, render) {
     if(render.items) state.items = render.items
     state.title = render.title
-    state.config = render.config ? render.config : defaultConfig.config
+    state.config = Object.assign(_.cloneDeep(defaultConfig), render.config || {})
   },
 
   [EDIT_DRAG_MODULE](state, dragModule) {

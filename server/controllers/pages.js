@@ -15,7 +15,7 @@ module.exports = class {
     let where = (title ? ' and `title` LIKE "%' + title + '%"' : '') + (isPublish != -1 ? ' and `is_publish` = ' + isPublish : '');
     let [total] = await ctx.sql('SELECT COUNT(*) AS count FROM `pages` WHERE `is_delete` = 0' + where);
     let query = '\
-      SELECT `id`, `title`, `create_by`, `create_at`, `update_at`, `publish_at` \
+      SELECT `id`, `title`, `cover`, `create_by`, `create_at`, `update_at`, `publish_at` \
         FROM `pages` WHERE `is_delete` = 0' + where + ' ORDER BY `create_at` DESC LIMIT ?,? \
     ';
     let result = await ctx.sql(query, [start, limit]);

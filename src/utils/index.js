@@ -92,7 +92,3 @@ function offsetParent (element) {
   }
   return parent
 }
-
-export default {
-  createStyles
-}

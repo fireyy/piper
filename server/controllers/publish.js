@@ -11,6 +11,8 @@ const upload = require('../lib/publish');
 
 const webshot = require('webshot');
 
+const protocol = 'http://'
+
 module.exports = class {
   static url = '/publish/:id';
 
@@ -91,7 +93,7 @@ module.exports = class {
       let shotUrl = uploadRes.filter(item => {
         return item.url.indexOf('index.html') !== -1
       })
-      shotUrl[0].url = "http://" + shotUrl[0].url
+      shotUrl[0].url = protocol + shotUrl[0].url
 
       var options = {
         screenSize: {
@@ -111,7 +113,12 @@ module.exports = class {
           throw { status: 404, name: 'WEBSHOT_ERR', message: 'webshot failed' };
         }
 
-        upload([fs.createReadStream(`${dir}/cover.png`)]);
+        (async function(){
+          let coverRes = await upload([fs.createReadStream(`${dir}/cover.png`)]);
+          ctx.sql('UPDATE `pages` SET ? WHERE `id` = ?', [ {
+            cover: protocol + coverRes[0].url
+          }, id ]);
+        })()
       });
 
       ctx.body = shotUrl
