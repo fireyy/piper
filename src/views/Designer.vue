@@ -54,14 +54,7 @@ export default {
     this.addDataWatcher()
     window.addEventListener("beforeunload", this.beforeunload);
     // 初始化数据
-    if(this.id){
-      api.page.get({id: this.id}).then((res)=>{
-        let data = res.data
-        this.editRenderData(data)
-      });
-    }else{
-      this.resetRenderState()
-    }
+    this.fetchData()
   },
 
   beforeDestroy() {
@@ -88,7 +81,9 @@ export default {
       next()
     }
   },
-
+  watch: {
+    '$route': 'fetchData'
+  },
   computed: {
     ...mapGetters({
       loading: 'loading',
@@ -208,6 +203,17 @@ export default {
       var confirmationMessage = "可能有数据未保存";
       e.returnValue = confirmationMessage;
       return confirmationMessage
+    },
+
+    fetchData() {
+      if(this.id){
+        api.page.get({id: this.id}).then((res)=>{
+          let data = res.data
+          this.editRenderData(data)
+        });
+      }else{
+        this.resetRenderState()
+      }
     }
   },
 
