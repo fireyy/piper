@@ -1,6 +1,6 @@
 {
   "name": "piper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "testing",
   "private": true,
   "engines": {
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "async-busboy": "^0.3.4",
+    "axios": "^0.16.2",
     "babel-polyfill": "^6.23.0",
     "co": "^4.6.0",
     "co-views": "^2.1.0",
@@ -42,7 +43,6 @@
     "request": "^2.81.0",
     "request-promise": "^4.1.1",
     "vue": "^2.2.2",
-    "vue-resource": "^1.2.1",
     "vue-router": "^2.3.0",
     "vuex": "^2.2.1",
     "vuex-router-sync": "^4.1.2",

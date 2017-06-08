@@ -141,25 +141,6 @@ export default {
       return data
     },
 
-    submitSave(data) {
-      //保存数据
-      if(this.id){
-        return api.page.update({id: this.id}, data).then((res)=>{
-          this.$message({
-            message: res.data.message,
-            type: 'success'
-          })
-        })
-      }else{
-        return api.page.saveData(data).then((res)=>{
-          this.$message({
-            message: res.data.message,
-            type: 'success'
-          });
-          this.$router.replace({name: 'design', params: {id: res.data.item.insertId}})
-        })
-      }
-    },
     save() {
       let data = this.getData()
 
@@ -171,7 +152,23 @@ export default {
         return this.focusDocumentTitle(true)
       }
 
-      this.submitSave(data)
+      //保存数据
+      if(this.id){
+        api.page.updateData(this.id, data).then((res)=>{
+          this.$message({
+            message: res.data.message,
+            type: 'success'
+          })
+        })
+      }else{
+        api.page.saveData(data).then((res)=>{
+          this.$message({
+            message: res.data.message,
+            type: 'success'
+          });
+          this.$router.replace({name: 'design', params: {id: res.data.item.insertId}})
+        })
+      }
     },
 
     back() {
@@ -207,7 +204,7 @@ export default {
 
     fetchData() {
       if(this.id){
-        api.page.get({id: this.id}).then((res)=>{
+        api.page.getData(this.id).then((res)=>{
           let data = res.data
           this.editRenderData(data)
         });

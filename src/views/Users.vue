@@ -20,7 +20,7 @@
     <div class="layout-content inner-row">
       <el-row>
         <el-col :span="6" v-for="(o, index) in tableData" :offset="index > 0 ? 2 : 0" :key="index">
-          <el-card :body-style="{ padding: '0px' }">
+          <el-card class="user-card" :body-style="{ padding: '0px' }">
             <img src="" class="image">
             <div style="padding: 14px;">
               <span>{{o.name}}</span>
@@ -35,7 +35,8 @@
     </div>
   </div>
 </template>
-<style scope>
+<style lang="less">
+.user-card {
   .time {
     font-size: 13px;
     color: #999;
@@ -68,13 +69,14 @@
   .clearfix:after {
       clear: both
   }
+}
 </style>
 <script>
   import api from '../api'
 
   export default {
     mounted() {
-      api.users.get().then((res)=>{
+      api.users.getData().then((res)=>{
         this.tableData = res.data
       })
     },

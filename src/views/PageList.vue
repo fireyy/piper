@@ -37,14 +37,14 @@
                   <i class="el-icon-arrow-right"></i>
                 </div>
                 <div class="operations">
-                  <i class="el-icon-delete" @click="handleDelete(index, item)" title="Delete"></i>
+                  <i class="el-icon-delete" @click.stop="handleDelete(index, item)" title="Delete"></i>
                 </div>
               </div>
-            </div>
-            <div style="padding: 14px;">
-              <h4>{{item.title}}</h4>
-              <div class="bottom clearfix">
-                <time class="time">{{ item.create_at | formatDate }}</time>
+              <div class="page-meta">
+                <h4>{{item.title}}</h4>
+                <div class="bottom clearfix">
+                  <time class="time">{{ item.create_at | formatDate }}</time>
+                </div>
               </div>
             </div>
           </el-card>
@@ -72,16 +72,16 @@
   width: 20%;
   padding: 10px;
   box-sizing: border-box;
+  color: #fff;
   h4 {
     font-weight: normal;
   }
   .time {
     font-size: 13px;
-    color: #999;
   }
 
   .bottom {
-    margin-top: 13px;
+    margin-top: 5px;
     line-height: 12px;
   }
 
@@ -94,11 +94,20 @@
     width: 100%;
     height: 200px;
     display: block;
+    background-repeat: no-repeat;
     background-size: 100% auto;
     cursor: pointer;
     position: relative;
     &:hover .hover-settings-container {
       opacity: 1;
+    }
+    .page-meta {
+      background: rgba(0,0,0,0.3);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px;
     }
   }
 
@@ -132,7 +141,6 @@
       pointer-events: none;
       h3.designer {
         display: inline;
-        width: 100%;
       }
       .el-icon-arrow-right {
         display: inline-block;
@@ -145,6 +153,9 @@
       right: 10px;
     }
   }
+}
+.piper-page {
+  text-align: right;
 }
 </style>
 <script>
@@ -162,7 +173,7 @@
           title: this.searchForm.title,
           isPublish: this.searchForm.isPublish
         };
-        api.pages.get(query).then((res)=>{
+        api.pages.getData(query).then((res)=>{
           this.tableData = res.data.data
           this.pageSize = res.data.size
           this.currentPage = res.data.page
@@ -188,7 +199,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          api.page.remove({id: row.id}).then((res)=>{
+          api.page.removeData(row.id).then((res)=>{
             this.tableData.splice(index, 1)
           })
         }).catch(()=>{
