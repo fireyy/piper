@@ -27,4 +27,10 @@ module.exports = class {
     return user
   }
 
+  static async findAll() {
+    let users = await pool.query('SELECT * FROM `user`');
+
+    return users
+  }
+
 };

@@ -8,7 +8,6 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(async function(id, done) {
   try {
-    console.log("id", id)
     const user = await User.find(id)
     done(null, user)
   } catch(err) {
