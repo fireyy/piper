@@ -1,7 +1,7 @@
 <template>
   <el-card class="login-card">
     <div slot="header" class="clearfix">
-      <h1>登录</h1>
+      <h1>第三方登录</h1>
     </div>
     <p><a href="/auth/github"><icon name="github" scale="4" label="Github"></icon></a></p>
     <el-form :model="loginForm" :rules="rules" label-width="60px" ref="loginForm" class="loginForm" style="display: none;">

@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import axios from 'axios'
-import { MessageBox } from 'element-ui'
+import { Message } from 'element-ui'
 import store from '../store'
+
+let logoutMessageShown = false
 
 axios.defaults.baseURL = '/api';
 
@@ -35,15 +37,10 @@ axios.interceptors.response.use(function (response) {
 }, function (error) {
   showLoading(false)
   // TODO 网络异常处理
-  switch(error.response.status){
-    case 401:
-      MessageBox.alert(error.response.data.message, '系统提醒', {
-        confirmButtonText: '登录',
-        callback: action => {
-          store.dispatch('redirectLogin')
-        }
-      });
-      break;
+  if (error.response.status == 401 && !logoutMessageShown){
+    logoutMessageShown = true
+    Message.error('登录失效，请重新登录');
+    store.dispatch('redirectLogin')
   }
   return Promise.reject(error)
 })

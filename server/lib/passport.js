@@ -8,7 +8,7 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(async function(id, done) {
   try {
-    const user = await User.find(id)
+    const user = await User.findOne(id)
     done(null, user)
   } catch(err) {
     done(err)

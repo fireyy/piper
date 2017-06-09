@@ -5,15 +5,15 @@ const pool = createPool(mysql);
 
 module.exports = class {
   static async findOrCreate(cp, data, fn) {
-    let user = await find(data.id);
+    let [ user ] = await pool.query('SELECT `id`, `name` FROM `user` WHERE `github_id` = ?', [ data.id ]);
     if (!user) {
       let change = [ data._json.name, data._json.email, data._json.id ]
-      let uid = await pool.query(
+      let res = await pool.query(
         'INSERT INTO `user` (`name`, `email`, `github_id`) VALUES (?)',
         [ change ]
       );
       fn(null, {
-        id: uid,
+        id: res.insertId,
         name: data._json.name
       })
     } else {
@@ -21,7 +21,7 @@ module.exports = class {
     }
   }
 
-  static async find(id) {
+  static async findOne(id) {
     let [ user ] = await pool.query('SELECT `id`, `name` FROM `user` WHERE `id` = ?', [ id ]);
 
     return user

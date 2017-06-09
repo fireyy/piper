@@ -15,7 +15,7 @@
           fireyy<i class="el-icon-caret-bottom el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item><span @click="handleLogout">注销</span></el-dropdown-item>
+          <el-dropdown-item><div @click="handleLogout">注销</div></el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </el-col>
@@ -92,7 +92,7 @@
       },
       handleLogout() {
         api.logout().then(res => {
-          this.$route.replace({ path: '/login' })
+          this.$router.replace({ path: '/login' })
         })
       }
     },
