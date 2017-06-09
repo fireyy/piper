@@ -39,8 +39,47 @@ if (env === 'development') {
   });
 }
 
+koa.keys = ['i-love-piper']
+koa.use(require('koa-session')({}, koa))
+
 koa.use(require('koa-bodyparser')());
 koa.use(require('./lib/errorlog'));
+
+// authentication
+require('./lib/passport')
+const passport = require('koa-passport')
+koa.use(passport.initialize())
+koa.use(passport.session())
+
+const router = require('koa-router')()
+
+router.get('/auth/github',
+  passport.authenticate('github')
+)
+
+router.get('/auth/github/callback',
+  passport.authenticate('github', {
+    successRedirect: '/',
+    failureRedirect: '/'
+  })
+)
+
+koa.use(router.routes())
+
+// Require authentication for now
+koa.use(function(ctx, next) {
+  if (ctx.isAuthenticated()) {
+    return next()
+  } else {
+    // ctx.redirect('/')
+    throw {
+      status: 401,
+      name: 'NOT_LOGIN',
+      message: 'not login'
+    }
+  }
+})
+
 koa.use(require('./lib/api'));
 koa.use(require('koa-static')('dist'));
 

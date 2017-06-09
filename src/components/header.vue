@@ -15,7 +15,7 @@
           fireyy<i class="el-icon-caret-bottom el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item><router-link to="login">注销</router-link></el-dropdown-item>
+          <el-dropdown-item><span @click="handleLogout">注销</span></el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </el-col>
@@ -51,6 +51,7 @@
   }
 </style>
 <script>
+  import api from '@/api'
   export default {
     computed: {
       current() {
@@ -88,6 +89,11 @@
     methods: {
       handleSelect() {
         //
+      },
+      handleLogout() {
+        api.logout().then(res => {
+          this.$route.replace({ path: '/login' })
+        })
       }
     },
     data() {

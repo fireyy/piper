@@ -1,4 +1,5 @@
 import * as t from './mutation-types'
+import router from '@/router'
 
 const makeAction = (type) => (
     ({ commit }, payload) => commit(type, payload)
@@ -23,6 +24,13 @@ const normalMutations = {
   editModuleData: t.EDIT_MODULE_DATA,
   resetRenderState: t.RESET_RENDER_STATE
 };
+
+// 跳转登录
+const redirectLogin = ({
+  state
+}) => {
+  router.replace({ path: '/login'});
+}
 
 const activeRenderItem = ({
   commit
@@ -128,5 +136,6 @@ function getDragPosition(event, dragTarget) {
 export default {
     ...makeActions(normalMutations),
     activeRenderItem,
-    dropRenderItem
+    dropRenderItem,
+    redirectLogin
 };

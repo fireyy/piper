@@ -28,3 +28,15 @@ CREATE TABLE `changelog` (
   KEY `ix_create_at`                            (`create_at`),
   KEY `ix_update_at`                            (`update_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '操作日志';
+
+CREATE TABLE `user` (
+  `id`          int(11)         NOT NULL        AUTO_INCREMENT          COMMENT 'physical primary key',
+  `name`       varchar(64)     NOT NULL                                COMMENT '用户名',
+  `email`      varchar(64)     NOT NULL                                COMMENT '邮箱地址',
+  `github_id`   int(11)         NOT NULL        DEFAULT 0               COMMENT 'github id',
+  `update_at`   timestamp       NOT NULL        DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最近更新时间',
+  `create_at`   timestamp       NOT NULL        DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  KEY `ix_create_at`                            (`create_at`),
+  KEY `ix_update_at`                            (`update_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '用户';

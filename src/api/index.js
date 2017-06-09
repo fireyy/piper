@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
-import { Message } from 'element-ui'
+import { MessageBox } from 'element-ui'
 import store from '../store'
 
 axios.defaults.baseURL = '/api';
@@ -35,6 +35,16 @@ axios.interceptors.response.use(function (response) {
 }, function (error) {
   showLoading(false)
   // TODO 网络异常处理
+  switch(error.response.status){
+    case 401:
+      MessageBox.alert(error.response.data.message, '系统提醒', {
+        confirmButtonText: '登录',
+        callback: action => {
+          store.dispatch('redirectLogin')
+        }
+      });
+      break;
+  }
   return Promise.reject(error)
 })
 
@@ -115,5 +125,13 @@ export default {
   count() {
     return axios
         .get('count')
+  },
+  /**
+   * 注销
+   * @returns {Promise}
+   */
+  logout() {
+    return axios
+        .get('logout')
   }
 }

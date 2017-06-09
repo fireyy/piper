@@ -3,7 +3,8 @@
     <div slot="header" class="clearfix">
       <h1>登录</h1>
     </div>
-    <el-form :model="loginForm" :rules="rules" label-width="60px" ref="loginForm" class="loginForm">
+    <p><a href="/auth/github"><icon name="github" scale="4" label="Github"></icon></a></p>
+    <el-form :model="loginForm" :rules="rules" label-width="60px" ref="loginForm" class="loginForm" style="display: none;">
       <el-form-item label="邮件" prop="email">
         <el-input type="text" v-model="loginForm.email"></el-input>
       </el-form-item>
@@ -18,8 +19,13 @@
 </template>
 <script>
 import api from '../api'
+import 'vue-awesome/icons/github'
+import Icon from 'vue-awesome/components/Icon'
 
 export default {
+  components: {
+    Icon
+  },
   data() {
     return {
       loading: false,
@@ -61,6 +67,12 @@ export default {
   h1 {
     font-size: 20px;
     font-weight: 400;
+  }
+  a {
+    color: #999;
+    &:hover {
+      color: #333;
+    }
   }
 }
 </style>

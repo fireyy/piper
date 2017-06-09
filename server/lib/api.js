@@ -15,4 +15,11 @@ glob.sync(path.join(__dirname, '../controllers/*.js')).forEach(dep => {
   }
 });
 
+apiRouter.get('/logout', (ctx) => {
+  ctx.logout()
+  ctx.body = {
+    message: 'success'
+  }
+})
+
 module.exports = apiRouter.routes();
