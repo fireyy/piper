@@ -1,11 +1,8 @@
-const authorize = require('../lib/authorize');
 const __ = require('../constants');
-const createby = require('../lib/createby');
 
 module.exports = class {
   static url = '/pages';
 
-  @authorize(['EDIT'])
   static async get(ctx) {
     let { page, size, title, isPublish } = ctx.query;
     page = parseInt(page, 10)
@@ -15,11 +12,10 @@ module.exports = class {
     let where = (title ? ' and `title` LIKE "%' + title + '%"' : '') + (isPublish != -1 ? ' and `is_publish` = ' + isPublish : '');
     let [total] = await ctx.sql('SELECT COUNT(*) AS count FROM `pages` WHERE `is_delete` = 0' + where);
     let query = '\
-      SELECT `id`, `title`, `cover`, `create_by`, `create_at`, `update_at`, `publish_at` \
-        FROM `pages` WHERE `is_delete` = 0' + where + ' ORDER BY `create_at` DESC LIMIT ?,? \
+      SELECT pages.`id`, pages.`title`, pages.`cover`, pages.`create_by`, pages.`create_at`, pages.`update_at`, pages.`publish_at`, users.`name`, users.`id` AS `user_id` FROM `pages` Left Join `users` On pages.create_by=users.id WHERE `is_delete` = 0' + where + ' ORDER BY `create_at` DESC LIMIT ?,? \
     ';
     let result = await ctx.sql(query, [start, limit]);
-    await createby(result);
+
     ctx.body = {
       total: total.count,
       page: page,
@@ -28,7 +24,6 @@ module.exports = class {
     };
   }
 
-  @authorize(['CHANGE'])
   static async put(ctx) {
     let { title = '', config = '', items = '' } = ctx.request.body;
     title = title.trim();

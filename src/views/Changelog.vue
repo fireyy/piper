@@ -30,7 +30,7 @@
           <el-tag :type="actionStyle[row.action]" close-transition>{{'action'+row.action | lang}}</el-tag>
         </el-table-column>
         <el-table-column
-          prop="create_by.name"
+          prop="name"
           label="操作人"
           width="220">
         </el-table-column>
@@ -74,6 +74,7 @@
           size: size || this.pageSize,
           page: page || this.currentPage
         }).then((res)=>{
+          console.log(res.data.data)
           this.tableData = res.data.data
           this.pageSize = res.data.size
           this.currentPage = res.data.page

@@ -43,6 +43,7 @@
               <div class="page-meta">
                 <h4>{{item.title}}</h4>
                 <div class="bottom clearfix">
+                  <span class="create_by">{{item.name}}</span>
                   <time class="time">{{ item.create_at | formatDate }}</time>
                 </div>
               </div>
@@ -85,7 +86,7 @@
     line-height: 12px;
   }
 
-  .button {
+  .create_by {
     padding: 0;
     float: right;
   }

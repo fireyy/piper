@@ -1,9 +1,6 @@
-const authorize = require('../lib/authorize');
-
 module.exports = class {
   static url = '/count';
 
-  @authorize(['EDIT'])
   static async get(ctx) {
     let [result] = await ctx.sql('\
       SELECT \

@@ -1,10 +1,8 @@
-const authorize = require('../lib/authorize');
 const __ = require('../constants');
 
 module.exports = class {
   static url = '/page/:id';
 
-  @authorize([ 'CHANGE' ])
   static async delete(ctx) {
     let { id } = ctx.params;
     await ctx.sql.commit('UPDATE `pages` SET `is_delete` = 1 WHERE `id` = ?', [ id ]);
@@ -17,7 +15,6 @@ module.exports = class {
     };
   }
 
-  @authorize([ 'EDIT' ])
   static async get(ctx) {
     let { id } = ctx.params;
     let result = await ctx.sql('                                                               \
@@ -35,7 +32,6 @@ module.exports = class {
     ctx.body = page;
   }
 
-  @authorize([ 'EDIT' ])
   static async put(ctx) {
     let { id } = ctx.params;
     let { body } = ctx.request;

@@ -1,4 +1,3 @@
-const authorize = require('../lib/authorize');
 const pageApi = require('./page');
 
 const path = require('path');
@@ -16,7 +15,6 @@ const protocol = 'http://'
 module.exports = class {
   static url = '/publish/:id';
 
-  @authorize([ 'EDIT' ])
   static async get(ctx) {
     let { id } = ctx.params;
     let result = await ctx.sql('                                                              \
@@ -34,7 +32,6 @@ module.exports = class {
     ctx.body = html
   }
 
-  @authorize([ 'EDIT' ])
   static async put(ctx) {
     // save data first
     await pageApi.put(ctx)

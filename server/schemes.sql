@@ -29,7 +29,7 @@ CREATE TABLE `changelog` (
   KEY `ix_update_at`                            (`update_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '操作日志';
 
-CREATE TABLE `user` (
+CREATE TABLE `users` (
   `id`          int(11)         NOT NULL        AUTO_INCREMENT          COMMENT 'physical primary key',
   `name`       varchar(64)     NOT NULL                                COMMENT '用户名',
   `email`      varchar(64)     NOT NULL                                COMMENT '邮箱地址',
