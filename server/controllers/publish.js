@@ -65,7 +65,7 @@ module.exports = class {
       action: 4,
       page_id: id,
       items: null,
-      create_by: ctx.user.id
+      create_by: ctx.state.user.id
     });
 
     const dir = `public/${id}`;

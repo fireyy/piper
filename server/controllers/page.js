@@ -22,7 +22,7 @@ module.exports = class {
       action: 3,
       page_id: id,
       items: null,
-      create_by: ctx.user.id
+      create_by: ctx.state.user.id
     });
 
     ctx.body = {
@@ -36,7 +36,7 @@ module.exports = class {
     let result = await models.pages.findAll(
       {
         where: {
-          is_delete: 1,
+          is_delete: 0,
           id: id
         }
       }
@@ -125,7 +125,7 @@ module.exports = class {
         action: 2,
         page_id: id,
         items: change.items,
-        create_by: ctx.user.id
+        create_by: ctx.state.user.id
       });
     }
 

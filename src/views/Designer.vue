@@ -166,7 +166,7 @@ export default {
             message: res.data.message,
             type: 'success'
           });
-          this.$router.replace({name: 'design', params: {id: res.data.item.insertId}})
+          this.$router.replace({name: 'design', params: {id: res.data.item.id}})
         })
       }
     },

@@ -59,7 +59,7 @@ module.exports = class {
         title: title,
         config: config,
         items: items,
-        create_by: ctx.user.id
+        create_by: ctx.state.user.id
       }
     });
 
@@ -71,7 +71,7 @@ module.exports = class {
       action: 1,
       page_id: page.id,
       items: items,
-      create_by: ctx.user.id
+      create_by: ctx.state.user.id
     })
 
     ctx.body = {
