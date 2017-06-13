@@ -14,7 +14,7 @@ npm install
 
 ### Config
 
-First of all，create a database `piper` in `Mysql`, and import `./server/schemes.sql`.
+First of all，create a database `piper` in `Mysql`.
 
 Then set up `.env` file with your `Mysql` database connection details and qiniu upload config.
 
@@ -42,3 +42,12 @@ npm run dev
     border-width: 2PX; // ignored
 }
 ```
+
+### Changelog
+
+#### 1.0.5
+
+- Login with Github base on [Passport.js](http://passportjs.org/).
+- Use [Sequelize.js](http://docs.sequelizejs.com/) for Database dialects.
+- Use [Axios](https://github.com/mzabriskie/axios) instead of vue-resource.
+- fix issues.
