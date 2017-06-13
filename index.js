@@ -9,6 +9,12 @@ if (env === 'development') {
   require('babel-register');
 }
 
+// check database
+const models = require('./server/models')
+models.sequelize.sync().catch(function(err){
+  console.error(new Error(err))
+});
+
 const app = require(src);
 
 app.listen(port, function(err) {

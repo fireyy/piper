@@ -36,12 +36,21 @@ axios.interceptors.response.use(function (response) {
   return response
 }, function (error) {
   showLoading(false)
-  // TODO 网络异常处理
-  if (error.response.status == 401 && !logoutMessageShown){
+  // 网络异常处理
+  if (error.response.status == 500){
+    Message({
+      type: 'error',
+      message: error.response.data.message,
+      duration: 0
+    });
+  } else if (error.response.status == 401 && !logoutMessageShown){
     logoutMessageShown = true
     Message.error('登录失效，请重新登录');
     store.dispatch('redirectLogin')
+  } else {
+    error.response.data && error.response.data.message && Message.error(error.response.data.message);
   }
+
   return Promise.reject(error)
 })
 

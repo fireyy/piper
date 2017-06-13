@@ -24,8 +24,11 @@ const sequelize = new Sequelize(DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD,
     ssl: false
   },
   define: {
-    timestamps: false // 取消Sequelzie自动给数据表加入时间戳（createdAt以及updatedAt）
-  }
+    timestamps: true,
+    createdAt: 'create_at',
+    updatedAt: 'update_at'
+  },
+  // logging: false
 });
 
 let db = {};

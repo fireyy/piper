@@ -22,10 +22,17 @@ passport.use(new GitHubStrategy({
     callbackURL: "http://127.0.0.1:4000/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
-    models.users.findOrCreate({where: {github_id: profile.id}, defaults: {
-      name: profile._json.username,
-      email: profile._json.email,
-      github_id: profile._json.id
-    }}).spread((user, created) => cb(null, user))
+    console.log(profile._json)
+    let {
+      name,
+      email,
+      id
+    } = profile._json;
+    models.users.findOrCreate({where: {github_id: id}, defaults: {
+      name: name,
+      email: email
+    }}).spread((user, created) => cb(null, user)).catch(err => {
+      console.log(err)
+    })
   }
 ));

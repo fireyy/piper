@@ -13,10 +13,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: '0'
     },
-    // page_id: {
-    //   type: DataTypes.INTEGER(11),
-    //   allowNull: false
-    // },
+    page_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false
+    },
     items: {
       type: DataTypes.STRING(10240),
       allowNull: true,
@@ -26,16 +26,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       defaultValue: '0'
-    },
-    update_at: {
-      type: DataTypes.TIME,
-      allowNull: false,
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    create_at: {
-      type: DataTypes.TIME,
-      allowNull: false,
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     tableName: 'changelog'

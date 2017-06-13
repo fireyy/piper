@@ -52,14 +52,14 @@ module.exports = class {
 
     if (!page) throw { status: 404, name: 'PAGES_NOT_FOUND', message: 'page is not found' };
 
-    if (page.is_publish == 0)
-      await models.pages.update({
-        'is_publish': 1
-      }, {
-        where: {
-          id: id
-        }
-      })
+    await models.pages.update({
+      is_publish: 1,
+      publish_at: Date.now()
+    }, {
+      where: {
+        id: id
+      }
+    })
 
     await models.changelog.create({
       action: 4,

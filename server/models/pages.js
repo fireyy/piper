@@ -42,19 +42,9 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: '0'
     },
     publish_at: {
-      type: DataTypes.TIME,
-      allowNull: false,
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    update_at: {
-      type: DataTypes.TIME,
-      allowNull: false,
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    create_at: {
-      type: DataTypes.TIME,
-      allowNull: false,
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+      type: DataTypes.DATE,
+      allowNull: true,
+      defaultValue: sequelize.NOW
     }
   }, {
     tableName: 'pages'
