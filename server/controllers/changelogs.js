@@ -1,3 +1,5 @@
+const models = require('../models');
+
 module.exports = class {
   static url = '/changelogs';
 
@@ -7,20 +9,27 @@ module.exports = class {
     size = parseInt(size, 10)
     let start = (page - 1) * size;
     let limit = size;
-    let [total] = await ctx.sql('SELECT COUNT(*) AS count FROM `changelog`');
-    let result = await ctx.sql('                                            \
-      SELECT pages.`id`, pages.`title`, changelog.`id`, changelog.`action`, \
-       changelog.`page_id`, changelog.`create_by`, changelog.`create_at`,   \
-       users.`name`, users.`id` AS `user_id`                                    \
-       FROM `changelog` Left Join `pages` On changelog.page_id=pages.id    \
-      Left Join `users` On changelog.create_by=users.id ORDER BY `create_at`\ DESC LIMIT ?,?  \
-    ', [start, limit]);
+    let result = await models.changelog.findAndCountAll({
+      include: [
+        {
+          model: models.pages,
+          attributes: ['title']
+        },
+        {
+          model: models.users,
+          attributes: ['name']
+        }
+      ],
+      offset: start,
+      limit: limit,
+      order: [['create_at', 'DESC']]
+    });
 
     ctx.body = {
-      total: total.count,
+      total: result.count,
       page: page,
       size: size,
-      data: result
+      data: result.rows
     }
   }
 

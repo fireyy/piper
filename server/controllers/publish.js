@@ -1,4 +1,5 @@
 const pageApi = require('./page');
+const models = require("../models");
 
 const path = require('path');
 const views = require('co-views');
@@ -17,10 +18,14 @@ module.exports = class {
 
   static async get(ctx) {
     let { id } = ctx.params;
-    let result = await ctx.sql('                                                              \
-      SELECT `id`, `title`, `config`, `items`, `create_by`, `create_at`              \
-        FROM `pages` WHERE `id` = ? AND `is_delete` = 0                                       \
-    ', [ id ]);
+
+    let result = await models.pages.findAll({
+      where: {
+        is_delete: 0,
+        id: id
+      }
+    });
+
     let page = result[0];
     if (!page) throw { status: 404, name: 'PAGES_NOT_FOUND', message: 'page is not found' };
     try { page.items = JSON.parse(page.items); } catch(error) {
@@ -37,21 +42,31 @@ module.exports = class {
     await pageApi.put(ctx)
 
     let { id } = ctx.params;
-    let page;
-    await ctx.sql.commit(async () => {
-      let [record] = await ctx.sql('\
-        SELECT `id`, `title`, `config`, `items`, `create_by`, `create_at`              \
-          FROM `pages` WHERE `id` = ? AND `is_delete` = 0                              \
-      ', [ id ]);
-      if (!record) throw { status: 404, name: 'PAGES_NOT_FOUND', message: 'page is not found' };
 
-      if (record.is_publish == 0) await ctx.sql('UPDATE `pages` SET ? WHERE `id` = ?', [ {'is_publish': 1}, id ]);
-      await ctx.sql(
-        'INSERT INTO `changelog` (`action`, `page_id`, `items`, `create_by`) VALUES (?)',
-        [ [ 4, id, null, ctx.user.id ] ]
-      );
-      page = record;
-    })
+    let [page] = await models.pages.findAll({
+      where: {
+        is_delete: 0,
+        id: id
+      }
+    });
+
+    if (!page) throw { status: 404, name: 'PAGES_NOT_FOUND', message: 'page is not found' };
+
+    if (page.is_publish == 0)
+      await models.pages.update({
+        'is_publish': 1
+      }, {
+        where: {
+          id: id
+        }
+      })
+
+    await models.changelog.create({
+      action: 4,
+      page_id: id,
+      items: null,
+      create_by: ctx.user.id
+    });
 
     const dir = `public/${id}`;
 

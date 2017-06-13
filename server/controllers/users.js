@@ -1,10 +1,10 @@
-const User = require('../models/user')
+const models = require('../models')
 
 module.exports = class {
   static url = '/users';
 
   static async get(ctx) {
-    let users = await User.findAll();
+    let users = await models.users.findAll();
     ctx.body = users;
   }
 

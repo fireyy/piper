@@ -1,3 +1,4 @@
+const models = require('../models');
 const __ = require('../constants');
 
 module.exports = class {
@@ -9,18 +10,35 @@ module.exports = class {
     size = parseInt(size, 10)
     let start = (page - 1) * size;
     let limit = size;
-    let where = (title ? ' and `title` LIKE "%' + title + '%"' : '') + (isPublish != -1 ? ' and `is_publish` = ' + isPublish : '');
-    let [total] = await ctx.sql('SELECT COUNT(*) AS count FROM `pages` WHERE `is_delete` = 0' + where);
-    let query = '\
-      SELECT pages.`id`, pages.`title`, pages.`cover`, pages.`create_by`, pages.`create_at`, pages.`update_at`, pages.`publish_at`, users.`name`, users.`id` AS `user_id` FROM `pages` Left Join `users` On pages.create_by=users.id WHERE `is_delete` = 0' + where + ' ORDER BY `create_at` DESC LIMIT ?,? \
-    ';
-    let result = await ctx.sql(query, [start, limit]);
+    let where = {
+      is_delete: 0
+    };
+    if (title) {
+      where['title'] = {
+        $like: `%${title}%`
+      }
+    }
+    if (isPublish != -1) {
+      where['is_publish'] = isPublish
+    }
+    let result = await models.pages.findAndCountAll({
+      include: [
+        {
+          model: models.users,
+          attributes: ['name']
+        }
+      ],
+      offset: start,
+      limit: limit,
+      where: where,
+      order: [['create_at', 'DESC']]
+    });
 
     ctx.body = {
-      total: total.count,
+      total: result.count,
       page: page,
       size: size,
-      data: result
+      data: result.rows
     };
   }
 
@@ -32,30 +50,33 @@ module.exports = class {
     if (items.length > __.VALUE_MAX_LENGTH) throw __.VALUE_TOO_LONG;
     config = JSON.stringify(config);
 
-    let data;
-    await ctx.sql.commit(async () => {
-
-      let pages = await ctx.sql(
-        'SELECT 1 FROM `pages` WHERE `is_delete` = 0 AND `title` = ? FOR UPDATE',
-        [ title ]
-      );
-      if (pages.length) throw { status: 400, name: 'DUP', message: '记录已存在' };
-
-      data = await ctx.sql(
-        'INSERT INTO `pages` (`title`, `config`, `items`, `create_by`) VALUES (?)',
-        [ [ title, config, items, ctx.user.id ] ]
-      );
-
-      await ctx.sql(
-        'INSERT INTO `changelog` (`action`, `page_id`, `items`, `create_by`) VALUES (?)',
-        [ [ 1, data.insertId, items, ctx.user.id ] ]
-      );
-
+    let [page, created] = await models.pages.findOrCreate({
+      where: {
+        is_delete: 0,
+        title: title
+      },
+      defaults: {
+        title: title,
+        config: config,
+        items: items,
+        create_by: ctx.user.id
+      }
     });
+
+    if (page && !created) {
+      throw { status: 400, name: 'DUP', message: '记录已存在' };
+    }
+
+    await models.changelog.create({
+      action: 1,
+      page_id: page.id,
+      items: items,
+      create_by: ctx.user.id
+    })
 
     ctx.body = {
       message: 'Save success',
-      item: data
+      item: page
     };
   }
 

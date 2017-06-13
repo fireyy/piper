@@ -45,6 +45,11 @@ koa.use(require('koa-session')({}, koa))
 koa.use(require('koa-bodyparser')());
 koa.use(require('./lib/errorlog'));
 
+// const models = require('./models')
+// models.sequelize.sync().catch(function(err){
+//   console.log(err, "DB error")
+// });
+
 // authentication
 require('./lib/passport')
 const passport = require('koa-passport')

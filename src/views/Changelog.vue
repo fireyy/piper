@@ -19,7 +19,7 @@
         :data="tableData"
         style="width: 100%">
         <el-table-column
-          prop="title"
+          prop="page.title"
           label="活动名称">
         </el-table-column>
         <el-table-column
@@ -30,7 +30,7 @@
           <el-tag :type="actionStyle[row.action]" close-transition>{{'action'+row.action | lang}}</el-tag>
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop="user.name"
           label="操作人"
           width="220">
         </el-table-column>

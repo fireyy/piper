@@ -1,6 +1,6 @@
 require('dotenv').config()
 const passport = require('koa-passport')
-const User = require('../models/user')
+const models = require('../models')
 
 passport.serializeUser(function(user, done) {
   done(null, user.id)
@@ -8,7 +8,7 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(async function(id, done) {
   try {
-    const user = await User.findOne(id)
+    const user = await models.users.findById(id)
     done(null, user)
   } catch(err) {
     done(err)
@@ -22,8 +22,10 @@ passport.use(new GitHubStrategy({
     callbackURL: "http://127.0.0.1:4000/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate('github', profile, function (err, user) {
-      return cb(err, user);
-    });
+    models.users.findOrCreate({where: {github_id: profile.id}, defaults: {
+      name: profile._json.username,
+      email: profile._json.email,
+      github_id: data._json.id
+    }}).spread((user, created) => cb(err, user))
   }
 ));
