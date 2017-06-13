@@ -25,7 +25,7 @@ passport.use(new GitHubStrategy({
     models.users.findOrCreate({where: {github_id: profile.id}, defaults: {
       name: profile._json.username,
       email: profile._json.email,
-      github_id: data._json.id
-    }}).spread((user, created) => cb(err, user))
+      github_id: profile._json.id
+    }}).spread((user, created) => cb(null, user))
   }
 ));
