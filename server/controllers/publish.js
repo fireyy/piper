@@ -125,12 +125,15 @@ module.exports = class {
           throw { status: 404, name: 'WEBSHOT_ERR', message: 'webshot failed' };
         }
 
-        (async function(){
-          let coverRes = await upload([fs.createReadStream(`${dir}/cover.png`)]);
-          ctx.sql('UPDATE `pages` SET ? WHERE `id` = ?', [ {
+        upload([fs.createReadStream(`${dir}/cover.png`)]).then((coverRes) => {
+          models.pages.update({
             cover: protocol + coverRes[0].url
-          }, id ]);
-        })()
+          }, {
+            where: {
+              id: id
+            }
+          })
+        })
       });
 
       ctx.body = shotUrl
