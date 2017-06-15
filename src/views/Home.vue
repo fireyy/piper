@@ -94,7 +94,6 @@
       color: #8492a6;
       line-height: 35px;
       text-align: center;
-      text-indent: 10px;
     }
   }
   .el-card {
