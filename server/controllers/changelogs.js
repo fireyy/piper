@@ -15,9 +15,11 @@ module.exports = class {
         $like: `%${title}%`
       }
     }
-    if (action != 0) {
+    if (action && action != 0) {
       where['action'] = action
     }
+    console.log("where", where)
+
     let result = await models.changelog.findAndCountAll({
       attributes: ['action', 'create_at'],
       include: [
