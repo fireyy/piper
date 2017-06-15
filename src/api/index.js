@@ -41,7 +41,8 @@ axios.interceptors.response.use(function (response) {
     Message({
       type: 'error',
       message: error.response.data.message,
-      duration: 0
+      duration: 0,
+      showClose: true
     });
   } else if (error.response.status == 401 && !logoutMessageShown){
     logoutMessageShown = true
