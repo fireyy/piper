@@ -1,7 +1,9 @@
 <template>
   <div class="layout-app">
     <commonhead></commonhead>
-    <router-view class="layout-container"></router-view>
+    <transition class="layout-content" name="fade" mode="out-in">
+      <router-view class="layout-container"></router-view>
+    </transition>
   </div>
 </template>
 <style lang="less">

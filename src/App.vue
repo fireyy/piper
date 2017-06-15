@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view class="view"></router-view>
+    <transition class="layout-content" name="fade" mode="out-in">
+      <router-view class="view"></router-view>
+    </transition>
     <loading :show="loading"></loading>
   </div>
 </template>
@@ -60,6 +62,13 @@ a {
 
 .text-right {
   text-align: right;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: all .2s ease;
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0;
 }
 </style>
 <script>

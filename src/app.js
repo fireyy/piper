@@ -6,12 +6,27 @@ import store from './store'
 import router from './router'
 import { sync } from 'vuex-router-sync'
 import App from './App.vue'
+import ProgressBar from '@/components/ProgressBar'
 
 import filters from './filters'
 
 sync(store, router)
 
 Vue.use(Element)
+
+Vue.config.productionTip = false
+
+// ProgressBar
+const bar = Vue.prototype.$bar = new Vue(ProgressBar).$mount()
+document.body.appendChild(bar.$el)
+
+router.beforeEach((to, from, next) => {
+  bar.start()
+  next()
+})
+router.afterEach((to, from) => {
+  bar.finish()
+})
 
 // add vue filter
 Object.keys(filters).forEach(k => Vue.filter(k, filters[k]));
