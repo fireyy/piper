@@ -4,12 +4,22 @@ module.exports = class {
   static url = '/changelogs';
 
   static async get(ctx) {
-    let { page, size } = ctx.query;
+    let { page, size, title, action } = ctx.query;
     page = parseInt(page, 10)
     size = parseInt(size, 10)
     let start = (page - 1) * size;
     let limit = size;
+    let where = {};
+    if (title) {
+      where['$page.title$'] = {
+        $like: `%${title}%`
+      }
+    }
+    if (action != 0) {
+      where['action'] = action
+    }
     let result = await models.changelog.findAndCountAll({
+      attributes: ['action', 'create_at'],
       include: [
         {
           model: models.pages,
@@ -22,6 +32,7 @@ module.exports = class {
       ],
       offset: start,
       limit: limit,
+      where: where,
       order: [['create_at', 'DESC']]
     });
 

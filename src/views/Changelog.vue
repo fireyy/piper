@@ -2,10 +2,16 @@
   <div>
     <div class="page-header">
       <el-row type="flex" class="inner-row" justify="space-between">
-        <el-col :span="12">
-          <el-form :inline="true">
-            <el-form-item>
-              <el-input placeholder="记录"></el-input>
+        <el-col :span="18">
+          <el-form ref="searchForm" :modle="searchForm" :inline="true">
+            <el-form-item prop="title">
+              <el-input style="width: 300px;" v-model="searchForm.title" placeholder="活动名称"></el-input>
+            </el-form-item>
+            <el-form-item prop="action">
+              <el-select v-model="searchForm.action" placeholder="请选择">
+                <el-option label="全部" :value="0"></el-option>
+                <el-option v-for="n in 4" :key="n" :label="'action'+n | lang" :value="n"></el-option>
+              </el-select>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" icon="search" @click="onSearch">查询</el-button>
@@ -69,12 +75,14 @@
       this.pageChange()
     },
     methods: {
-      pageChange(page, size){
-        api.changelog.getAll({
-          size: size || this.pageSize,
-          page: page || this.currentPage
-        }).then((res)=>{
-          console.log(res.data.data)
+      pageChange(){
+        let query = {
+          size: this.pageSize,
+          page: this.currentPage,
+          title: this.searchForm.title,
+          action: this.searchForm.action
+        };
+        api.changelog.getAll(query).then((res)=>{
           this.tableData = res.data.data
           this.pageSize = res.data.size
           this.currentPage = res.data.page
@@ -82,18 +90,22 @@
         })
       },
       onSearch() {
-        alert("todo")
+        this.$refs['searchForm'].validate((valid) => {
+          if (valid) {
+            this.pageChange()
+          }
+        });
       },
       formatDate(row) {
         return filters.formatDate(row.create_at)
       },
       handleSizeChange(val) {
         this.pageSize = val
-        this.pageChange(1, val)
+        this.pageChange()
       },
       handleCurrentChange(val) {
         this.currentPage = val;
-        this.pageChange(val)
+        this.pageChange()
       }
     },
     data() {
@@ -103,6 +115,10 @@
           1: 'primary',
           2: 'success',
           3: 'danger'
+        },
+        searchForm: {
+          title: '',
+          action: 0
         },
         currentPage: 1,
         pageSize: 10,
