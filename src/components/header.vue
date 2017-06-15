@@ -2,7 +2,12 @@
 <header class="layout-header">
   <el-row class="inner-row">
     <el-col :span="3">
-      <h1 class="logo"></h1>
+      <h1 class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/>
+        </svg>
+        Piper
+      </h1>
     </el-col>
     <el-col :span="17">
       <el-menu theme="dark" :default-active="current" mode="horizontal" router @select="handleSelect">
@@ -35,13 +40,18 @@
       }
     }
     .logo {
-      text-indent: 100px;
       color: #fff;
-      font-size: 18px;
+      font-size: 24px;
+      font-weight: normal;
       height: 40px;
-      line-height: 44px;
+      line-height: 40px;
       margin: 12px 0 0 0;
-      background: url(../assets/img/logo.png) no-repeat;
+      svg {
+        width: 32px;
+        height: 32px;
+        vertical-align: middle;
+        margin-right: 5px;
+      }
     }
     .user-setting {
       cursor: pointer;
