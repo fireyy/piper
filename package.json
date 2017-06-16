@@ -18,7 +18,8 @@
     "build:server": "babel server --out-dir dist",
     "server": "node index.js",
     "start": "NODE_ENV=production node index.js",
-    "dev": "nodemon --watch server --watch build --exec npm run server"
+    "dev": "nodemon --watch server --watch build --exec npm run server",
+    "db:update": "node node_modules/.bin/sequelize db:migrate --config=config/db.js"
   },
   "dependencies": {
     "async-busboy": "^0.3.4",
@@ -29,7 +30,6 @@
     "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "element-ui": "^1.2.4",
-    "glob": "^7.1.1",
     "interactjs": "^1.2.8",
     "koa": "^2.1.0",
     "koa-bodyparser": "^4.1.0",
