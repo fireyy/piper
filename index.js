@@ -5,10 +5,6 @@ const env = process.env.NODE_ENV || 'development';
 const src = env === 'production' ? './dist/index' : './server/index';
 const config = require('./config')
 
-// if (env === 'development') {
-//   require('babel-register');
-// }
-
 const app = require(src);
 
 // check database

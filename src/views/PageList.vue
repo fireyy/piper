@@ -42,7 +42,7 @@
               </div>
               <div class="page-meta">
                 <h4>{{item.title}}</h4>
-                <div class="bottom clearfix">
+                <div class="bottom">
                   <span class="create_by">{{item.user.name}}</span>
                   <time class="time">{{ item.create_at | formatDate }}</time>
                 </div>
@@ -84,6 +84,7 @@
   .bottom {
     margin-top: 5px;
     line-height: 12px;
+    overflow: hidden;
   }
 
   .create_by {
@@ -112,15 +113,6 @@
     }
   }
 
-  .clearfix:before,
-  .clearfix:after {
-    display: table;
-    content: "";
-  }
-
-  .clearfix:after {
-    clear: both
-  }
   .hover-settings-container {
     z-index: 9;
     background-color: rgba(43, 50, 57, 0.8);
