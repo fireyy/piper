@@ -14,9 +14,11 @@ const webshot = require('webshot');
 const protocol = 'http://'
 
 module.exports = class {
-  static url = '/publish/:id';
+  constructor() {
+    this.url = '/publish/:id';
+  }
 
-  static async get(ctx) {
+  async get(ctx) {
     let { id } = ctx.params;
 
     let result = await models.pages.findAll({
@@ -37,7 +39,7 @@ module.exports = class {
     ctx.body = html
   }
 
-  static async put(ctx) {
+  async put(ctx) {
     // save data first
     await pageApi.put(ctx)
 

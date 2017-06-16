@@ -2,9 +2,11 @@ const __ = require("../constants");
 const models = require("../models");
 
 module.exports = class {
-  static url = "/page/:id";
+  constructor() {
+    this.url = '/page/:id';
+  }
 
-  static async delete(ctx) {
+  async delete(ctx) {
     let { id } = ctx.params;
 
     await models.pages.update(
@@ -30,7 +32,7 @@ module.exports = class {
     };
   }
 
-  static async get(ctx) {
+  async get(ctx) {
     let { id } = ctx.params;
 
     let result = await models.pages.findAll(
@@ -64,7 +66,7 @@ module.exports = class {
     ctx.body = page;
   }
 
-  static async put(ctx) {
+  async put(ctx) {
     let { id } = ctx.params;
     let { body } = ctx.request;
     let change = Object.create(null);

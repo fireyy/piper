@@ -1,9 +1,11 @@
 const models = require('../models');
 
 module.exports = class {
-  static url = '/changelogs';
+  constructor() {
+    this.url = '/changelogs';
+  }
 
-  static async get(ctx) {
+  async get(ctx) {
     let { page, size, title, action } = ctx.query;
     page = parseInt(page, 10)
     size = parseInt(size, 10)

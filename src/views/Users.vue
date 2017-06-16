@@ -2,7 +2,7 @@
   <div>
     <div class="page-header">
       <el-row type="flex" class="inner-row" justify="space-between">
-        <el-col :span="12">
+        <el-col :span="18">
           <el-form :inline="true">
             <el-form-item>
               <el-input placeholder="用户名"></el-input>
@@ -11,9 +11,6 @@
               <el-button type="primary" icon="search" @click="onSearch">查询</el-button>
             </el-form-item>
           </el-form>
-        </el-col>
-        <el-col :span="6" class="text-right">
-          <el-button type="primary" icon="plus" @click="handleCreate">新建</el-button>
         </el-col>
       </el-row>
     </div>
@@ -26,7 +23,6 @@
               <span>{{o.name}}</span>
               <div class="bottom clearfix">
                 <time class="time">{{ o.email }}</time>
-                <el-button type="text" class="button">操作按钮</el-button>
               </div>
             </div>
           </el-card>

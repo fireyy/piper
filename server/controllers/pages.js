@@ -2,9 +2,11 @@ const models = require('../models');
 const __ = require('../constants');
 
 module.exports = class {
-  static url = '/pages';
+  constructor() {
+    this.url = '/pages';
+  }
 
-  static async get(ctx) {
+  async get(ctx) {
     let { page, size, title, isPublish } = ctx.query;
     page = parseInt(page, 10)
     size = parseInt(size, 10)
@@ -42,7 +44,7 @@ module.exports = class {
     };
   }
 
-  static async put(ctx) {
+  async put(ctx) {
     let { title = '', config = '', items = '' } = ctx.request.body;
     title = title.trim();
     if (!title) throw { status: 400, name: 'ERROR_PARAMS', message: 'Title 不能为空' };

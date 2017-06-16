@@ -36,11 +36,10 @@ module.exports = async (files) => {
   var options = {
     url: OPADS_URL,
     json: true,
-    formData: {
+    formData: Object.assign({
       project: OPADS_PROJECT,
-      authkey: OPADS_AUTHKEY,
-      ...uploadObj
-    }
+      authkey: OPADS_AUTHKEY
+    }, uploadObj)
   };
 
   try {

@@ -1,9 +1,11 @@
 const models = require('../models')
 
 module.exports = class {
-  static url = '/count';
+  constructor() {
+    this.url = '/count';
+  }
 
-  static async get(ctx) {
+  async get(ctx) {
     let [result] = await models.pages.findAll({
       attributes: [
         [models.sequelize.fn('COUNT', models.sequelize.literal('CASE WHEN `is_publish` = 0 THEN 1 ELSE NULL END')), 'working'],
