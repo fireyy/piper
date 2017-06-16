@@ -14,12 +14,22 @@ npm install
 
 ### Config
 
-First of all，create a database `piper` in `Mysql`.
+First of all，create a database `piper` in `PostgreSQL`, `MySQL`, `SQLite` or `MSSQL`.
 
-Then set up `.env` file with your `Mysql` database connection details and qiniu upload config.
+Then set up `.env` file with your:
+
+- Database connection details
+- Qiniu SDK config
+- Github `CLIENT_ID` and `CLIENT_SECRET`
 
 ```shell
 cp env.sample .env
+```
+
+### Updating existing database
+
+```shell
+npm run db:update
 ```
 
 ### Develop
