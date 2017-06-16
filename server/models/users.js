@@ -20,6 +20,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       defaultValue: '0'
+    },
+    avatar: {
+      type: DataTypes.STRING(64),
+      allowNull: true,
+      defaultValue: '',
     }
   }, {
     tableName: 'users'

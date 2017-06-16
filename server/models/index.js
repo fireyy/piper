@@ -2,21 +2,10 @@ require('dotenv').config();
 const fs        = require("fs");
 const path      = require("path");
 const Sequelize = require('sequelize');
+const env       = process.env.NODE_ENV || "development";
+const config    = require(path.join(__dirname, '../../', 'config', 'db.js'))[env];
 
-let {
-  DATABASE_DIALECT = 'mysql',
-  DATABASE_HOST = '127.0.0.1',
-  DATABASE_PORT = 3306,
-  DATABASE_NAME = 'piper',
-  DATABASE_USER,
-  DATABASE_PASSWORD
-} = process.env;
-
-const sequelize = new Sequelize(DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, {
-  host: DATABASE_HOST,
-  dialect: DATABASE_DIALECT,
-  protocol: DATABASE_DIALECT,
-  port: DATABASE_PORT,
+const sequelize = new Sequelize(config.database, config.username, config.password, Object.assign({
   // 字段以下划线（_）来分割
   underscored: true,
   timezone: '+08:00',
@@ -29,7 +18,7 @@ const sequelize = new Sequelize(DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD,
     updatedAt: 'update_at'
   },
   // logging: false
-});
+}, config));
 
 let db = {};
 

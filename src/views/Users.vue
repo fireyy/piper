@@ -15,27 +15,34 @@
       </el-row>
     </div>
     <div class="layout-content inner-row">
-      <el-row>
-        <el-col :span="6" v-for="(o, index) in tableData" :offset="index > 0 ? 2 : 0" :key="index">
-          <el-card class="user-card" :body-style="{ padding: '0px' }">
-            <img src="" class="image">
+      <div class="user-cards">
+        <div class="user-card" v-for="(o, index) in tableData" :key="index">
+          <el-card :body-style="{ padding: '0px' }">
+            <img :src="o.avatar" class="image">
             <div style="padding: 14px;">
               <span>{{o.name}}</span>
-              <div class="bottom clearfix">
+              <div class="bottom">
                 <time class="time">{{ o.email }}</time>
               </div>
             </div>
           </el-card>
-        </el-col>
-      </el-row>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <style lang="less">
+.user-cards {
+  display: flex;
+  flex-wrap: wrap;
+}
 .user-card {
+  width: 20%;
+  padding: 10px;
+  box-sizing: border-box;
+  color: #999;
   .time {
     font-size: 13px;
-    color: #999;
   }
 
   .bottom {
@@ -50,20 +57,10 @@
 
   .image {
     width: 100%;
-    height: 50px;
+    height: 100%;
     border: none;
     background: #eee;
     display: block;
-  }
-
-  .clearfix:before,
-  .clearfix:after {
-      display: table;
-      content: "";
-  }
-
-  .clearfix:after {
-      clear: both
   }
 }
 </style>
