@@ -3,9 +3,7 @@
   <el-row class="inner-row">
     <el-col :span="3">
       <h1 class="logo">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/>
-        </svg>
+        <icon name="piper" scale="1.2"></icon>
         Piper
       </h1>
     </el-col>
@@ -46,11 +44,8 @@
       height: 40px;
       line-height: 40px;
       margin: 12px 0 0 0;
-      svg {
-        width: 32px;
-        height: 32px;
+      .fa-icon {
         vertical-align: middle;
-        margin-right: 5px;
       }
     }
     .user-setting {
@@ -62,7 +57,18 @@
 </style>
 <script>
   import api from '@/api'
+  import Icon from 'vue-awesome/components/Icon.vue'
+
+  Icon.register({
+    piper: {
+      width: 100,
+      height: 100,
+      raw: '<g fill="#fff"><path d="M50 42.1C45.6 42.1 42.1 45.6 42.1 50 42.1 53.8 44.8 57 48.4 57.7L48.4 100C48.9 100 49.5 100 50 100 50.5 100 51.1 100 51.6 100L51.6 57.7C55.2 57 57.9 53.8 57.9 50 57.9 45.6 54.4 42.1 50 42.1Z"/><path d="M100 50C100 22.4 77.6 0 50 0 22.4 0 0 22.4 0 50 0 76 19.8 97.3 45.1 99.8L45.1 99.8 45.1 99.7 45.1 99.7C45 79.4 32.7 63.7 27.6 58.1L27.6 58.1C27.6 58.1 25.5 55.6 26.7 52.6L36 29.1C36 29.1 37.7 24.8 41.5 24.8L50 24.8 58.5 24.8C62.3 24.8 64 29.1 64 29.1L73.3 52.6C74.5 55.6 72.4 58.1 72.4 58.1L72.4 58.1C67.3 63.7 55 79.4 54.9 99.7L54.9 99.8C80.2 97.3 100 76 100 50Z"/></g>'
+    }
+  })
+
   export default {
+    components: {Icon},
     computed: {
       current() {
         return this.$route.name

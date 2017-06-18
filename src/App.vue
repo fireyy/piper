@@ -70,6 +70,10 @@ a {
 .fade-enter, .fade-leave-active {
   opacity: 0;
 }
+.fa-icon {
+  width: auto;
+  height: 1em;
+}
 </style>
 <script>
   import loading from './components/loading.vue'
