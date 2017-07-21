@@ -76,6 +76,7 @@
     "html-webpack-plugin": "^2.28.0",
     "http-proxy-middleware": "^0.17.4",
     "json-loader": "^0.5.4",
+    "koa-convert": "^1.2.0",
     "koa-webpack-dev-middleware": "^1.4.4",
     "koa-webpack-hot-middleware": "^1.0.3",
     "less": "^2.7.2",
