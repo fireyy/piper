@@ -1,0 +1,21 @@
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+  - stable
+  - "8"
+  - "7"
+before_install:
+  - export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - npm i -g npm@5.3.3
+  - npm config set spin false
+install:
+  - npm install
+cache:
+  directories:
+    - node_modules
+after_script:
+  - npm run build
+  - npm run start
