@@ -66,6 +66,9 @@ router.get('/auth/github/callback',
 
 koa.use(router.routes())
 
+koa.use(require('./lib/api'));
+koa.use(require('koa-static')('dist'));
+
 // Require authentication for now
 koa.use(function(ctx, next) {
   if (ctx.isAuthenticated()) {
@@ -79,8 +82,5 @@ koa.use(function(ctx, next) {
     }
   }
 })
-
-koa.use(require('./lib/api'));
-koa.use(require('koa-static')('dist'));
 
 module.exports = koa;
