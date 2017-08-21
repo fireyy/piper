@@ -19,7 +19,7 @@ const GitHubStrategy = require('passport-github').Strategy;
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "http://127.0.0.1:4000/auth/github/callback"
+    callbackURL: process.env.GITHUB_CLIENT_CALLBACK_URL
   },
   function(accessToken, refreshToken, profile, cb) {
     let {
@@ -28,7 +28,6 @@ passport.use(new GitHubStrategy({
       id,
       avatar_url
     } = profile._json;
-    console.log("avatar_url", avatar_url)
     models.users.findOrCreate({where: {github_id: id}, defaults: {
       name: name,
       email: email,
