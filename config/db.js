@@ -2,6 +2,7 @@ require('dotenv').config();
 
 let {
   DATABASE_DIALECT = 'mysql',
+  DATABASE_STORAGE = './db.sqlite',
   DATABASE_HOST = '127.0.0.1',
   DATABASE_PORT = 3306,
   DATABASE_NAME = 'piper',
@@ -15,7 +16,8 @@ let base = {
   "database": DATABASE_NAME,
   "host": DATABASE_HOST,
   "port": DATABASE_PORT,
-  "dialect": DATABASE_DIALECT
+  "dialect": DATABASE_DIALECT,
+  "storage": DATABASE_STORAGE
 };
 
 module.exports = {
