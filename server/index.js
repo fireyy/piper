@@ -74,11 +74,14 @@ koa.use(function(ctx, next) {
   if (ctx.isAuthenticated()) {
     return next()
   } else {
-    // ctx.redirect('/')
-    throw {
-      status: 401,
-      name: 'NOT_LOGIN',
-      message: 'not login'
+    if (ctx.request.url.indexOf('/api/') !== -1) {
+      throw {
+        status: 401,
+        name: 'NOT_LOGIN',
+        message: 'not login'
+      }
+    } else {
+      ctx.redirect('/')
     }
   }
 })
