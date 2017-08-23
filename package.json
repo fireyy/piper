@@ -19,7 +19,8 @@
     "server": "node index.js",
     "start": "NODE_ENV=production node index.js",
     "dev": "nodemon --watch server --watch build --exec npm run server",
-    "db:update": "node node_modules/.bin/sequelize db:migrate --config=config/db.js"
+    "db:update": "node node_modules/.bin/sequelize db:migrate --config=config/db.js",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "async-busboy": "^0.3.4",
