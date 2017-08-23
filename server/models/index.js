@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
 const env       = process.env.NODE_ENV || "development";
 const config    = require(path.join(__dirname, '../../', 'config', 'db.js'))[env];
 
-const sequelize = new Sequelize(config.database, config.username, config.password, Object.assign({
+const params = Object.assign({
   // 字段以下划线（_）来分割
   underscored: true,
   dialectOptions: {
@@ -17,7 +17,15 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
     updatedAt: 'update_at'
   },
   // logging: false
-}, config));
+}, config);
+
+let sequelize
+
+if (config.url) {
+  sequelize = new Sequelize(config.url, params);
+} else {
+  sequelize = new Sequelize(config.database, config.username, config.password, params);
+}
 
 let db = {};
 

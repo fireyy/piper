@@ -7,7 +7,8 @@ let {
   DATABASE_PORT = 3306,
   DATABASE_NAME = 'piper',
   DATABASE_USER,
-  DATABASE_PASSWORD
+  DATABASE_PASSWORD,
+  DATABASE_URL
 } = process.env;
 
 let base = {
@@ -17,7 +18,8 @@ let base = {
   "host": DATABASE_HOST,
   "port": DATABASE_PORT,
   "dialect": DATABASE_DIALECT,
-  "storage": DATABASE_STORAGE
+  "storage": DATABASE_STORAGE,
+  "url": DATABASE_URL
 };
 
 module.exports = {
