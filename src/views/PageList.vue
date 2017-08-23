@@ -3,7 +3,7 @@
     <div class="page-header">
       <el-row type="flex" class="inner-row" justify="space-between">
         <el-col :span="18">
-          <el-form ref="searchForm" :modle="searchForm" :inline="true">
+          <el-form ref="searchForm" :model="searchForm" :inline="true">
             <el-form-item prop="title">
               <el-input style="width: 300px;" v-model="searchForm.title" placeholder="活动名称"></el-input>
             </el-form-item>
