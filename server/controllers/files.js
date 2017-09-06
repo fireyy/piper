@@ -1,7 +1,7 @@
-const asyncBusboy = require('async-busboy');
-const upload = require('../lib/publish');
+import asyncBusboy from 'async-busboy'
+import upload from '../lib/publish'
 
-module.exports = class {
+export default class {
   constructor() {
     this.url = '/files';
   }

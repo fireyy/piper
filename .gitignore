@@ -5,6 +5,5 @@ node_modules
 .idea
 public/*
 .vscode
-now.json
 .env
-.env.now
+.nuxt

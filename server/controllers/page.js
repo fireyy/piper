@@ -1,7 +1,7 @@
-const __ = require("../constants");
-const models = require("../models");
+import __ from '../constants'
+import models from '../models'
 
-module.exports = class {
+export default class {
   constructor() {
     this.url = '/page/:id';
   }

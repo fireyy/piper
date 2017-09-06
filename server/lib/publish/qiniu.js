@@ -41,7 +41,7 @@ const upload = (uptoken, localFile) => {
   })
 }
 
-module.exports = async (files) => {
+export default async (files) => {
 
   if (
     QINIU_ACCESS_KEY === 'YOUR QINIU AK' ||

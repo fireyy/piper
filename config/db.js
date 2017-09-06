@@ -22,7 +22,7 @@ let base = {
   "url": DATABASE_URL
 };
 
-module.exports = {
+export default {
   "development": base,
   "test": base,
   "production": base

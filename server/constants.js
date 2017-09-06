@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   VALUE_MAX_LENGTH: 10240,
   VALUE_TOO_LONG: {
                     status: 400,

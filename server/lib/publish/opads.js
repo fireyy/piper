@@ -16,7 +16,7 @@ const getUploadData = data => {
   return arr
 };
 
-module.exports = async (files) => {
+export default async (files) => {
 
   if (
     OPADS_URL === 'YOUR OPADS URL' ||

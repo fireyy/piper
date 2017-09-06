@@ -3,7 +3,13 @@ const fs        = require("fs");
 const path      = require("path");
 const Sequelize = require('sequelize');
 const env       = process.env.NODE_ENV || "development";
-const config    = require(path.join(__dirname, '../../', 'config', 'db.js'))[env];
+// const config    = require('../../config/db.js')[env];
+import configDB from '../../config/db.js';
+const config = configDB[env];
+
+import changelog from './changelog'
+import pages from './pages'
+import users from './users'
 
 const params = Object.assign({
   // 字段以下划线（_）来分割
@@ -29,15 +35,10 @@ if (config.url) {
 
 let db = {};
 
-fs
-  .readdirSync(__dirname)
-  .filter(function(file) {
-    return (file.indexOf(".") !== 0) && (file !== "index.js");
-  })
-  .forEach(function(file) {
-    var model = sequelize.import(path.join(__dirname, file));
-    db[model.name] = model;
-  });
+[changelog, pages, users].forEach(function(md) {
+  var model = md(sequelize, Sequelize);
+  db[model.name] = model;
+});
 
 Object.keys(db).forEach(function(modelName) {
   if ("associate" in db[modelName]) {
@@ -48,4 +49,4 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-module.exports = db;
+export default db;

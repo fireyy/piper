@@ -1,4 +1,4 @@
-const qiniu = require('./qiniu');
-const opads = require('./opads');
+import qiniu from './qiniu'
+// import opads from './opads'
 
-module.exports = qiniu;
+export default qiniu;

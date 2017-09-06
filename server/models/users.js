@@ -1,6 +1,6 @@
 /* jshint indent: 2 */
 
-module.exports = function(sequelize, DataTypes) {
+export default function(sequelize, DataTypes) {
   let users = sequelize.define('users', {
     id: {
       type: DataTypes.INTEGER(11),

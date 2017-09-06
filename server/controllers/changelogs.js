@@ -1,6 +1,6 @@
-const models = require('../models');
+import models from '../models'
 
-module.exports = class {
+export default class {
   constructor() {
     this.url = '/changelogs';
   }
@@ -20,7 +20,6 @@ module.exports = class {
     if (action && action != 0) {
       where['action'] = action
     }
-    console.log("where", where)
 
     let result = await models.changelog.findAndCountAll({
       attributes: ['action', 'create_at'],

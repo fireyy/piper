@@ -13,7 +13,7 @@ const webshot = require('webshot');
 
 const protocol = 'http://'
 
-module.exports = class {
+export default class {
   constructor() {
     this.url = '/publish/:id';
   }

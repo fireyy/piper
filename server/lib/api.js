@@ -1,26 +1,25 @@
-const KoaRouter = require('koa-router');
+import KoaRouter from 'koa-router'
+import fs from 'fs'
+import path from 'path'
+
+import changelogs from '../controllers/changelogs'
+import count from '../controllers/count'
+import files from '../controllers/files'
+import page from '../controllers/page'
+import pages from '../controllers/pages'
+import publish from '../controllers/publish'
+import users from '../controllers/users'
+
 const apiRouter = new KoaRouter({ prefix: '/api' });
-const fs = require("fs");
-const path = require('path');
 
-const controllerPath = path.join(__dirname, '../controllers');
-
-fs
-  .readdirSync(controllerPath)
-  .filter(function(file) {
-    return (file.indexOf(".") !== 0) && (file !== "index.js");
-  })
-  .forEach(function(file) {
-    let controllerClass = require(path.join(controllerPath, file));
-    let controller = new controllerClass();
-    for (let method of [ 'options', 'get', 'post', 'delete', 'put' ]) {
-      if (method in controller) {
-        apiRouter[method](controller.url, async (ctx, next) => {
-          return controller[method](ctx).then(next);
-        });
-      }
+[changelogs, count, files, page, pages, users].forEach(function(klass) {
+  let controller = new klass();
+  for (let method of [ 'options', 'get', 'post', 'delete', 'put' ]) {
+    if (method in controller) {
+      apiRouter[method](controller.url, async (ctx) => await controller[method](ctx));
     }
-  });
+  }
+});
 
 apiRouter.get('/logout', (ctx) => {
   ctx.logout()
@@ -29,4 +28,4 @@ apiRouter.get('/logout', (ctx) => {
   }
 })
 
-module.exports = apiRouter.routes();
+export default apiRouter

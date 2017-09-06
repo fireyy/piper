@@ -1,6 +1,6 @@
 require('dotenv').config()
 const passport = require('koa-passport')
-const models = require('../models')
+import models from '../models'
 
 passport.serializeUser(function(user, done) {
   done(null, user.id)
