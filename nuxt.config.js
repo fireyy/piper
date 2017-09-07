@@ -3,6 +3,14 @@ const path = require('path')
 module.exports = {
   srcDir: 'client/',
   /*
+  ** Router config
+  */
+  router: {
+    middleware: [
+      'check-auth'
+    ]
+  },
+  /*
   ** Headers of the page
   */
   head: {
@@ -35,7 +43,8 @@ module.exports = {
       'element-ui',
       'interactjs',
       'lodash',
-      'qr.js'
+      'qr.js',
+      'feather-icons'
     ],
     extend (config, { dev, isClient }) {
       config.resolve.alias['_variable.less'] = path.join(__dirname, './assets/skin/_variable.less'),

@@ -27,7 +27,7 @@
               </div>
               <ul class="recent-changelogs">
                 <li v-for="(item, index) in recentChangeLog" :key="index" class="text item">
-                  {{ item.user.name }} 于 {{ item.create_at | formatDate }} {{'action' + item.action | lang}} 了 <router-link :to="{ name: 'design', params: { id: item.page_id }}">{{ item.page.title }}</router-link>
+                  {{ item.user.name }} 于 {{ item.create_at | formatDate }} {{'action' + item.action | lang}} 了 <router-link :to="{ name: 'design-id', params: { id: item.page_id }}">{{ item.page.title }}</router-link>
                 </li>
               </ul>
             </el-card>

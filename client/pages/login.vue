@@ -5,16 +5,19 @@
     </div>
     <div class="passports">
       <el-tooltip effect="dark" content="使用 Github 登录" placement="top">
-        <a href="/auth/github" class="passport">Github</a>
+        <a href="/auth/github" class="passport"><icon name="github" /></a>
       </el-tooltip>
     </div>
   </el-card>
 </template>
 <script>
-import api from '@/api'
+import Icon from '@/components/icon.vue'
 
 export default {
   layout: 'simple',
+  components: {
+    Icon
+  },
   data() {
     return {
       loading: false

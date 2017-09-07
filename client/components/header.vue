@@ -3,6 +3,7 @@
   <el-row class="inner-row">
     <el-col :span="3">
       <h1 class="logo">
+        <icon name="feather" />
         Piper
       </h1>
     </el-col>
@@ -56,9 +57,13 @@
 </style>
 <script>
   import api from '@/api'
+  import Icon from '@/components/icon.vue'
 
   export default {
     name: 'header',
+    components: {
+      Icon
+    },
     computed: {
       current() {
         return this.$route.name
@@ -68,7 +73,7 @@
           {
             "title": "首页",
             "route": {
-              "name": "home"
+              "name": "index"
             }
           },
           {

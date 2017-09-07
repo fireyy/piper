@@ -515,28 +515,12 @@ router.get('/auth/github', passport.authenticate('github'));
 
 router.get('/auth/github/callback', passport.authenticate('github', {
   successRedirect: '/',
-  failureRedirect: '/'
+  // TODO: login failure page
+  failureRedirect: '/login'
 }));
 
 app.use(router.routes());
 app.use(__WEBPACK_IMPORTED_MODULE_2__lib_api__["a" /* default */].routes());
-
-// Require authentication for now
-// app.use(function(ctx, next) {
-//   if (ctx.isAuthenticated()) {
-//     return next()
-//   } else {
-//     if (ctx.request.url.indexOf('/api/') !== -1) {
-//       throw {
-//         status: 401,
-//         name: 'NOT_LOGIN',
-//         message: 'not login'
-//       }
-//     } else {
-//       ctx.redirect('/login')
-//     }
-//   }
-// })
 
 app.use(function (ctx) {
   ctx.status = 200; // koa defaults to 404 when it sees that status is unset
@@ -637,13 +621,25 @@ var apiRouter = new __WEBPACK_IMPORTED_MODULE_1_koa_router___default.a({ prefix:
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  _context.next = 2;
+                  if (!ctx.isAuthenticated()) {
+                    _context.next = 6;
+                    break;
+                  }
+
+                  _context.next = 3;
                   return controller[method](ctx);
 
-                case 2:
+                case 3:
                   return _context.abrupt('return', _context.sent);
 
-                case 3:
+                case 6:
+                  throw {
+                    status: 401,
+                    name: 'NOT_LOGIN',
+                    message: 'not login'
+                  };
+
+                case 7:
                 case 'end':
                   return _context.stop();
               }
@@ -1912,6 +1908,12 @@ module.exports = require("passport-github");
 module.exports = {
   srcDir: 'client/',
   /*
+  ** Router config
+  */
+  router: {
+    middleware: ['check-auth']
+  },
+  /*
   ** Headers of the page
   */
   head: {
@@ -1931,7 +1933,7 @@ module.exports = {
   ** Build
   */
   build: {
-    vendor: ['axios', 'element-ui', 'interactjs', 'lodash', 'qr.js'],
+    vendor: ['axios', 'element-ui', 'interactjs', 'lodash', 'qr.js', 'feather-icons'],
     extend: function extend(config, _ref) {
       var dev = _ref.dev,
           isClient = _ref.isClient;

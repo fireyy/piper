@@ -28,29 +28,13 @@ router.get('/auth/github',
 router.get('/auth/github/callback',
   passport.authenticate('github', {
     successRedirect: '/',
-    failureRedirect: '/'
+    // TODO: login failure page
+    failureRedirect: '/login'
   })
 )
 
 app.use(router.routes())
 app.use(apiRoute.routes())
-
-// Require authentication for now
-// app.use(function(ctx, next) {
-//   if (ctx.isAuthenticated()) {
-//     return next()
-//   } else {
-//     if (ctx.request.url.indexOf('/api/') !== -1) {
-//       throw {
-//         status: 401,
-//         name: 'NOT_LOGIN',
-//         message: 'not login'
-//       }
-//     } else {
-//       ctx.redirect('/login')
-//     }
-//   }
-// })
 
 app.use(ctx => {
   ctx.status = 200 // koa defaults to 404 when it sees that status is unset

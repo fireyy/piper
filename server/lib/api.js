@@ -16,7 +16,17 @@ const apiRouter = new KoaRouter({ prefix: '/api' });
   let controller = new klass();
   for (let method of [ 'options', 'get', 'post', 'delete', 'put' ]) {
     if (method in controller) {
-      apiRouter[method](controller.url, async (ctx) => await controller[method](ctx));
+      apiRouter[method](controller.url, async (ctx) => {
+        if (ctx.isAuthenticated()) {
+          return await controller[method](ctx)
+        } else {
+          throw {
+            status: 401,
+            name: 'NOT_LOGIN',
+            message: 'not login'
+          }
+        }
+      });
     }
   }
 });
