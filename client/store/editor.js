@@ -57,10 +57,10 @@ const makeActions = mutations => (
 export const actions = {
   ...makeActions(normalMutations),
   activeRenderItem ({ commit }, event) {
-    commit(t.ACTIVE_RENDER_ITEM, getDragInfo(event))
+    commit(ACTIVE_RENDER_ITEM, getDragInfo(event))
   },
   dropRenderItem ({ state, commit }, event) {
-    let module = state.render.dragModule
+    let module = state.dragModule
     let {
       dragTag,
       position
@@ -70,13 +70,13 @@ export const actions = {
       let data = module.data || null
 
       if (dragTag === 'modules') {
-        commit(t.ADD_RENDER_ITEM, {
+        commit(ADD_RENDER_ITEM, {
           type: module.type,
           module: module
         })
       } else {
         let index = +(dragTag.split('-')[1])
-        commit(t.ADD_RENDER_ITEM, {
+        commit(ADD_RENDER_ITEM, {
           type: module.type,
           module: module,
           index: position === 'bottom' ? ++index : index,

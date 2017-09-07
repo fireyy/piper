@@ -1,4 +1,3 @@
-import { mapActions } from 'vuex'
 import rules from '../constants/rules'
 export default {
   props: {
@@ -17,9 +16,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
-      'editModuleData'
-    ])
+    editModuleData(data) {
+      this.$store.dispatch('editor/editModuleData', data)
+    }
   },
   watch: {
     'data': {

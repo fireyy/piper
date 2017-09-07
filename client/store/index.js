@@ -3,6 +3,8 @@ import {
   CHANGE_LOADING_BAR
 } from '@/constants/mutation-types'
 
+export const strict = false
+
 export const state = () => ({
   activeDocumentTitle: false,
   loading: false

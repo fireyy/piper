@@ -2,6 +2,6 @@ import inputs from './input'
 
 export default {
   ...inputs,
-  group   : require('./group.vue'),
-  htmlStyle : require('./html-style.vue')
+  group   : require('./group.vue').default,
+  htmlStyle : require('./html-style.vue').default
 }

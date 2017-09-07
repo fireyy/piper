@@ -217,7 +217,6 @@ export default {
     onSort(newIndex, oldIndex) {
       setTimeout(() => {
         this.editRenderItem(this.items[newIndex])
-        //this.$store.commit('EDIT_RENDER_ITEM', this.items[newIndex])
       }, 0)
     },
     updateStyle(item, position) {
