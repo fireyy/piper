@@ -17,7 +17,7 @@
   <div class="container inner-row">
     <module-container></module-container>
 
-    <render></render>
+    <render-container></render-container>
 
     <property></property>
   </div>
@@ -35,26 +35,40 @@
 
 <script>
 import api from '@/api'
-import { mapGetters, mapActions } from 'vuex'
 import _ from 'lodash'
-import render from '@/components/render.vue'
+import renderContainer from '@/components/render.vue'
 import moduleContainer from '@/components/module-container.vue'
 import property from '@/components/property.vue'
 import Qrcode from '@/components/qrcode.vue'
 
 export default {
+  name: 'design-id',
   components: {
     property,
     moduleContainer,
-    render,
+    renderContainer,
     Qrcode
+  },
+
+  fetch ({ store, params }) {
+    // return axios.get('http://my-api/stars')
+    // .then((res) => {
+    //   store.commit('setStars', res.data)
+    // })
+    if(params.id){
+      return api.page.getData(params.id).then((res)=>{
+        store.commit('editor/EDIT_RENDER_DATA', res.data)
+      });
+    }else{
+      return store.dispatch('editor/resetRenderState')
+    }
   },
 
   mounted() {
     this.addDataWatcher()
     window.addEventListener("beforeunload", this.beforeunload);
     // 初始化数据
-    this.fetchData()
+    // this.fetchData()
   },
 
   beforeDestroy() {
@@ -81,24 +95,21 @@ export default {
       next()
     }
   },
-  watch: {
-    '$route': 'fetchData'
-  },
   computed: {
-    ...mapGetters({
-      loading: 'loading',
-      renderData: 'render'
-    }),
+    loading() {
+      return this.$store.getters.loading
+    },
+    renderData() {
+      return this.$store.getters['editor/render']
+    },
     id() {
       return this.$route.params.id || ''
     }
   },
   methods: {
-    ...mapActions([
-      'focusDocumentTitle',
-      'editRenderData',
-      'resetRenderState'
-    ]),
+    focusDocumentTitle(bool) {
+      this.$store.dispatch('focusDocumentTitle', bool)
+    },
     addDataWatcher() {
       this.watchItems = this.$watch('renderData.items', function(val){
         console.log("watch items", val)
@@ -200,17 +211,6 @@ export default {
       var confirmationMessage = "可能有数据未保存";
       e.returnValue = confirmationMessage;
       return confirmationMessage
-    },
-
-    fetchData() {
-      if(this.id){
-        api.page.getData(this.id).then((res)=>{
-          let data = res.data
-          this.editRenderData(data)
-        });
-      }else{
-        this.resetRenderState()
-      }
     }
   },
 

@@ -1,14 +1,14 @@
 import {
   FOCUS_DOCUMENT_TITLE,
   CHANGE_LOADING_BAR
-} from './mutation-types'
+} from '@/constants/mutation-types'
 
-const state = {
+export const state = () => ({
   activeDocumentTitle: false,
   loading: false
-}
+})
 
-const getters = {
+export const getters = {
   base: state => state,
   loading: state => state.loading
 }
@@ -28,7 +28,7 @@ export const actions = {
   redirectLogin
 }
 
-const mutations = {
+export const mutations = {
   [FOCUS_DOCUMENT_TITLE](state, active = true) {
     state.activeDocumentTitle = active
   },

@@ -4,10 +4,10 @@
     <i class="el-icon-information"></i>
     <br>请选择一个模块
   </div>
-  <div class="page-config-editor" v-if="render.config === currentModule">
+  <div class="page-config-editor" v-if="renderData.config === currentModule">
     <h2>页面设置</h2>
     <el-form label-width="100px" label-position="left">
-      <component v-bind:key="key" v-for="(value, key) in render.config" :title="key | lang" :index="key" :data="value" :is="value.type">
+      <component v-bind:key="key" v-for="(value, key) in renderData.config" :title="key | lang" :index="key" :data="value" :is="value.type">
       </component>
     </el-form>
   </div>
@@ -57,22 +57,23 @@
 }
 </style>
 <script>
-import {
-  mapGetters,
-  mapActions
-} from 'vuex'
 import components from '../property'
 import _ from 'lodash'
 
 export default {
+  name: 'property',
   components,
 
   computed: {
-    ...mapGetters({
-      render: 'render',
-      items: 'renderItems',
-      currentModule: 'currentModule'
-    })
+    renderData() {
+      return this.$store.getters['editor/render']
+    },
+    items() {
+      return this.$store.getters['editor/renderItems']
+    },
+    currentModule() {
+      return this.$store.getters['editor/currentModule']
+    }
   },
 
   data() {

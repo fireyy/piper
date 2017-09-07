@@ -2,10 +2,10 @@
 <div class="modules-container">
   <el-tabs type="border-card">
     <el-tab-pane label="组件库">
-      <div class="modules" v-for="moduleItem in modules">
+      <div class="modules" v-for="moduleItem in modules" :key="moduleItem.title">
         <div class="title">{{moduleItem.title}}</div>
         <ul class="items">
-          <li v-for="item in moduleItem.items" title="按住拖拽" @mousedown="drag(item)" class="item">
+          <li v-for="item in moduleItem.items" :key="item.alias" title="按住拖拽" @mousedown="drag(item)" class="item">
             <i :class="'el-icon-'+item.icon"></i> {{item.alias}}
           </li>
         </ul>
@@ -74,32 +74,36 @@
 </style>
 <script>
 import _ from 'lodash'
-import { mapGetters, mapActions } from 'vuex'
 import {
   modules
 } from '../modules'
 import dragDrop from './drag-drop.vue'
 
 export default {
+  name: 'module-container',
   components: {
     dragDrop
   },
 
   computed: {
-    ...mapGetters({
-      items: 'renderItems',
-      currentModule: 'currentModule'
-    }),
+    items() {
+      return this.$store.getters['editor/renderItems']
+    },
+    currentModule() {
+      return this.$store.getters['editor/currentModule']
+    },
     currentNodeKey(){
-      return this.currentModule._timestamp ? this.currentModule._timestamp : 0
+      return this.currentModule && this.currentModule._timestamp ? this.currentModule._timestamp : 0
     }
   },
 
   methods: {
-    ...mapActions([
-      'editDragModule',
-      'editRenderItem'
-    ]),
+    editRenderItem(node) {
+      this.$store.dispatch('editor/editRenderItem', node)
+    },
+    editDragModule(item) {
+      this.$store.dispatch('editor/editDragModule', item)
+    },
     drag(item) {
       this.editDragModule(item)
     },

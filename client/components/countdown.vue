@@ -22,6 +22,7 @@
 </template>
 <script>
 export default {
+  name: 'countdown',
   props: {
     start: {
       default: () => new Date()

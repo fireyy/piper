@@ -8,6 +8,7 @@
 import countdown from '../components/countdown.vue'
 
 export default {
+  name: 'modules-countdown',
   props: ['data'],
 
   components: {

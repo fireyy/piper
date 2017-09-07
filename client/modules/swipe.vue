@@ -20,6 +20,7 @@ import Swiper from '../components/swiper/index.vue'
 import SwiperItem from '../components/swiper/swiper-item.vue'
 
 export default {
+  name: 'modules-swipe',
   props: ['data'],
 
   components: {

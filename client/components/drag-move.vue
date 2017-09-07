@@ -15,8 +15,9 @@
 import interact from 'interactjs'
 import { offset } from '../utils'
 
-window.interact = interact
+// window.interact = interact
 export default {
+  name: 'drag-move',
   props: {
     drag: Boolean,
     pStyle: Object,

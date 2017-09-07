@@ -1,9 +1,9 @@
 <template>
   <div @click="blurRenderItem" class="render-container">
-    <div drag-tag="modules" :class="{'active': activeModules, 'current': currentModule === render.config}" class="body" :style="customStyle">
+    <div drag-tag="modules" :class="{'active': activeModules, 'current': currentModule === renderData.config}" class="body" :style="customStyle">
       <div class="phone-head">
-        <input class="page-title" type="text" ref="documentTitle" v-model="render.title">
-        <div class="page-config" @click.stop.prevent="editRenderItem(render.config)">
+        <input class="page-title" type="text" ref="documentTitle" v-model="renderData.title">
+        <div class="page-config" @click.stop.prevent="editRenderItem(renderData.config)">
           <el-tooltip content="页面设置" placement="top">
             <i class="el-icon-setting"></i>
           </el-tooltip>
@@ -144,7 +144,6 @@
 
 </style>
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import {
   components,
   modules
@@ -155,6 +154,7 @@ import ctrlBar from './ctrl-bar.vue'
 import { createStyles } from '../utils'
 
 export default {
+  name: 'render-container',
   components: {
     ...components,
     dragDrop,
@@ -179,33 +179,44 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      base: 'base',
-      render: 'render',
-      items: 'renderItems',
-      activeModules: 'activeModules',
-      activeModule: 'activeModule',
-      currentModule: 'currentModule'
-    }),
+    base() {
+      return this.$store.getters.base
+    },
+    activeModules() {
+      return this.$store.getters['editor/activeModules']
+    },
+    activeModule() {
+      return this.$store.getters['editor/activeModule']
+    },
+    currentModule() {
+      return this.$store.getters['editor/currentModule']
+    },
+    items() {
+      return this.$store.getters['editor/renderItems']
+    },
+    renderData() {
+      return this.$store.getters['editor/render']
+    },
     customStyle() {
-      return createStyles(this.render.config)
+      return createStyles(this.renderData.config)
     }
   },
 
   methods: {
-    ...mapActions([
-      'editRenderItem',
-      'blurRenderItem',
-      'editDragModule'
-    ]),
+    editRenderItem(item) {
+      this.$store.dispatch('editor/editRenderItem', item)
+    },
+    blurRenderItem() {
+      this.$store.dispatch('editor/blurRenderItem')
+    },
     drag(item) {
-      var index = this.items.indexOf(item);
+      var index = this.items.indexOf(item)
       this.items.splice(index, 1)
-      this.editDragModule(item)
+      this.$store.dispatch('editor/editDragModule', item)
     },
     onSort(newIndex, oldIndex) {
       setTimeout(() => {
-        this.editRenderItem(this.items[newIndex]);
+        this.editRenderItem(this.items[newIndex])
         //this.$store.commit('EDIT_RENDER_ITEM', this.items[newIndex])
       }, 0)
     },

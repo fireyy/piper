@@ -24,6 +24,7 @@ const getBackingStorePixelRatio = (ctx) => {
 }
 
 export default {
+  name: 'qrcode',
   props: {
     val: {
       type: String,

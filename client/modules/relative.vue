@@ -13,6 +13,7 @@
 <script>
 import { createStyles } from '../utils'
 export default {
+  name: 'modules-relative',
   props: ['data'],
   computed: {
     customStyle() {

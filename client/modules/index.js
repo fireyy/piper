@@ -192,7 +192,7 @@ export let components = {};
 modules.forEach(function(obj){
   if(obj.items && obj.items.length > 0) {
     obj.items.forEach(function(item){
-      components[item.type] = item.component
+      components[item.type] = item.component.default
     })
   }
 });

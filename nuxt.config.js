@@ -34,7 +34,8 @@ module.exports = {
       'axios',
       'element-ui',
       'interactjs',
-      'lodash'
+      'lodash',
+      'qr.js'
     ],
     extend (config, { dev, isClient }) {
       config.resolve.alias['_variable.less'] = path.join(__dirname, './assets/skin/_variable.less'),

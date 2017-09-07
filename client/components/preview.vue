@@ -18,6 +18,7 @@ import {
 } from '../modules'
 
 export default {
+  name: 'preview',
   props: ['items'],
 
   components,

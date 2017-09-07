@@ -38,6 +38,7 @@
 </style>
 <script>
 export default {
+  name: 'ctrl-bar',
   props: {
     items: {
       type: Array

@@ -58,6 +58,7 @@
   import api from '@/api'
 
   export default {
+    name: 'header',
     computed: {
       current() {
         return this.$route.name

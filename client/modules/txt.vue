@@ -11,6 +11,7 @@
 <script>
 import { createStyles } from '../utils'
 export default {
+  name: 'modules-txt',
   props: ['data'],
   computed: {
     customStyle() {

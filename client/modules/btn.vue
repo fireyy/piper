@@ -47,6 +47,7 @@
 <script>
 
 export default {
+  name: 'modules-btn',
   props: ['data'],
   computed: {
     customClass() {

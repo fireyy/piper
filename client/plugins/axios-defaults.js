@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export default ({ req, isServer, redirect }) => {
-  axios.defaults.baseURL = '/api'
+  axios.defaults.baseURL = 'http://127.0.0.1:3000/api'
   axios.defaults.timeout = 5000
   if (!isServer) {
     axios.interceptors.response.use(

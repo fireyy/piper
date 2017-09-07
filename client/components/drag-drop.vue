@@ -24,7 +24,6 @@
 }
 </style>
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import _ from 'lodash'
 import {
   components,
@@ -32,20 +31,24 @@ import {
 } from '../modules'
 
 export default {
-
+  name: 'drag-drop',
   components: components,
 
   computed: {
-    ...mapGetters({
-      dragInfo: 'dragInfo',
-      dragModule: 'dragModule',
-      draging: 'draging'
-    })
+    draging () {
+      return this.$store.state.editor.draging
+    },
+    dragModule () {
+      return this.$store.state.editor.dragModule
+    },
+    dragInfo () {
+      return this.$store.state.editor.dragInfo
+    }
   },
   watch: {
     dragModule: function(newVal) {
       this.show = !(_.isEmpty(newVal))
-  
+
       if (this.show && !this.draging) {
         this.editDraging(true)
         this.hitDrop = false
@@ -56,14 +59,21 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      'addRenderItem',
-      'activeRenderItem',
-      'dropRenderItem',
-      'blurRenderItem',
-      'editDragModule',
-      'editDraging'
-    ]),
+    activeRenderItem(event) {
+      this.$store.dispatch('editor/activeRenderItem', event)
+    },
+    blurRenderItem() {
+      this.$store.dispatch('editor/blurRenderItem')
+    },
+    dropRenderItem(event) {
+      this.$store.dispatch('editor/dropRenderItem', event)
+    },
+    editDragModule(item) {
+      this.$store.dispatch('editor/editDragModule', item)
+    },
+    editDraging(bool) {
+      this.$store.dispatch('editor/editDraging', bool)
+    },
     startDrag() {
       let that = this
 

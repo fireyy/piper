@@ -12,7 +12,7 @@ import {
   EDIT_RENDER_DATA,
   EDIT_MODULE_DATA,
   RESET_RENDER_STATE
-} from './mutation-types'
+} from '@/constants/mutation-types'
 
 import defaultConfig from '~/constants/default'
 
@@ -26,8 +26,11 @@ const createDefaultState = (data) => {
   data.draging = false
 }
 
-const state = {}
-createDefaultState(state)
+export const state = () => {
+  let state = {}
+  createDefaultState(state)
+  return state
+}
 
 const normalMutations = {
   addRenderItem: ADD_RENDER_ITEM,
@@ -51,7 +54,7 @@ const makeActions = mutations => (
   }, {})
 );
 
-const actions = {
+export const actions = {
   ...makeActions(normalMutations),
   activeRenderItem ({ commit }, event) {
     commit(t.ACTIVE_RENDER_ITEM, getDragInfo(event))
@@ -86,18 +89,15 @@ const actions = {
   }
 }
 
-const getters = {
+export const getters = {
   activeModules: state => state.dragInfo.dragTag === 'modules',
   activeModule: state => state.dragInfo,
   currentModule: state => state.current,
-  dragInfo: state => state.dragInfo,
-  draging: state => state.draging,
-  dragModule: state => state.dragModule,
   render: state => state,
   renderItems: state => state.items
 }
 
-const mutations = {
+export const mutations = {
   [ADD_RENDER_ITEM](state, { type, module, index: index = state.items.length + 1, parent: parent = null }) {
 
     let newItem = flow(

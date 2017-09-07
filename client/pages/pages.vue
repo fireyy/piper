@@ -181,10 +181,10 @@
         });
       },
       handleCreate() {
-        this.$router.push('design')
+        this.$router.push('design-id')
       },
       handleEdit(index, row) {
-        this.$router.push({ name: 'design', params: { id: row.id }})
+        this.$router.push({ name: 'design-id', params: { id: row.id }})
       },
       handleDelete(index, row) {
         this.$confirm('此操作将删除该记录, 是否继续?', '提示', {

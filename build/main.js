@@ -498,13 +498,13 @@ var host = process.env.HOST || '127.0.0.1';
 var port = process.env.PORT || 3000;
 
 app.keys = ['i-love-piper'];
-app.use(__webpack_require__(35)({}, app));
+app.use(__webpack_require__(34)({}, app));
 
-app.use(__webpack_require__(36)());
+app.use(__webpack_require__(35)());
 // app.use(require('./lib/errorlog'));
 
 // authentication
-__webpack_require__(37);
+__webpack_require__(36);
 var passport = __webpack_require__(9);
 app.use(passport.initialize());
 app.use(passport.session());
@@ -552,7 +552,7 @@ app.use(function (ctx) {
 });
 
 // Import and Set Nuxt.js options
-var config = __webpack_require__(34);
+var config = __webpack_require__(38);
 config.dev = !(app.env === 'production');
 
 // Instantiate nuxt.js
@@ -1806,58 +1806,18 @@ var _class = function () {
 
 /***/ }),
 /* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(__dirname) {var path = __webpack_require__(2);
-
-module.exports = {
-  srcDir: 'client/',
-  /*
-  ** Headers of the page
-  */
-  head: {
-    title: 'Piper',
-    meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { hid: 'description', name: 'description', content: 'A drag-and-drop mobile website builder base on Vue.' }],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
-  },
-  /*
-  ** Global CSS
-  */
-  css: ['@/assets/main.css'],
-  /*
-  ** Customize the progress-bar color
-  */
-  loading: { color: '#3B8070' },
-  /*
-  ** Build
-  */
-  build: {
-    vendor: ['axios', 'element-ui', 'interactjs', 'lodash'],
-    extend: function extend(config, _ref) {
-      var dev = _ref.dev,
-          isClient = _ref.isClient;
-
-      config.resolve.alias['_variable.less'] = path.join(__dirname, './assets/skin/_variable.less'), config.resolve.alias['_base.less'] = path.join(__dirname, './assets/skin/_base.less');
-    }
-  },
-  plugins: ['@/plugins/filters.js', '@/plugins/element-ui.js', '@/plugins/axios-defaults']
-};
-/* WEBPACK VAR INJECTION */}.call(exports, ""))
-
-/***/ }),
-/* 35 */
 /***/ (function(module, exports) {
 
 module.exports = require("koa-session");
 
 /***/ }),
-/* 36 */
+/* 35 */
 /***/ (function(module, exports) {
 
 module.exports = require("koa-bodyparser");
 
 /***/ }),
-/* 37 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1914,7 +1874,7 @@ passport.deserializeUser(function () {
   };
 }());
 
-var GitHubStrategy = __webpack_require__(38).Strategy;
+var GitHubStrategy = __webpack_require__(37).Strategy;
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
@@ -1938,10 +1898,50 @@ passport.use(new GitHubStrategy({
 }));
 
 /***/ }),
-/* 38 */
+/* 37 */
 /***/ (function(module, exports) {
 
 module.exports = require("passport-github");
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(__dirname) {var path = __webpack_require__(2);
+
+module.exports = {
+  srcDir: 'client/',
+  /*
+  ** Headers of the page
+  */
+  head: {
+    title: 'Piper',
+    meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { hid: 'description', name: 'description', content: 'A drag-and-drop mobile website builder base on Vue.' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+  },
+  /*
+  ** Global CSS
+  */
+  css: ['@/assets/main.css'],
+  /*
+  ** Customize the progress-bar color
+  */
+  loading: { color: '#3B8070' },
+  /*
+  ** Build
+  */
+  build: {
+    vendor: ['axios', 'element-ui', 'interactjs', 'lodash', 'qr.js'],
+    extend: function extend(config, _ref) {
+      var dev = _ref.dev,
+          isClient = _ref.isClient;
+
+      config.resolve.alias['_variable.less'] = path.join(__dirname, './assets/skin/_variable.less'), config.resolve.alias['_base.less'] = path.join(__dirname, './assets/skin/_base.less');
+    }
+  },
+  plugins: ['@/plugins/filters.js', '@/plugins/element-ui.js', '@/plugins/axios-defaults']
+};
+/* WEBPACK VAR INJECTION */}.call(exports, ""))
 
 /***/ })
 /******/ ]);
