@@ -20,6 +20,17 @@ npm install
 
 First of all，create a database `piper` in `PostgreSQL`, `MySQL`, `SQLite` or `MSSQL`.
 
+```shell
+# use MySQL
+npm install mysql2
+
+# use SQLite
+npm install sqlite3
+
+# use PostgreSQL
+npm install pg pg-hstore
+```
+
 Then set up `.env` file with your:
 
 - Database connection details
@@ -28,12 +39,6 @@ Then set up `.env` file with your:
 
 ```shell
 cp env.sample .env
-```
-
-### Updating existing database
-
-```shell
-npm run db:update
 ```
 
 ### Develop
@@ -55,6 +60,13 @@ npm run dev
     border: 1Px solid; // ignored
     border-width: 2PX; // ignored
 }
+```
+
+### Updating existing database
+
+```shell
+npm install sequelize-cli
+npm run db:migrate
 ```
 
 ### Changelog

@@ -77,8 +77,7 @@ module.exports = __webpack_require__(14);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_db_js__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__db_js__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__changelog__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__users__ = __webpack_require__(20);
@@ -89,7 +88,7 @@ var Sequelize = __webpack_require__(16);
 var env = "development" || "development";
 // const config    = require('../../config/db.js')[env];
 
-var config = __WEBPACK_IMPORTED_MODULE_0__config_db_js__["a" /* default */][env];
+var config = __WEBPACK_IMPORTED_MODULE_0__db_js__["a" /* default */][env];
 
 
 
@@ -105,8 +104,8 @@ var params = Object.assign({
     timestamps: true,
     createdAt: 'create_at',
     updatedAt: 'update_at'
-  }
-  // logging: false
+  },
+  logging: false
 }, config);
 
 var sequelize = void 0;
@@ -133,7 +132,7 @@ Object.keys(db).forEach(function (modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-/* harmony default export */ __webpack_exports__["default"] = (db);
+/* harmony default export */ __webpack_exports__["a"] = (db);
 
 /***/ }),
 /* 2 */
@@ -164,19 +163,17 @@ module.exports = require("koa-router");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__qiniu__ = __webpack_require__(24);
 
 // import opads from './opads'
 
-/* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_0__qiniu__["a" /* default */]);
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0__qiniu__["a" /* default */]);
 
 /***/ }),
 /* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_fireyy_Works_piper_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_fireyy_Works_piper_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Users_fireyy_Works_piper_node_modules_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__constants__ = __webpack_require__(8);
@@ -212,7 +209,7 @@ var _class = function () {
               case 0:
                 id = ctx.params.id;
                 _context.next = 3;
-                return __WEBPACK_IMPORTED_MODULE_2__models__["default"].pages.update({
+                return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].pages.update({
                   is_delete: 1
                 }, {
                   where: {
@@ -222,7 +219,7 @@ var _class = function () {
 
               case 3:
                 _context.next = 5;
-                return __WEBPACK_IMPORTED_MODULE_2__models__["default"].changelog.create({
+                return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].changelog.create({
                   action: 3,
                   page_id: id,
                   items: null,
@@ -260,7 +257,7 @@ var _class = function () {
               case 0:
                 id = ctx.params.id;
                 _context2.next = 3;
-                return __WEBPACK_IMPORTED_MODULE_2__models__["default"].pages.findAll({
+                return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].pages.findAll({
                   where: {
                     is_delete: 0,
                     id: id
@@ -379,7 +376,7 @@ var _class = function () {
                 }
 
                 _context3.next = 16;
-                return __WEBPACK_IMPORTED_MODULE_2__models__["default"].pages.findAll({
+                return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].pages.findAll({
                   attributes: ['is_delete', 'items'],
                   where: {
                     id: id
@@ -404,7 +401,7 @@ var _class = function () {
 
               case 21:
                 _context3.next = 23;
-                return __WEBPACK_IMPORTED_MODULE_2__models__["default"].pages.update(change, {
+                return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].pages.update(change, {
                   where: {
                     id: id
                   }
@@ -421,7 +418,7 @@ var _class = function () {
                 }
 
                 _context3.next = 27;
-                return __WEBPACK_IMPORTED_MODULE_2__models__["default"].changelog.create({
+                return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].changelog.create({
                   action: 2,
                   page_id: id,
                   items: change.items,
@@ -453,7 +450,7 @@ var _class = function () {
   return _class;
 }();
 
-/* harmony default export */ __webpack_exports__["default"] = (_class);
+/* harmony default export */ __webpack_exports__["a"] = (_class);
 ;
 
 /***/ }),
@@ -498,13 +495,13 @@ var host = process.env.HOST || '127.0.0.1';
 var port = process.env.PORT || 3000;
 
 app.keys = ['i-love-piper'];
-app.use(__webpack_require__(34)({}, app));
+app.use(__webpack_require__(32)({}, app));
 
-app.use(__webpack_require__(35)());
+app.use(__webpack_require__(33)());
 // app.use(require('./lib/errorlog'));
 
 // authentication
-__webpack_require__(36);
+__webpack_require__(34);
 var passport = __webpack_require__(9);
 app.use(passport.initialize());
 app.use(passport.session());
@@ -536,7 +533,7 @@ app.use(function (ctx) {
 });
 
 // Import and Set Nuxt.js options
-var config = __webpack_require__(38);
+var config = __webpack_require__(36);
 config.dev = !(app.env === 'production');
 
 // Instantiate nuxt.js
@@ -551,7 +548,7 @@ if (config.dev) {
   });
 }
 
-__WEBPACK_IMPORTED_MODULE_3__models__["default"].sequelize.sync().then(function () {
+__WEBPACK_IMPORTED_MODULE_3__models__["a" /* default */].sequelize.sync().then(function () {
   app.listen(port, host);
   console.log('Server listening on ' + host + ':' + port); // eslint-disable-line no-console
 }).catch(function (err) {
@@ -589,7 +586,7 @@ module.exports = require("nuxt");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__controllers_page__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__controllers_pages__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__controllers_publish__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__controllers_users__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__controllers_users__ = __webpack_require__(31);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -608,38 +605,38 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 var apiRouter = new __WEBPACK_IMPORTED_MODULE_1_koa_router___default.a({ prefix: '/api' });
 
-[__WEBPACK_IMPORTED_MODULE_4__controllers_changelogs__["a" /* default */], __WEBPACK_IMPORTED_MODULE_5__controllers_count__["a" /* default */], __WEBPACK_IMPORTED_MODULE_6__controllers_files__["a" /* default */], __WEBPACK_IMPORTED_MODULE_7__controllers_page__["default"], __WEBPACK_IMPORTED_MODULE_8__controllers_pages__["a" /* default */], __WEBPACK_IMPORTED_MODULE_10__controllers_users__["a" /* default */]].forEach(function (klass) {
+[__WEBPACK_IMPORTED_MODULE_4__controllers_changelogs__["a" /* default */], __WEBPACK_IMPORTED_MODULE_5__controllers_count__["a" /* default */], __WEBPACK_IMPORTED_MODULE_6__controllers_files__["a" /* default */], __WEBPACK_IMPORTED_MODULE_7__controllers_page__["a" /* default */], __WEBPACK_IMPORTED_MODULE_8__controllers_pages__["a" /* default */], __WEBPACK_IMPORTED_MODULE_9__controllers_publish__["a" /* default */], __WEBPACK_IMPORTED_MODULE_10__controllers_users__["a" /* default */]].forEach(function (klass) {
   var _this = this;
 
   var controller = new klass();
 
   var _loop = function _loop(method) {
     if (method in controller) {
+      // apiRouter[method](controller.url, async (ctx) => {
+      //   if (ctx.isAuthenticated()) {
+      //     return await controller[method](ctx)
+      //   } else {
+      //     throw {
+      //       status: 401,
+      //       name: 'NOT_LOGIN',
+      //       message: 'not login'
+      //     }
+      //   }
+      // });
+      // TODO: ctx.isAuthenticated
       apiRouter[method](controller.url, function () {
         var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_fireyy_Works_piper_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(ctx) {
           return __WEBPACK_IMPORTED_MODULE_0__Users_fireyy_Works_piper_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  if (!ctx.isAuthenticated()) {
-                    _context.next = 6;
-                    break;
-                  }
-
-                  _context.next = 3;
+                  _context.next = 2;
                   return controller[method](ctx);
 
-                case 3:
+                case 2:
                   return _context.abrupt('return', _context.sent);
 
-                case 6:
-                  throw {
-                    status: 401,
-                    name: 'NOT_LOGIN',
-                    message: 'not login'
-                  };
-
-                case 7:
+                case 3:
                 case 'end':
                   return _context.stop();
               }
@@ -729,13 +726,13 @@ var _class = function () {
                 }
 
                 _context.next = 10;
-                return __WEBPACK_IMPORTED_MODULE_1__models__["default"].changelog.findAndCountAll({
+                return __WEBPACK_IMPORTED_MODULE_1__models__["a" /* default */].changelog.findAndCountAll({
                   attributes: ['action', 'create_at'],
                   include: [{
-                    model: __WEBPACK_IMPORTED_MODULE_1__models__["default"].pages,
+                    model: __WEBPACK_IMPORTED_MODULE_1__models__["a" /* default */].pages,
                     attributes: ['title']
                   }, {
-                    model: __WEBPACK_IMPORTED_MODULE_1__models__["default"].users,
+                    model: __WEBPACK_IMPORTED_MODULE_1__models__["a" /* default */].users,
                     attributes: ['name']
                   }],
                   offset: start,
@@ -784,46 +781,7 @@ var _class = function () {
 module.exports = require("sequelize");
 
 /***/ }),
-/* 17 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__(3).config();
-
-var _process$env = process.env,
-    _process$env$DATABASE = _process$env.DATABASE_DIALECT,
-    DATABASE_DIALECT = _process$env$DATABASE === undefined ? 'mysql' : _process$env$DATABASE,
-    _process$env$DATABASE2 = _process$env.DATABASE_STORAGE,
-    DATABASE_STORAGE = _process$env$DATABASE2 === undefined ? './db.sqlite' : _process$env$DATABASE2,
-    _process$env$DATABASE3 = _process$env.DATABASE_HOST,
-    DATABASE_HOST = _process$env$DATABASE3 === undefined ? '127.0.0.1' : _process$env$DATABASE3,
-    _process$env$DATABASE4 = _process$env.DATABASE_PORT,
-    DATABASE_PORT = _process$env$DATABASE4 === undefined ? 3306 : _process$env$DATABASE4,
-    _process$env$DATABASE5 = _process$env.DATABASE_NAME,
-    DATABASE_NAME = _process$env$DATABASE5 === undefined ? 'piper' : _process$env$DATABASE5,
-    DATABASE_USER = _process$env.DATABASE_USER,
-    DATABASE_PASSWORD = _process$env.DATABASE_PASSWORD,
-    DATABASE_URL = _process$env.DATABASE_URL;
-
-
-var base = {
-  "username": DATABASE_USER,
-  "password": DATABASE_PASSWORD,
-  "database": DATABASE_NAME,
-  "host": DATABASE_HOST,
-  "port": DATABASE_PORT,
-  "dialect": DATABASE_DIALECT,
-  "storage": DATABASE_STORAGE,
-  "url": DATABASE_URL
-};
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  "development": base,
-  "test": base,
-  "production": base
-});
-
-/***/ }),
+/* 17 */,
 /* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1017,8 +975,8 @@ var _class = function () {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return __WEBPACK_IMPORTED_MODULE_1__models__["default"].pages.findAll({
-                  attributes: [[__WEBPACK_IMPORTED_MODULE_1__models__["default"].sequelize.fn('COUNT', __WEBPACK_IMPORTED_MODULE_1__models__["default"].sequelize.literal('CASE WHEN is_publish = 0 THEN 1 ELSE NULL END')), 'working'], [__WEBPACK_IMPORTED_MODULE_1__models__["default"].sequelize.fn('COUNT', __WEBPACK_IMPORTED_MODULE_1__models__["default"].sequelize.literal('CASE WHEN is_publish = 1 THEN 1 ELSE NULL END')), 'published']],
+                return __WEBPACK_IMPORTED_MODULE_1__models__["a" /* default */].pages.findAll({
+                  attributes: [[__WEBPACK_IMPORTED_MODULE_1__models__["a" /* default */].sequelize.fn('COUNT', __WEBPACK_IMPORTED_MODULE_1__models__["a" /* default */].sequelize.literal('CASE WHEN is_publish = 0 THEN 1 ELSE NULL END')), 'working'], [__WEBPACK_IMPORTED_MODULE_1__models__["a" /* default */].sequelize.fn('COUNT', __WEBPACK_IMPORTED_MODULE_1__models__["a" /* default */].sequelize.literal('CASE WHEN is_publish = 1 THEN 1 ELSE NULL END')), 'published']],
                   where: {
                     is_delete: 0
                   }
@@ -1100,7 +1058,7 @@ var _class = function () {
                 files = _ref2.files;
                 fields = _ref2.fields;
                 _context.next = 7;
-                return Object(__WEBPACK_IMPORTED_MODULE_2__lib_publish__["default"])(files);
+                return Object(__WEBPACK_IMPORTED_MODULE_2__lib_publish__["a" /* default */])(files);
 
               case 7:
                 uploadRes = _context.sent;
@@ -1299,9 +1257,9 @@ var _class = function () {
                   where['is_publish'] = isPublish;
                 }
                 _context.next = 10;
-                return __WEBPACK_IMPORTED_MODULE_2__models__["default"].pages.findAndCountAll({
+                return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].pages.findAndCountAll({
                   include: [{
-                    model: __WEBPACK_IMPORTED_MODULE_2__models__["default"].users,
+                    model: __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].users,
                     attributes: ['name']
                   }],
                   offset: start,
@@ -1370,7 +1328,7 @@ var _class = function () {
                 config = JSON.stringify(config);
 
                 _context2.next = 10;
-                return __WEBPACK_IMPORTED_MODULE_2__models__["default"].pages.findOrCreate({
+                return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].pages.findOrCreate({
                   where: {
                     is_delete: 0,
                     title: title
@@ -1398,7 +1356,7 @@ var _class = function () {
 
               case 16:
                 _context2.next = 18;
-                return __WEBPACK_IMPORTED_MODULE_2__models__["default"].changelog.create({
+                return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].changelog.create({
                   action: 1,
                   page_id: page.id,
                   items: items,
@@ -1439,8 +1397,19 @@ var _class = function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(__dirname) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_fireyy_Works_piper_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_fireyy_Works_piper_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_fireyy_Works_piper_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Users_fireyy_Works_piper_node_modules_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__page__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_path__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_path___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_path__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_fs__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_fs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_fs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_mkdirp__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_mkdirp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_mkdirp__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__lib_publish__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_webshot__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_webshot___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_webshot__);
 
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -1451,18 +1420,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var pageApi = __webpack_require__(7);
-var models = __webpack_require__(1);
 
-var path = __webpack_require__(2);
-var views = __webpack_require__(29);
-var child_process = __webpack_require__(30);
-var fs = __webpack_require__(4);
-var mkdirp = __webpack_require__(31);
-var render = views(path.join(__dirname, '../views'), { ext: 'ejs' });
-var upload = __webpack_require__(6);
 
-var webshot = __webpack_require__(32);
+
+
+
+
+
 
 var protocol = 'http://';
 
@@ -1474,87 +1438,22 @@ var _class = function () {
   }
 
   _createClass(_class, [{
-    key: 'get',
+    key: 'put',
     value: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_fireyy_Works_piper_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(ctx) {
-        var id, result, page, html;
+        var id, _ref2, _ref3, page, dir, shotUrl, options;
+
         return __WEBPACK_IMPORTED_MODULE_0__Users_fireyy_Works_piper_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                id = ctx.params.id;
-                _context.next = 3;
-                return models.pages.findAll({
-                  where: {
-                    is_delete: 0,
-                    id: id
-                  }
-                });
-
-              case 3:
-                result = _context.sent;
-                page = result[0];
-
-                if (page) {
-                  _context.next = 7;
-                  break;
-                }
-
-                throw { status: 404, name: 'PAGES_NOT_FOUND', message: 'page is not found' };
-
-              case 7:
-                _context.prev = 7;
-                page.items = JSON.parse(page.items);_context.next = 14;
-                break;
-
-              case 11:
-                _context.prev = 11;
-                _context.t0 = _context['catch'](7);
-                throw { status: 500, name: 'JSON_PARSE_ERROR', message: 'json parse error' };
-
-              case 14:
-                ;
-
-                _context.next = 17;
-                return render('activity', { page: page });
-
-              case 17:
-                html = _context.sent;
-
-
-                ctx.body = html;
-
-              case 19:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this, [[7, 11]]);
-      }));
-
-      function get(_x) {
-        return _ref.apply(this, arguments);
-      }
-
-      return get;
-    }()
-  }, {
-    key: 'put',
-    value: function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_fireyy_Works_piper_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(ctx) {
-        var id, _ref3, _ref4, page, dir, html, command, stdout, packRes, files, uploadRes, shotUrl, options;
-
-        return __WEBPACK_IMPORTED_MODULE_0__Users_fireyy_Works_piper_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return pageApi.put(ctx);
+                _context.next = 2;
+                return new __WEBPACK_IMPORTED_MODULE_1__page__["a" /* default */]().put(ctx);
 
               case 2:
                 id = ctx.params.id;
-                _context2.next = 5;
-                return models.pages.findAll({
+                _context.next = 5;
+                return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].pages.findAll({
                   where: {
                     is_delete: 0,
                     id: id
@@ -1562,20 +1461,20 @@ var _class = function () {
                 });
 
               case 5:
-                _ref3 = _context2.sent;
-                _ref4 = _slicedToArray(_ref3, 1);
-                page = _ref4[0];
+                _ref2 = _context.sent;
+                _ref3 = _slicedToArray(_ref2, 1);
+                page = _ref3[0];
 
                 if (page) {
-                  _context2.next = 10;
+                  _context.next = 10;
                   break;
                 }
 
                 throw { status: 404, name: 'PAGES_NOT_FOUND', message: 'page is not found' };
 
               case 10:
-                _context2.next = 12;
-                return models.pages.update({
+                _context.next = 12;
+                return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].pages.update({
                   is_publish: 1,
                   publish_at: Date.now()
                 }, {
@@ -1585,8 +1484,8 @@ var _class = function () {
                 });
 
               case 12:
-                _context2.next = 14;
-                return models.changelog.create({
+                _context.next = 14;
+                return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].changelog.create({
                   action: 4,
                   page_id: id,
                   items: null,
@@ -1597,62 +1496,31 @@ var _class = function () {
                 dir = 'public/' + id;
 
 
-                if (!fs.existsSync(dir)) {
+                if (!__WEBPACK_IMPORTED_MODULE_4_fs___default.a.existsSync(dir)) {
 
-                  mkdirp(dir, function (err) {
+                  __WEBPACK_IMPORTED_MODULE_5_mkdirp___default()(dir, function (err) {
                     if (err) {
                       console.error(err);
                     }
                   });
                 }
 
-                _context2.prev = 16;
+                _context.prev = 16;
 
                 page.config = JSON.parse(page.config);
                 page.items = JSON.parse(page.items);
-                _context2.next = 24;
+                _context.next = 24;
                 break;
 
               case 21:
-                _context2.prev = 21;
-                _context2.t0 = _context2['catch'](16);
+                _context.prev = 21;
+                _context.t0 = _context['catch'](16);
                 throw { status: 500, name: 'JSON_PARSE_ERROR', message: 'json parse error' };
 
               case 24:
                 ;
 
-                _context2.next = 27;
-                return render('activity', { page: page });
-
-              case 27:
-                html = _context2.sent;
-                _context2.next = 30;
-                return fs.writeFileSync(dir + '/index.html', html, 'utf-8', { 'flags': 'w+' });
-
-              case 30:
-                command = 'NODE_ENV=production webpack --config ./build/webpack.publish.conf.js --env.id=' + id + ' --hide-modules --json --verbose';
-                stdout = child_process.execSync(command).toString();
-                packRes = JSON.parse(stdout);
-
-                if (!(packRes.errors.length == 0)) {
-                  _context2.next = 45;
-                  break;
-                }
-
-                files = packRes.assets.map(function (item) {
-                  return fs.createReadStream(dir + ('/' + item.name));
-                });
-                _context2.next = 37;
-                return upload(files);
-
-              case 37:
-                uploadRes = _context2.sent;
-                shotUrl = uploadRes.filter(function (item) {
-                  return item.url.indexOf('index.html') !== -1;
-                });
-
-                shotUrl[0].url = protocol + shotUrl[0].url;
-
+                shotUrl = 'http://127.0.0.1:3000/view/' + id;
                 options = {
                   screenSize: {
                     width: 375,
@@ -1666,13 +1534,13 @@ var _class = function () {
                 };
 
 
-                webshot(shotUrl[0].url, dir + '/cover.png', options, function (err) {
+                __WEBPACK_IMPORTED_MODULE_7_webshot___default()(shotUrl, dir + '/cover.png', options, function (err) {
                   if (err) {
                     throw { status: 404, name: 'WEBSHOT_ERR', message: 'webshot failed' };
                   }
 
-                  upload([fs.createReadStream(dir + '/cover.png')]).then(function (coverRes) {
-                    models.pages.update({
+                  Object(__WEBPACK_IMPORTED_MODULE_6__lib_publish__["a" /* default */])([__WEBPACK_IMPORTED_MODULE_4_fs___default.a.createReadStream(dir + '/cover.png')]).then(function (coverRes) {
+                    __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].pages.update({
                       cover: protocol + coverRes[0].url
                     }, {
                       where: {
@@ -1682,24 +1550,20 @@ var _class = function () {
                   });
                 });
 
-                ctx.body = shotUrl;
-                _context2.next = 46;
-                break;
+                ctx.body = {
+                  url: shotUrl
+                };
 
-              case 45:
-
-                ctx.body = packRes;
-
-              case 46:
+              case 29:
               case 'end':
-                return _context2.stop();
+                return _context.stop();
             }
           }
-        }, _callee2, this, [[16, 21]]);
+        }, _callee, this, [[16, 21]]);
       }));
 
-      function put(_x2) {
-        return _ref2.apply(this, arguments);
+      function put(_x) {
+        return _ref.apply(this, arguments);
       }
 
       return put;
@@ -1709,35 +1573,22 @@ var _class = function () {
   return _class;
 }();
 
-/* unused harmony default export */ var _unused_webpack_default_export = (_class);
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, "server/controllers"))
+/* harmony default export */ __webpack_exports__["a"] = (_class);
 
 /***/ }),
 /* 29 */
 /***/ (function(module, exports) {
 
-module.exports = require("co-views");
+module.exports = require("mkdirp");
 
 /***/ }),
 /* 30 */
 /***/ (function(module, exports) {
 
-module.exports = require("child_process");
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports) {
-
-module.exports = require("mkdirp");
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports) {
-
 module.exports = require("webshot");
 
 /***/ }),
-/* 33 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1771,7 +1622,7 @@ var _class = function () {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return __WEBPACK_IMPORTED_MODULE_1__models__["default"].users.findAll();
+                return __WEBPACK_IMPORTED_MODULE_1__models__["a" /* default */].users.findAll();
 
               case 2:
                 users = _context.sent;
@@ -1801,19 +1652,19 @@ var _class = function () {
 ;
 
 /***/ }),
-/* 34 */
+/* 32 */
 /***/ (function(module, exports) {
 
 module.exports = require("koa-session");
 
 /***/ }),
-/* 35 */
+/* 33 */
 /***/ (function(module, exports) {
 
 module.exports = require("koa-bodyparser");
 
 /***/ }),
-/* 36 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1842,7 +1693,7 @@ passport.deserializeUser(function () {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return __WEBPACK_IMPORTED_MODULE_1__models__["default"].users.findById(id);
+            return __WEBPACK_IMPORTED_MODULE_1__models__["a" /* default */].users.findById(id);
 
           case 3:
             user = _context.sent;
@@ -1870,7 +1721,7 @@ passport.deserializeUser(function () {
   };
 }());
 
-var GitHubStrategy = __webpack_require__(37).Strategy;
+var GitHubStrategy = __webpack_require__(35).Strategy;
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
@@ -1882,7 +1733,7 @@ passport.use(new GitHubStrategy({
       id = _profile$_json.id,
       avatar_url = _profile$_json.avatar_url;
 
-  __WEBPACK_IMPORTED_MODULE_1__models__["default"].users.findOrCreate({ where: { github_id: id }, defaults: {
+  __WEBPACK_IMPORTED_MODULE_1__models__["a" /* default */].users.findOrCreate({ where: { github_id: id }, defaults: {
       name: name,
       email: email,
       avatar: avatar_url
@@ -1894,13 +1745,13 @@ passport.use(new GitHubStrategy({
 }));
 
 /***/ }),
-/* 37 */
+/* 35 */
 /***/ (function(module, exports) {
 
 module.exports = require("passport-github");
 
 /***/ }),
-/* 38 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(__dirname) {var path = __webpack_require__(2);
@@ -1918,7 +1769,7 @@ module.exports = {
   */
   head: {
     title: 'Piper',
-    meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { hid: 'description', name: 'description', content: 'A drag-and-drop mobile website builder base on Vue.' }],
+    meta: [{ charset: 'utf-8' }, { hid: 'viewport', name: 'viewport', content: 'width=device-width, initial-scale=1' }, { hid: 'description', name: 'description', content: 'A drag-and-drop mobile website builder base on Vue.' }],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   /*
@@ -1944,6 +1795,46 @@ module.exports = {
   plugins: ['@/plugins/filters.js', '@/plugins/element-ui.js', '@/plugins/axios-defaults']
 };
 /* WEBPACK VAR INJECTION */}.call(exports, ""))
+
+/***/ }),
+/* 37 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__(3).config();
+
+var _process$env = process.env,
+    _process$env$DATABASE = _process$env.DATABASE_DIALECT,
+    DATABASE_DIALECT = _process$env$DATABASE === undefined ? 'mysql' : _process$env$DATABASE,
+    _process$env$DATABASE2 = _process$env.DATABASE_STORAGE,
+    DATABASE_STORAGE = _process$env$DATABASE2 === undefined ? './db.sqlite' : _process$env$DATABASE2,
+    _process$env$DATABASE3 = _process$env.DATABASE_HOST,
+    DATABASE_HOST = _process$env$DATABASE3 === undefined ? '127.0.0.1' : _process$env$DATABASE3,
+    _process$env$DATABASE4 = _process$env.DATABASE_PORT,
+    DATABASE_PORT = _process$env$DATABASE4 === undefined ? 3306 : _process$env$DATABASE4,
+    _process$env$DATABASE5 = _process$env.DATABASE_NAME,
+    DATABASE_NAME = _process$env$DATABASE5 === undefined ? 'piper' : _process$env$DATABASE5,
+    DATABASE_USER = _process$env.DATABASE_USER,
+    DATABASE_PASSWORD = _process$env.DATABASE_PASSWORD,
+    DATABASE_URL = _process$env.DATABASE_URL;
+
+
+var base = {
+  "username": DATABASE_USER,
+  "password": DATABASE_PASSWORD,
+  "database": DATABASE_NAME,
+  "host": DATABASE_HOST,
+  "port": DATABASE_PORT,
+  "dialect": DATABASE_DIALECT,
+  "storage": DATABASE_STORAGE,
+  "url": DATABASE_URL
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  "development": base,
+  "test": base,
+  "production": base
+});
 
 /***/ })
 /******/ ]);

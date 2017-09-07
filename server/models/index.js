@@ -1,11 +1,11 @@
 require('dotenv').config();
-const fs        = require("fs");
-const path      = require("path");
-const Sequelize = require('sequelize');
-const env       = process.env.NODE_ENV || "development";
-// const config    = require('../../config/db.js')[env];
-import configDB from '../../config/db.js';
-const config = configDB[env];
+import fs from 'fs'
+import path from 'path'
+import Sequelize from 'Sequelize'
+import dbConfig from './db.js';
+
+const env = process.env.NODE_ENV || "development";
+const config = dbConfig[env];
 
 import changelog from './changelog'
 import pages from './pages'
@@ -22,7 +22,7 @@ const params = Object.assign({
     createdAt: 'create_at',
     updatedAt: 'update_at'
   },
-  // logging: false
+  logging: false
 }, config);
 
 let sequelize

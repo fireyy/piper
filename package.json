@@ -13,21 +13,16 @@
     "not ie <= 8"
   ],
   "scripts": {
-    "build": "npm run build:client && npm run build:server",
-    "build:client": "webpack --config build/webpack.prod.conf.js",
-    "build:server": "babel server --out-dir dist",
-    "server": "node index.js",
-    "start": "NODE_ENV=production node index.js",
+    "build": "nuxt build && backpack build",
+    "start": "cross-env NODE_ENV=production node build/main.js",
     "dev": "backpack dev",
-    "db:update": "node node_modules/.bin/sequelize db:migrate --config=config/db.js"
+    "db:migrate": "node node_modules/.bin/sequelize db:migrate --config=server/models/db.js"
   },
   "dependencies": {
     "async-busboy": "^0.3.4",
     "axios": "^0.16.2",
-    "co": "^4.6.0",
-    "co-views": "^2.1.0",
+    "cross-env": "^5.0.5",
     "dotenv": "^4.0.0",
-    "ejs": "^2.5.6",
     "element-ui": "^1.2.4",
     "feather-icons": "^3.2.2",
     "interactjs": "^1.2.8",
@@ -44,10 +39,7 @@
     "pg-hstore": "^2.3.2",
     "qiniu": "^6.1.13",
     "qr.js": "0.0.0",
-    "request": "^2.81.0",
-    "request-promise": "^4.1.1",
     "sequelize": "^4.0.0",
-    "sequelize-cli": "^2.7.0",
     "sqlite3": "^3.1.9",
     "webshot": "^0.18.0"
   },
@@ -58,7 +50,6 @@
     "lodash-webpack-plugin": "^0.11.2",
     "nodemon": "^1.11.0",
     "postcss-pxtorem": "^4.0.0",
-    "prerender-spa-plugin": "^2.0.1",
     "scmp": "^2.0.0"
   }
 }

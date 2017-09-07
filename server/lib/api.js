@@ -12,21 +12,23 @@ import users from '../controllers/users'
 
 const apiRouter = new KoaRouter({ prefix: '/api' });
 
-[changelogs, count, files, page, pages, users].forEach(function(klass) {
+[changelogs, count, files, page, pages, publish, users].forEach(function(klass) {
   let controller = new klass();
   for (let method of [ 'options', 'get', 'post', 'delete', 'put' ]) {
     if (method in controller) {
-      apiRouter[method](controller.url, async (ctx) => {
-        if (ctx.isAuthenticated()) {
-          return await controller[method](ctx)
-        } else {
-          throw {
-            status: 401,
-            name: 'NOT_LOGIN',
-            message: 'not login'
-          }
-        }
-      });
+      // apiRouter[method](controller.url, async (ctx) => {
+      //   if (ctx.isAuthenticated()) {
+      //     return await controller[method](ctx)
+      //   } else {
+      //     throw {
+      //       status: 401,
+      //       name: 'NOT_LOGIN',
+      //       message: 'not login'
+      //     }
+      //   }
+      // });
+      // TODO: ctx.isAuthenticated
+      apiRouter[method](controller.url, async (ctx) => await controller[method](ctx));
     }
   }
 });

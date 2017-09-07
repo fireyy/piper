@@ -51,15 +51,11 @@ export default {
   },
 
   fetch ({ store, params }) {
-    // return axios.get('http://my-api/stars')
-    // .then((res) => {
-    //   store.commit('setStars', res.data)
-    // })
-    if(params.id){
+    if (params.id) {
       return api.page.getData(params.id).then((res)=>{
         store.commit('editor/EDIT_RENDER_DATA', res.data)
       });
-    }else{
+    } else {
       return store.dispatch('editor/resetRenderState')
     }
   },
@@ -193,9 +189,10 @@ export default {
         if(res.data.errors && res.data.errors.length > 0){
           // 打包失败
         }else{
+          console.log('res', res)
           this.$message.success('发布成功')
           this.qrcode.visible = true
-          this.qrcode.url = res.data[0].url
+          this.qrcode.url = res.data.url
         }
       })
     },
