@@ -1,11 +1,11 @@
 <template>
   <el-card class="login-card">
     <div slot="header" class="clearfix">
-      <h1>第三方登录</h1>
+      <h1>Welcome</h1>
     </div>
     <div class="passports">
       <el-tooltip effect="dark" content="使用 Github 登录" placement="top">
-        <a href="/auth/github" class="passport"><icon name="github" /></a>
+        <a href="/auth/github" class="passport">Login with <icon name="github" /> Github</a>
       </el-tooltip>
     </div>
   </el-card>
@@ -36,6 +36,11 @@ export default {
   .passport {
     color: #999;
     display: inline-block;
+    font-size: 20px;
+    svg {
+      font-size: 30px;
+      vertical-align: baseline;
+    }
     &:hover {
       color: #333;
     }

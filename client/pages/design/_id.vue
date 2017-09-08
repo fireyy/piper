@@ -7,7 +7,7 @@
       </el-col>
       <el-col :span="9" class="text-right">
         <el-button type="danger" icon="arrow-left" @click="back">返回</el-button>
-        <el-button type="warning" icon="document" @click="preview">预览</el-button>
+        <el-button type="warning" icon="document" @click="preview" :disabled="!id">预览</el-button>
         <el-button type="primary" icon="check" @click="save">保存</el-button>
         <el-button v-if="id" type="success" icon="upload" @click="publish">保存并发布</el-button>
       </el-col>
@@ -24,7 +24,7 @@
   <el-dialog size="full" custom-class="preview-dialog" title="预览" v-model="previewVisible">
     <div class="preview-frame">
       <div class="page-title"></div>
-      <iframe src="/#preview" frameborder="0"></iframe>
+      <iframe :src="'/view/'+id" frameborder="0"></iframe>
     </div>
   </el-dialog>
   <el-dialog size="tiny" title="二维码" v-model="qrcode.visible">
@@ -173,7 +173,7 @@ export default {
             message: res.data.message,
             type: 'success'
           });
-          this.$router.replace({name: 'design', params: {id: res.data.item.id}})
+          this.$router.replace({name: 'design-id', params: {id: res.data.item.id}})
         })
       }
     },

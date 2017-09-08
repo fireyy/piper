@@ -26,7 +26,7 @@
     </div>
     <div class="layout-content inner-row">
       <div class="page-cards">
-        <div class="page-card" v-for="(item, index) in tableData" :key="index">
+        <div class="page-card" v-for="(item, index) in tableData" :key="item.id">
           <el-card :body-style="{ padding: '0px' }">
             <div :style="{ backgroundImage: 'url('+item.cover+')' }" class="image" @click="handleEdit(index, item)">
               <div class="hover-settings-container">
@@ -152,26 +152,35 @@
 }
 </style>
 <script>
-  import api from '../api'
-
+  import { mapState } from 'vuex'
   export default {
-    mounted() {
-      this.pageChange()
+    fetch ({ store }) {
+      return store.dispatch('pages/get_list')
+    },
+    mounted () {
+      // this.pageChange()
+    },
+    computed: {
+      ...mapState({
+        total: state => state.pages.total,
+        currentPage: state => state.pages.currentPage,
+        pageSize: state => state.pages.pageSize
+      }),
+      tableData () {
+        return this.$store.state.pages.data
+      },
+      searchForm: {
+        get () {
+          return this.$store.state.pages.searchForm
+        },
+        set (val) {
+          this.$store.commit('pages/set_search_form', val)
+        }
+      }
     },
     methods: {
       pageChange(){
-        let query = {
-          size: this.pageSize,
-          page: this.currentPage,
-          title: this.searchForm.title,
-          isPublish: this.searchForm.isPublish
-        };
-        api.pages.getData(query).then((res)=>{
-          this.tableData = res.data.data
-          this.pageSize = res.data.size
-          this.currentPage = res.data.page
-          this.total = res.data.total
-        })
+        this.$store.dispatch('pages/get_list')
       },
       submitForm() {
         this.$refs['searchForm'].validate((valid) => {
@@ -181,7 +190,7 @@
         });
       },
       handleCreate() {
-        this.$router.push('design-id')
+        this.$router.push('/design')
       },
       handleEdit(index, row) {
         this.$router.push({ name: 'design-id', params: { id: row.id }})
@@ -192,32 +201,22 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          api.page.removeData(row.id).then((res)=>{
-            this.tableData.splice(index, 1)
-          })
+          this.$store.dispatch('pages/remove_item', {id: row.id, index})
         }).catch(()=>{
           //
         })
       },
       handleSizeChange(val) {
-        this.pageSize = val
+        this.$store.commit('pages/set_page_size', val)
         this.pageChange()
       },
       handleCurrentChange(val) {
-        this.currentPage = val;
+        this.$store.commit('pages/set_page', val)
         this.pageChange()
       }
     },
     data() {
       return {
-        tableData: [],
-        searchForm: {
-          title: '',
-          isPublish: -1
-        },
-        currentPage: 1,
-        pageSize: 10,
-        total: 10
       }
     }
   }

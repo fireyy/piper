@@ -15,7 +15,8 @@
     <el-col :span="4" class="text-right">
       <el-dropdown>
         <span class="user-setting">
-          fireyy<i class="el-icon-caret-bottom el-icon--right"></i>
+          <img :src="user.avatar" alt="" class="avatar">
+          {{user.name}}<i class="el-icon-caret-bottom el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item><div @click="handleLogout">注销</div></el-dropdown-item>
@@ -52,6 +53,12 @@
       cursor: pointer;
       color: #eee;
       line-height: 60px;
+      .avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 32px;
+        vertical-align: middle;
+      }
     }
   }
 </style>
@@ -67,6 +74,9 @@
     computed: {
       current() {
         return this.$route.name
+      },
+      user() {
+        return this.$store.state.user
       },
       menus() {
         return [
