@@ -28,7 +28,12 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '@/assets/main.css'
+    '@/assets/main.css',
+    'element-ui/lib/theme-default/index.css'
+  ],
+  modules: [
+    '@nuxtjs/pwa',
+    '@nuxtjs/component-cache'
   ],
   /*
   ** Customize the progress-bar color

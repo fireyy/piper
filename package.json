@@ -19,6 +19,8 @@
     "db:migrate": "node node_modules/.bin/sequelize db:migrate --config=server/models/db.js"
   },
   "dependencies": {
+    "@nuxtjs/component-cache": "^1.1.0",
+    "@nuxtjs/pwa": "^0.2.1",
     "async-busboy": "^0.3.4",
     "axios": "^0.16.2",
     "cross-env": "^5.0.5",

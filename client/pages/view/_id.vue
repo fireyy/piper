@@ -4,6 +4,7 @@
 </template>
 
 <style lang="less">
+@import '../../assets/skin/dpi.less';
 @import '../../assets/skin/_base.less';
 
 body,

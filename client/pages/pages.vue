@@ -5,7 +5,7 @@
         <el-col :span="18">
           <el-form ref="searchForm" :model="searchForm" :inline="true">
             <el-form-item prop="title">
-              <el-input style="width: 300px;" v-model="searchForm.title" placeholder="活动名称"></el-input>
+              <el-input style="width: 300px;" v-model="searchForm.title" placeholder="活动名称" icon="circle-close" :on-icon-click="handleTitleClear"></el-input>
             </el-form-item>
             <el-form-item prop="isPublish">
               <el-radio-group v-model="searchForm.isPublish">
@@ -213,6 +213,9 @@
       handleCurrentChange(val) {
         this.$store.commit('pages/set_page', val)
         this.pageChange()
+      },
+      handleTitleClear(evt) {
+        this.searchForm.title = ''
       }
     },
     data() {

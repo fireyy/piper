@@ -7,7 +7,6 @@
       </el-col>
       <el-col :span="9" class="text-right">
         <el-button type="danger" icon="arrow-left" @click="back">返回</el-button>
-        <el-button type="warning" icon="document" @click="preview" :disabled="!id">预览</el-button>
         <el-button type="primary" icon="check" @click="save">保存</el-button>
         <el-button v-if="id" type="success" icon="upload" @click="publish">保存并发布</el-button>
       </el-col>
@@ -21,12 +20,6 @@
 
     <property></property>
   </div>
-  <el-dialog size="full" custom-class="preview-dialog" title="预览" v-model="previewVisible">
-    <div class="preview-frame">
-      <div class="page-title"></div>
-      <iframe :src="'/view/'+id" frameborder="0"></iframe>
-    </div>
-  </el-dialog>
   <el-dialog size="tiny" title="二维码" v-model="qrcode.visible">
     <Qrcode :val="qrcode.url" :size="qrcode.size"></Qrcode>
   </el-dialog>
@@ -197,11 +190,6 @@ export default {
       })
     },
 
-    preview() {
-      window.DATA = this.getData()
-      this.previewVisible = true;
-    },
-
     beforeunload(e) {
       if(this.changed >= 0) return;
 
@@ -213,7 +201,6 @@ export default {
 
   data() {
     return {
-      previewVisible: false,
       changed: 2,
       watchItems: null,
       watchTitle: null,
@@ -275,47 +262,12 @@ html {
   .modules-container,
   .render-container {
     user-select: none;
-    -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
     user-drag: none;
 
     a,
     img {
       user-select: none;
-      -webkit-user-drag: none;
-      -khtml-user-drag: none;
-      -moz-user-drag: none;
-      -o-user-drag: none;
       user-drag: none;
-    }
-  }
-}
-.preview-dialog {
-  .preview-frame {
-    width: 375px;
-    min-height: 667px;
-    background: #fff url("~/assets/img/phone-head.png") no-repeat;
-    padding-top: 64px;
-    margin: 20px auto 30px;
-    user-select: none;
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.30);
-    position: relative;
-    .page-title {
-      color: #fff;
-      border: none;
-      font-size: 20px;
-      text-align: center;
-      position: absolute;
-      top: 27px;
-      left: 73px;
-      width: 210px;
-      background: transparent;
-    }
-    iframe {
-      width: 100%;
-      height: 667px;
     }
   }
 }
