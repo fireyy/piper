@@ -4,7 +4,7 @@
 </template>
 
 <style lang="less">
-@import '~_base.less';
+@import '../assets/skin/_base.less';
 
 body,
 html {

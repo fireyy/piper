@@ -33,7 +33,7 @@
   </div>
 </template>
 <style lang="less">
-  @import '~_base.less';
+  @import '../assets/skin/_base.less';
 
   .dropArea {
     width: 95%;

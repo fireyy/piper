@@ -45,11 +45,7 @@ module.exports = {
       'lodash',
       'qr.js',
       'feather-icons'
-    ],
-    extend (config, { dev, isClient }) {
-      config.resolve.alias['_variable.less'] = path.join(__dirname, './assets/skin/_variable.less'),
-      config.resolve.alias['_base.less'] = path.join(__dirname, './assets/skin/_base.less')
-    }
+    ]
   },
   plugins: [
     '@/plugins/filters.js',

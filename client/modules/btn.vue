@@ -4,7 +4,7 @@
 </div>
 </template>
 <style lang="less">
-@import '~_variable.less';
+@import '../assets/skin/_variable.less';
 
 .piper-btn {
   text-align: center;

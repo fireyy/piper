@@ -9,9 +9,7 @@ const port = process.env.PORT || 3000
 
 app.keys = ['i-love-piper']
 app.use(require('koa-session')({}, app))
-
-// app.use(require('koa-bodyparser')());
-// app.use(require('./lib/errorlog'));
+app.use(require('koa-bodyparser')())
 
 // authentication
 require('./lib/passport')

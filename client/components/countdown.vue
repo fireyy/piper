@@ -144,7 +144,7 @@ export default {
 }
 </script>
 <style lang="less">
-@import '~_variable';
+@import '../assets/skin/_variable';
 
 .countdown {
   white-space: nowrap;
