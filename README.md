@@ -1,4 +1,4 @@
-## Piper
+## Piper [![Build Status](https://travis-ci.org/fireyy/piper.svg?branch=dev)](https://travis-ci.org/fireyy/piper)
 
 <p align="center">
   <a href="https://piper-now.herokuapp.com" target="_blank">
