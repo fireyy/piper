@@ -1,12 +1,24 @@
 {
   "name": "piper",
   "version": "1.0.5",
-  "description": "testing",
-  "private": true,
+  "description": "A drag-and-drop mobile website builder base on Vue.",
   "engines": {
     "node": ">=7.6.0",
     "npm": ">=3.0.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fireyy/piper.git"
+  },
+  "keywords": [
+    "vue",
+    "drag-and-drop",
+    "drag",
+    "builder",
+    "editor",
+    "page-builder"
+  ],
+  "author": "fireyy <fireyy@gmail.com>",
   "browserslist": [
     "> 1%",
     "last 2 versions",
