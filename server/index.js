@@ -45,45 +45,57 @@ koa.use(require('koa-session')({}, koa))
 koa.use(require('koa-bodyparser')());
 koa.use(require('./lib/errorlog'));
 
-// authentication
-require('./lib/passport')
-const passport = require('koa-passport')
-koa.use(passport.initialize())
-koa.use(passport.session())
+if (process.env.NEED_AUTH) {
+  // authentication
+  require('./lib/passport')
+  const passport = require('koa-passport')
+  koa.use(passport.initialize())
+  koa.use(passport.session())
 
-const router = require('koa-router')()
+  const router = require('koa-router')()
 
-router.get('/auth/github',
-  passport.authenticate('github')
-)
+  router.get('/auth/github',
+    passport.authenticate('github')
+  )
 
-router.get('/auth/github/callback',
-  passport.authenticate('github', {
-    successRedirect: '/',
-    failureRedirect: '/'
+  router.get('/auth/github/callback',
+    passport.authenticate('github', {
+      successRedirect: '/',
+      failureRedirect: '/'
+    })
+  )
+
+  koa.use(router.routes())
+} else {
+  koa.use(async function(ctx, next) {
+    ctx.state.user = {
+      id: 1,
+      name: "fireyy"
+    }
+    await next()
   })
-)
-
-koa.use(router.routes())
+}
 
 koa.use(require('./lib/api'));
 koa.use(require('koa-static')('dist'));
 
-// Require authentication for now
-koa.use(function(ctx, next) {
-  if (ctx.isAuthenticated()) {
-    return next()
-  } else {
-    if (ctx.request.url.indexOf('/api/') !== -1) {
-      throw {
-        status: 401,
-        name: 'NOT_LOGIN',
-        message: 'not login'
-      }
+if (process.env.NEED_AUTH) {
+  // Require authentication for now
+  koa.use(function(ctx, next) {
+    if (ctx.isAuthenticated()) {
+      return next()
     } else {
-      ctx.redirect('/')
+      if (ctx.request.url.indexOf('/api/') !== -1) {
+        throw {
+          status: 401,
+          name: 'NOT_LOGIN',
+          message: 'not login'
+        }
+      } else {
+        ctx.redirect('/')
+      }
     }
-  }
-})
+  })
+}
 
 module.exports = koa;
