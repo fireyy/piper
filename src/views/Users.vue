@@ -22,7 +22,7 @@
             <div style="padding: 14px;">
               <span>{{o.name}}</span>
               <div class="bottom">
-                <time class="time">{{ o.email }}</time>
+                <time class="time">{{ o.create_at | formatDate }}</time>
               </div>
             </div>
           </el-card>
