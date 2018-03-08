@@ -30,12 +30,6 @@ Then set up `.env` file with your:
 cp env.sample .env
 ```
 
-### Updating existing database
-
-```shell
-npm run db:update
-```
-
 ### Develop
 
 ```shell
